@@ -1,4 +1,4 @@
-const CustomError = require('../utils/CustomError');
+const CustomError = require('../utils/customError');
 
 const devError = (err, res) => {
   console.log(err);

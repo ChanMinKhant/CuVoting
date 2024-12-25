@@ -1,14 +1,25 @@
-import { useState } from 'react';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
-function App() {
-  const [count, setCount] = useState(0);
+const App = () => {
+  const [visitorId, setVisitorId] = useState(null);
+
+  useEffect(() => {
+    const loadFingerprint = async () => {
+      const fp = await FingerprintJS.load();
+      const result = await fp.get();
+      setVisitorId(result.visitorId); // Unique visitor identifier
+    };
+
+    loadFingerprint();
+  }, []);
 
   return (
-    <>
-      <div className='text-red-500'>hi</div>
-    </>
+    <div>
+      <h1>FingerprintJS Example</h1>
+      {visitorId ? <p>Your Visitor ID: {visitorId}</p> : <p>Loading...</p>}
+    </div>
   );
-}
+};
 
 export default App;

@@ -5,7 +5,12 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    votingChances: { type: Number, default: 5 },
+    votes: [{ type: String }],
+    votedTitles: {
+      type: [String],
+      enum: ['glory', 'smart', 'handsome', 'king', 'queen'],
+      default: [],
+    },
     isVerified: { type: Boolean, default: false },
   },
   { timestamps: true }

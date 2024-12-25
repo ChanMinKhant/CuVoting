@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const CustomError = require('../util/CustomError');
+const CustomError = require('../util/customError');
 const asyncErrorHandler = require('../util/asyncErrorHandler');
 const Token = require('../model/tokenModel');
 

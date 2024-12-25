@@ -1,5 +1,5 @@
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
-const customError = require('../utils/CustomError');
+const customError = require('../utils/customError');
 const util = require('util');
 const User = require('../models/userModel');
 //i am not sure it is good or not/ for refresh token or access token

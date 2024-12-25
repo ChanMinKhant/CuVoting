@@ -11,7 +11,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   //   const err = new CustomError('You are already logged in', 400);
   //   return next(err);
   // }
-  const { email, password, confirmPassword } = req.body;
+  const { email, password, confirmPassword, username, section, year } =
+    req.body;
   let user = await User.findOne({ email });
   const isPending = await Otp.find({ email });
   if (user?.isVerified) {
@@ -19,13 +20,11 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  console.log(isPending);
   if (user && isPending.length > 0) {
     await Otp.deleteMany({ email });
     user.password = password;
     await user.save();
   } else {
-    console.log(1);
     user = await User.create({
       email,
       password,
@@ -42,15 +41,10 @@ exports.register = asyncHandler(async (req, res, next) => {
   console.log(otp);
 
   // hash the otp
-  const hashOtp = crypto
-    .createHash('sha256')
-    .update(otp.toString())
-    .digest('hex');
-  const otpExpiresAt = Date.now() + 1000 * 60 * 5; // 5 minutes
+  const hashOtp = bcrypt.hashSync(otp.toString(), 10);
   const otpData = {
     otp: hashOtp,
     email: email,
-    expiresAt: otpExpiresAt,
   };
 
   const otpDoc = await Otp.create(otpData);
@@ -115,19 +109,20 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
   }
-  console.log(user._id);
-  const otpDoc = await Otp.findOne({
-    userId: user._id,
-  });
-  console.log(otpDoc);
+  const otpDoc = await Otp.findOne({ email });
   if (!otpDoc) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
   }
+
+  // Debugging statements
+  console.log('OTP from request:', otp.toString());
+  console.log('Hashed OTP from database:', otpDoc.otp);
+
   const isMatch = await bcrypt.compare(otp.toString(), otpDoc.otp);
   if (!isMatch) {
     const err = new CustomError('Invalid credentials', 400);
-    const isMatch = otp.toString() === otpDoc.otp;
+    return next(err);
   }
   if (otpDoc.expiresAt < Date.now()) {
     const err = new CustomError('OTP has expired', 400);
