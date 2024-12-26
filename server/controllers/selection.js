@@ -97,3 +97,34 @@ exports.getUserVotedHistories = asyncHandler(async (req, res, next) => {
   }
   const user = await User.findById(req.userId);
 });
+
+exports.deleteVote = asyncHandler(async (req, res, next) => {
+  if (!req.userId) {
+    const err = new CustomError('You are not logged in', 400);
+    return next(err);
+  }
+  const user = await User.findById(req.userId);
+  if (!user) {
+    const err = new CustomError('Something went wrong', 404);
+    return next(err);
+  }
+  const { voteId } = req.body;
+  const vote = await Vote.findById(voteId);
+  if (!vote) {
+    const err = new CustomError('Vote not found', 404);
+    return next(err);
+  }
+  if (vote.user.toString() !== req.userId) {
+    const err = new CustomError('Unauthorized', 401);
+    return next(err);
+  }
+  const result = await Vote.findByIdAndDelete(voteId);
+  if (!result) {
+    const err = new CustomError('Something went wrong', 500);
+    return next(err);
+  }
+  res.status(200).send({
+    success: true,
+    message: 'Vote deleted',
+  });
+});

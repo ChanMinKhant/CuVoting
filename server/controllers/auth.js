@@ -10,8 +10,15 @@ exports.register = asyncHandler(async (req, res, next) => {
   //   const err = new CustomError('You are already logged in', 400);
   //   return next(err);
   // }
-  const { email, password, confirmPassword, username, section, year } =
-    req.body;
+  const {
+    email,
+    password,
+    confirmPassword,
+    username,
+    section,
+    year,
+    deviceId,
+  } = req.body;
   let user = await User.findOne({ email });
   const isPending = await Otp.find({ email });
   if (user?.isVerified) {
@@ -27,6 +34,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     user = await User.create({
       email,
       password,
+      deviceId,
     });
   }
 
@@ -155,5 +163,33 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   res.status(200).send({
     success: true,
     message: 'OTP verified successfully',
+  });
+});
+
+//deviceId
+exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
+  const { deviceId } = req.body;
+  const user = await User.findOne({ deviceId });
+  if (!user) {
+    const err = new CustomError('Invalid credentials', 400);
+    return next(err);
+  }
+
+  res.status(200).send({
+    success: true,
+    message: 'you can login this accound with this device',
+  });
+});
+
+exports.exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
+  const { deviceId } = req.body;
+  const user = await User.findOne({ deviceId });
+  if (!user) {
+    const err = new CustomError('Invalid credentials', 400);
+    return next(err);
+  }
+  // generate token
+  const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE || '30d',
   });
 });
