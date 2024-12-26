@@ -1,8 +1,8 @@
-const selectorRoutes = require('./selector');
+const selectionRoutes = require('./selection');
 const authRoutes = require('./auth');
 const router = require('express').Router();
 
-router.use('/selector', selectorRoutes);
+router.use('/selections', selectionRoutes);
 router.use('/auth', authRoutes);
 
 module.exports = router;

@@ -1,10 +1,10 @@
 const jwt = require('jsonwebtoken');
-const CustomError = require('../util/customError');
-const asyncErrorHandler = require('../util/asyncErrorHandler');
-const Token = require('../model/tokenModel');
+const CustomError = require('../utils/customError');
+const asyncHandler = require('express-async-handler');
 
-exports.verifyJWT = asyncErrorHandler(async (req, res, next) => {
+exports.verifyJWT = asyncHandler(async (req, res, next) => {
   const token = req?.cookies?.jwt; // cookies.jwt // iam not sure cookie or authrization
+  console.log(req.cookies);
   if (!token) {
     const err = new CustomError('Authentication failed', 401);
     return next(err);
@@ -23,11 +23,6 @@ exports.verifyJWT = asyncErrorHandler(async (req, res, next) => {
 
   // verify token
   jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
-    if (err || decodedToken.id !== foundToken.adminId.toString()) {
-      const err = new CustomError('Authentication failed', 401);
-      res.clearCookie('jwt');
-      return next(err);
-    }
     req.userId = decodedToken.id;
     next();
   });

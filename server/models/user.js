@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, select: false },
     votes: [{ type: String }],
     votedTitles: {
       type: [String],
@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema(
       default: [],
     },
     isVerified: { type: Boolean, default: false },
+    deviceId: { type: String, select: false },
   },
   { timestamps: true }
 );
