@@ -1,23 +1,16 @@
 const mongoose = require('mongoose');
+const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
 const resultSchema = new mongoose.Schema(
   {
-    selection: {
+    selectionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Selection',
       required: true,
     },
     category: {
       type: String,
-      enum: [
-        'handsome',
-        'smart',
-        'attractive',
-        'beauty',
-        'glory',
-        'grace',
-        'bestCouple',
-      ],
+      enum: [...BoyTitles, ...GirlTitles, ...CoupleTitles],
       required: true,
     },
     count: { type: Number, required: true, default: 0 },

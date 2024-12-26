@@ -5,8 +5,12 @@ const Result = require('../models/result');
 const asyncHandler = require('express-async-handler');
 const CustomError = require('../utils/customError');
 const mongoose = require('mongoose');
+const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
 exports.getSelections = asyncHandler(async (req, res, next) => {
+  // query for boy, girls, and couples
+  const { gender } = req.query;
+
   if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
     return next(err);
@@ -16,7 +20,7 @@ exports.getSelections = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const Selections = await Selection.find();
+  const Selections = await Selection.find({ gender });
   res.status(200).send({
     success: true,
     data: Selections,
@@ -24,8 +28,8 @@ exports.getSelections = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.voteSelection = asyncHandler(async (req, res) => {
-  if (!req.user) {
+exports.voteSelection = asyncHandler(async (req, res, next) => {
+  if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
     return next(err);
   }
@@ -34,28 +38,51 @@ exports.voteSelection = asyncHandler(async (req, res) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const { title, SelectionId } = req.body;
-  const Selection = await Selection.findById(SelectionId);
-  if (!Selection) {
+  const { title, selectionId } = req.body;
+  console.log(title);
+  const selection = await Selection.findById(selectionId);
+  if (!selection) {
     const err = new CustomError('Selection not found', 404);
     return next(err);
   }
+  console.log(BoyTitles);
+  if (selection.gender === 'boy' && !BoyTitles.includes(title)) {
+    const err = new CustomError('Invalid title', 400);
+    return next(err);
+  }
+
+  if (selection.gender === 'girl' && !GirlTitles.includes(title)) {
+    const err = new CustomError('Invalid title', 400);
+    return next(err);
+  }
+
+  if (selection.gender === 'couple' && !CoupleTitles.includes(title)) {
+    const err = new CustomError('Invalid title', 400);
+    return next(err);
+  }
+
   if (user.votedTitles.includes(title)) {
     const err = new CustomError('You have already voted for this title', 400);
     return next(err);
   }
+
   user.votedTitles.push(title);
   await user.save();
-  Vote.create({
+  await Vote.create({
     user: req.userId,
-    Selection: mongoose.Types.ObjectId(SelectionId),
-    title,
+    selectionId: new mongoose.Types.ObjectId(selectionId),
+    category: title,
   });
   const result = await Result.findOneAndUpdate(
-    { Selection: mongoose.Types.ObjectId(SelectionId), category: title },
+    { selectionId: new mongoose.Types.ObjectId(selectionId), category: title },
     { $inc: { count: 1 } }, // Increment count by 1 if the document exists
     { upsert: true, new: true, setDefaultsOnInsert: true } // Create if not exists
   );
+
+  if (!result) {
+    const err = new CustomError('Something went wrong', 500);
+    return next(err);
+  }
 
   res.status(200).send({
     success: true,
@@ -63,7 +90,7 @@ exports.voteSelection = asyncHandler(async (req, res) => {
   });
 });
 
-exports.getUserVoted = asyncHandler(async (req, res, next) => {
+exports.getUserVotedHistories = asyncHandler(async (req, res, next) => {
   if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
     return next(err);

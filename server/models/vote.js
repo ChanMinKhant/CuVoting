@@ -1,24 +1,17 @@
 const mongoose = require('mongoose');
+const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
 const voteSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-    selection: {
+    selectionId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Selection',
       required: true,
     },
     category: {
       type: String,
-      enum: [
-        'handsome',
-        'smart',
-        'attractive',
-        'beauty',
-        'glory',
-        'grace',
-        'bestCouple',
-      ],
+      enum: [...BoyTitles, ...GirlTitles, ...CoupleTitles],
       required: true,
     },
   },
