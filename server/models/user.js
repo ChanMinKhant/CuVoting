@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,7 +9,7 @@ const userSchema = new mongoose.Schema(
     votes: [{ type: String }],
     votedTitles: {
       type: [String],
-      enum: ['glory', 'smart', 'handsome', 'king', 'queen'],
+      enum: [...BoyTitles, ...GirlTitles, ...CoupleTitles],
       default: [],
     },
     isVerified: { type: Boolean, default: false },
