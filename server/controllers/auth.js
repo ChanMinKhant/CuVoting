@@ -1,10 +1,9 @@
 const User = require('../models/user');
 const Otp = require('../models/otp');
-const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const CustomError = require('../utils/customError');
-
 const asyncHandler = require('express-async-handler');
+const jwt = require('jsonwebtoken');
 
 exports.register = asyncHandler(async (req, res, next) => {
   // if (req.user) {
@@ -81,7 +80,7 @@ exports.login = asyncHandler(async (req, res, next) => {
   // }
   const { email, password } = req.body;
   // find the user in the database
-  user = await User.findOne({ email });
+  const user = await User.findOne({ email }, '+password');
   if (!user || !user?.isVerified) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
@@ -93,7 +92,21 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(err);
   }
   // generate token
-  // const token = user.generateAuthToken();
+  const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE || '30d',
+  });
+
+  // set cookie
+  res.cookie('jwt', token, {
+    expires: new Date(
+      Date.now() + (process.env.COOKIE_EXPIRES_IN || 365) * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+  });
+
   res.status(200).send({
     success: true,
     message: 'Logged in successfully',
@@ -111,32 +124,33 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   }
   const otpDoc = await Otp.findOne({ email });
   if (!otpDoc) {
-    const err = new CustomError('Invalid credentials', 400);
+    const err = new CustomError('Invalid OTP', 400);
     return next(err);
   }
-
-  // Debugging statements
-  console.log('OTP from request:', otp.toString());
-  console.log('Hashed OTP from database:', otpDoc.otp);
 
   const isMatch = await bcrypt.compare(otp.toString(), otpDoc.otp);
   if (!isMatch) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
   }
-  if (otpDoc.expiresAt < Date.now()) {
-    const err = new CustomError('OTP has expired', 400);
-    return next(err);
-  }
-  await otpDoc.deleteOne();
-  // await User.updateOne(
-  //   {
-  //     email,
-  //   },
-  //   {
-  //     isVerified: true,
-  //   }
-  // );
+
+  //delete the otp
+  await Otp.deleteOne();
+  user.isVerified = true;
+  await user.save();
+
+  //generate token
+  const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE || '30d',
+  });
+
+  //set cookie
+  res.cookie('jwt', token, {
+    httpOnly: true,
+    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    sameSite: 'None',
+    secure: true,
+  });
 
   res.status(200).send({
     success: true,

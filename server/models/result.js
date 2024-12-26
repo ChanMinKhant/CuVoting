@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 
-const voteSchema = new mongoose.Schema(
+const resultSchema = new mongoose.Schema(
   {
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     selection: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Selection',
@@ -21,8 +20,9 @@ const voteSchema = new mongoose.Schema(
       ],
       required: true,
     },
+    count: { type: Number, required: true, default: 0 },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model('Vote', voteSchema);
+module.exports = mongoose.model('Result', resultSchema);

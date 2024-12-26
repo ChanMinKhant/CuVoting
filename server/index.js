@@ -4,8 +4,10 @@ const app = express();
 const db = require('./config/db');
 const PORT = process.env.PORT || 3000;
 const router = require('./routes/index');
+const cookieParser = require('cookie-parser');
 
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/api', router);
 
