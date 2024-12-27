@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { useAppDispatch } from './store/store';
+import { register } from './store/features/userSlice';
 
 const App = () => {
-  const [visitorId, setVisitorId] = useState(null);
-
+  const dispatch = useAppDispatch();
+  //test
   useEffect(() => {
-    const loadFingerprint = async () => {
-      const fp = await FingerprintJS.load();
-      const result = await fp.get();
-      setVisitorId(result.visitorId); // Unique visitor identifier
-    };
-
-    loadFingerprint();
-  }, []);
-
+    dispatch((dispatch, getState) => {
+      dispatch(register({ email: 'abc@gmail.com', password: '123456' }));
+    });
+  }, [dispatch]);
   return (
     <div>
-      <h1>FingerprintJS Example</h1>
-      {visitorId ? <p>Your Visitor ID: {visitorId}</p> : <p>Loading...</p>}
+      <h1>hiiiii</h1>
     </div>
   );
 };
