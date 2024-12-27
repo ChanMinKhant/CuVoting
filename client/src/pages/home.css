@@ -1,0 +1,21 @@
+.addbg {
+  background-image: url('/bg1.jpeg'); /* Correct path for public folder */
+  background-size: cover; /* Makes the background image cover the entire element */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Ensures the image doesn't repeat */
+  /* height: 100vh;  */
+  width: 100%; /* Full width of the container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .addbg {
+    background-position: top; /* Adjust positioning for smaller screens */
+  }
+}
+
+@media (min-width: 1024px) {
+  .addbg {
+    background-attachment: fixed; /* Parallax effect for larger screens */
+  }
+}

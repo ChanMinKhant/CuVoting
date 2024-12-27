@@ -11,7 +11,7 @@ const Nav = () => {
   return (
     <div>
       {/* Navbar */}
-      <nav className='flex justify-between items-center p-4 bg-[#444444] text-white z-[50] fixed top-0 w-[100vw]'>
+      <nav className='flex justify-between items-center px-4 py-2 bg-[#444444] text-white z-[50] fixed top-0 w-[100vw]'>
         {/* Website Name */}
         <div className='text-2xl font-bold'>UCSP voting</div>
 
@@ -76,7 +76,7 @@ const Nav = () => {
 
       {/* Sidebar / Dropdown Menu (on mobile) */}
       <div
-        className={`lg:hidden fixed top-[60px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
+        className={`lg:hidden fixed top-[50px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >

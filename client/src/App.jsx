@@ -3,6 +3,7 @@ import Home from './pages/home';
 import CandidateProfile from './pages/CandidateProfile ';
 import SignUpPage from './pages/Signup';
 import Nav from './components/Nav';
+import Footer from './components/Footer';
 function App() {
   return (
     <>
@@ -12,6 +13,7 @@ function App() {
         <Route path='/signup' element={<SignUpPage />}></Route>
         <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
       </Routes>
+      <Footer />
     </>
   );
 }
