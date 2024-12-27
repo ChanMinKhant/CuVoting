@@ -14,14 +14,18 @@ function Home() {
           <div className=' font-medium sm:text-[17px] text-sm'>
             In the court of Pyay Computer University, your vote holds the power
             to crown the next royal sovereign.Your choice. Your university. Your
-            vote matters.{' '}
+            vote matters.
+            {/* <button class='bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded ml-2'>
+              Vote
+            </button> */}
           </div>
         </div>
-        <hr class='border-t-2 border-gray-300 my-2 rounded-full m-auto w-[50%] sm:hidden' />
+        <hr className='border-t-2 border-gray-300 my-2 rounded-full m-auto w-[50%] sm:hidden' />
 
         <div className='my-2 sm:text-[17px] text-sm w-full sm:w-[45%]'>
+          <div>Choose categorie to vote</div>
           <Link
-            to='/boys'
+            to='/vote/boys'
             className='w-full border-b-2 flex justify-between px-2 my-4'
           >
             <div>Boys</div>
@@ -35,7 +39,7 @@ function Home() {
             </button> */}
           </Link>
           <Link
-            to='/girls'
+            to='/vote/girls'
             className='w-full border-b-2 flex justify-between px-2 my-4'
           >
             <div>girls</div>
@@ -46,7 +50,7 @@ function Home() {
             />
           </Link>
           <Link
-            to='/cluples'
+            to='/vote/cluples'
             className='w-full border-b-2 flex justify-between px-2 my-4'
           >
             <div>couple</div>
@@ -72,7 +76,7 @@ function Home() {
       </div>
 
       <CardSwiper />
-      <hr class='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
+      <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
 
       <div className='text-center text-sm my-2 px-2'>
         "The person you vote for today might become your partner one day. So,

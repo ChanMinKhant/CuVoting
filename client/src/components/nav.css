@@ -1,0 +1,10 @@
+.drop {
+  transition: max-height 0.3s ease, margin 0.3s ease; /* Smooth transition */
+  max-height: 0; /* Collapsed state */
+  overflow: hidden; /* Prevents content from spilling out */
+}
+
+.drop-open {
+  max-height: 300px; /* Large enough to fit the dropdown content */
+  margin-top: 10px; /* Adds spacing when expanded */
+}

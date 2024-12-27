@@ -1,13 +1,17 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import './nav.css';
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isdrop, setisdrop] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setisdrop(false);
   };
-
+  const handleDropdown = () => {
+    setisdrop(!isdrop);
+  };
   return (
     <div>
       {/* Navbar */}
@@ -48,7 +52,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                to='/vote'
+                to='/vote_categories'
                 className='text-lg hover:bg-blue-600 px-2 rounded py-1'
               >
                 vote
@@ -91,13 +95,39 @@ const Nav = () => {
             </Link>
           </li>
           <li className='mb-4'>
-            <Link
-              to='/vote'
+            <div
               className='text-lg hover:bg-blue-600 px-2 rounded py-1'
-              onClick={toggleMenu}
+              onClick={handleDropdown}
             >
               vote
-            </Link>
+            </div>
+            <div
+              className={`flex flex-col overflow-hidden drop ${
+                isdrop ? 'drop-open' : ''
+              }`}
+            >
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/boys'}
+                onClick={toggleMenu}
+              >
+                boys
+              </Link>
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/girls'}
+                onClick={toggleMenu}
+              >
+                girls
+              </Link>
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/couples'}
+                onClick={toggleMenu}
+              >
+                couples
+              </Link>
+            </div>
           </li>
           <li className='mb-4'>
             <Link
