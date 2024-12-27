@@ -1,20 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { useAppDispatch } from './store/store';
-import { register } from './store/features/userSlice';
-
-const App = () => {
-  const dispatch = useAppDispatch();
-  //test
-  useEffect(() => {
-    dispatch((dispatch, getState) => {
-      dispatch(register({ email: 'abc@gmail.com', password: '123456' }));
-    });
-  }, [dispatch]);
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/home';
+import CandidateProfile from './pages/CandidateProfile ';
+import SignUpPage from './pages/Signup';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+function App() {
   return (
-    <div>
-      <h1>hiiiii</h1>
-    </div>
+    <>
+      <Nav />
+      <Routes>
+        <Route path='/' element={<Home />}></Route>
+        <Route path='/signup' element={<SignUpPage />}></Route>
+        <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
+      </Routes>
+      <Footer />
+    </>
   );
-};
+}
 
 export default App;
+// import React, { useEffect, useState } from 'react';
+// import FingerprintJS from '@fingerprintjs/fingerprintjs';
+
+// const App = () => {
+//   const [visitorId, setVisitorId] = useState(null);
+
+//   useEffect(() => {
+//     const loadFingerprint = async () => {
+//       const fp = await FingerprintJS.load();
+//       const result = await fp.get();
+//       setVisitorId(result.visitorId); // Unique visitor identifier
+//     };
+
+//     loadFingerprint();
+//   }, []);
+
+//   return (
+//     <div>
+//       <h1>FingerprintJS Example</h1>
+//       {visitorId ? <p>Your Visitor ID: {visitorId}</p> : <p>Loading...</p>}
+//     </div>
+//   );
+// };
+
+// export default App;
