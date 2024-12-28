@@ -8,17 +8,19 @@ import Vote from './pages/Vote';
 import VoteCata from './pages/VoteCata';
 function App() {
   return (
-    <>
-      <Nav />
-      <Routes>
-        <Route path='/' element={<Home />}></Route>
-        <Route path='/vote/:cate' element={<Vote />}></Route>
-        <Route path='/vote_categories' element={<VoteCata />}></Route>
-        <Route path='/signup' element={<SignUpPage />}></Route>
-        <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
-      </Routes>
-      <Footer />
-    </>
+    <div className='sm:flex sm:justify-center'>
+      <div className='max-w-screen-sm'>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/vote/:cate' element={<Vote />}></Route>
+          <Route path='/vote_categories' element={<VoteCata />}></Route>
+          <Route path='/signup' element={<SignUpPage />}></Route>
+          <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
+        </Routes>
+        <Footer />
+      </div>
+    </div>
   );
 }
 

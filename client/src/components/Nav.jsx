@@ -13,14 +13,14 @@ const Nav = () => {
     setisdrop(!isdrop);
   };
   return (
-    <div>
+    <div className='max-w-screen-sm sticky top-0 z-[50] w-[100vw]'>
       {/* Navbar */}
-      <nav className='flex justify-between items-center px-4 py-2 bg-[#444444] text-white z-[50] fixed top-0 w-[100vw]'>
+      <nav className='flex justify-between w-full items-center px-4 py-2 bg-[#444444] text-white'>
         {/* Website Name */}
         <div className='text-2xl font-bold'>UCSP voting</div>
 
         {/* Hamburger Icon (visible on small screens) */}
-        <div className='lg:hidden'>
+        <div className='sm:hidden'>
           <button onClick={toggleMenu} className='focus:outline-none'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -40,7 +40,7 @@ const Nav = () => {
         </div>
 
         {/* Navbar Links (visible on larger screens) */}
-        <div className='hidden lg:flex flex-grow justify-end bg-[#444444]'>
+        <div className='hidden sm:flex flex-grow justify-end bg-[#444444]'>
           <ul className='flex space-x-10'>
             <li>
               <Link
@@ -80,7 +80,7 @@ const Nav = () => {
 
       {/* Sidebar / Dropdown Menu (on mobile) */}
       <div
-        className={`lg:hidden fixed top-[50px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
+        className={`sm:hidden fixed top-[50px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
