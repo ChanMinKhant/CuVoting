@@ -13,7 +13,7 @@ function App() {
   return (
     <div className='sm:flex sm:justify-center'>
       <div className='max-w-screen-sm'>
-        {/* <Nav /> */}
+        <Nav />
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/vote/:cate' element={<Vote />}></Route>
