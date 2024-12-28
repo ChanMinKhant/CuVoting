@@ -181,7 +181,7 @@ exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
   });
 });
 
-exports.exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
+exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
   const { deviceId } = req.body;
   const user = await User.findOne({ deviceId });
   if (!user) {
