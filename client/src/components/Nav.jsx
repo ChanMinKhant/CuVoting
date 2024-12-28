@@ -131,7 +131,7 @@ const Nav = () => {
 
       {/* Dropdown Menu */}
       <div
-        className={`flex flex-col bg-[#f0f8ff] fixed  px-2 top-[50px] overflow-hidden shadow-lg transition-transform transform ${
+        className={`flex flex-col bg-[#f0f8ff] max-w-[640px] fixed  px-2 top-[50px] overflow-hidden shadow-lg transition-transform transform ${
           isMenuOpen
             ? 'translate-y-0 opacity-100 w-full'
             : '-translate-y-full w-0 opacity-0'
