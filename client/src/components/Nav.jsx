@@ -1,22 +1,26 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import './nav.css';
 const Nav = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isdrop, setisdrop] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+    setisdrop(false);
   };
-
+  const handleDropdown = () => {
+    setisdrop(!isdrop);
+  };
   return (
-    <div>
+    <div className='max-w-screen-sm sticky top-0 z-[50] w-[100vw]'>
       {/* Navbar */}
-      <nav className='flex justify-between items-center px-4 py-2 bg-[#444444] text-white z-[50] fixed top-0 w-[100vw]'>
+      <nav className='flex justify-between w-full items-center px-4 py-2 bg-[#444444] text-white'>
         {/* Website Name */}
         <div className='text-2xl font-bold'>UCSP voting</div>
 
         {/* Hamburger Icon (visible on small screens) */}
-        <div className='lg:hidden'>
+        <div className='sm:hidden'>
           <button onClick={toggleMenu} className='focus:outline-none'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -36,7 +40,7 @@ const Nav = () => {
         </div>
 
         {/* Navbar Links (visible on larger screens) */}
-        <div className='hidden lg:flex flex-grow justify-end bg-[#444444]'>
+        <div className='hidden sm:flex flex-grow justify-end bg-[#444444]'>
           <ul className='flex space-x-10'>
             <li>
               <Link
@@ -48,7 +52,7 @@ const Nav = () => {
             </li>
             <li>
               <Link
-                to='/vote'
+                to='/vote_categories'
                 className='text-lg hover:bg-blue-600 px-2 rounded py-1'
               >
                 vote
@@ -76,7 +80,7 @@ const Nav = () => {
 
       {/* Sidebar / Dropdown Menu (on mobile) */}
       <div
-        className={`lg:hidden fixed top-[50px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
+        className={`sm:hidden fixed top-[50px] left-0 w-[150px] z-50 h-full text-white bg-[#999999] p-4 transition-transform transform ${
           isMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -91,13 +95,39 @@ const Nav = () => {
             </Link>
           </li>
           <li className='mb-4'>
-            <Link
-              to='/vote'
+            <div
               className='text-lg hover:bg-blue-600 px-2 rounded py-1'
-              onClick={toggleMenu}
+              onClick={handleDropdown}
             >
               vote
-            </Link>
+            </div>
+            <div
+              className={`flex flex-col overflow-hidden drop ${
+                isdrop ? 'drop-open' : ''
+              }`}
+            >
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/boys'}
+                onClick={toggleMenu}
+              >
+                boys
+              </Link>
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/girls'}
+                onClick={toggleMenu}
+              >
+                girls
+              </Link>
+              <Link
+                className='text-lg hover:bg-blue-600 px-2 rounded py-1 border-b-2 bg-[#777777]'
+                to={'/vote/couples'}
+                onClick={toggleMenu}
+              >
+                couples
+              </Link>
+            </div>
           </li>
           <li className='mb-4'>
             <Link
