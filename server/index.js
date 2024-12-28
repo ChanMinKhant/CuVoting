@@ -8,12 +8,19 @@ const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const mongoSanitize = require('express-mongo-sanitize');
+const expressRateLimit = require('express-rate-limit');
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(mongoSanitize());
+app.use(
+  expressRateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100,
+  })
+);
 
 app.use('/api', router);
 
