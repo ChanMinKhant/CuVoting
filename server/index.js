@@ -5,9 +5,15 @@ const db = require('./config/db');
 const PORT = process.env.PORT || 3000;
 const router = require('./routes/index');
 const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const mongoSanitize = require('express-mongo-sanitize');
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(helmet());
+app.use(morgan('dev'));
+app.use(mongoSanitize());
 
 app.use('/api', router);
 
