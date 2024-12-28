@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const GirlModal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose }) => {
   const [votes, setVotes] = useState({
     smileQueen: 0,
     stylish: 0,
@@ -40,20 +40,22 @@ const GirlModal = ({ isOpen, onClose }) => {
         className='bg-white rounded-lg w-96 p-6'
         onClick={(e) => e.stopPropagation()}
       >
-        <h2 className='text-2xl font-semibold mb-4'>Vote for Categories</h2>
+        <h2 className='text-lg border-b-2 font-semibold mb-4'>
+          Vote for Categories
+        </h2>
 
         {/* Vote for Smile Queen */}
-        <div className='mb-4'>
+        <div className='mb-2'>
           {catas.map((cata) => (
             <div>
-              <p className='font-medium'>Vote for {cata.title}</p>
+              {/* <p className='font-medium'>Vote for {cata.title}</p> */}
               <button
-                className='mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'
+                className='mt-2 px-2 py-[3px] bg-blue-500 text-sm text-white rounded hover:bg-blue-600'
                 onClick={() => handleVoteChange('smileQueen')}
               >
                 Vote {cata.title}
               </button>
-              <p className='mt-2 text-gray-700'>Votes: {votes.smileQueen}</p>
+              {/* <p className='mt-2 text-gray-700'>Votes: {votes.smileQueen}</p> */}
             </div>
           ))}
           {/* <p className='font-medium'>Vote for Smile Queen</p>
@@ -79,4 +81,4 @@ const GirlModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default GirlModal;
+export default Modal;

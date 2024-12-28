@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import GirlModal from '../components/girlModal';
+import Modal from '../components/Modal';
 
 const CandidateProfile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +40,7 @@ const CandidateProfile = () => {
           >
             Vote me
           </button>
-          <GirlModal isOpen={isModalOpen} onClose={closeModal} />
+          <Modal isOpen={isModalOpen} onClose={closeModal} />
           <p className='text-center text-gray-500 mt-4'>
             A highly motivated candidate with a strong passion for technology
             and innovation. Adept at solving complex problems and delivering

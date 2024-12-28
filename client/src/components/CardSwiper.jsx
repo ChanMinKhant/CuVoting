@@ -2,22 +2,33 @@ import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import Card from './Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './cardSwiper.css';
+import users from '../db.json';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
-const users = [
-  { name: 'Alice', img: '/emma.jpg' },
-  { name: 'Bob', img: '/emma1.jpg' },
-  { name: 'Charlie', img: '/Thor.jpg' },
-  { name: 'David', img: '/tonystark.jpg' },
-  { name: 'Eva', img: '/mjolnir.jpg' },
-  { name: 'Frank', img: '/supandbatsy.jpg' },
-  { name: 'Grace', img: '/hulk.jpg' },
-  { name: 'Hannah', img: '/Groot.jpg' },
-  { name: 'Ivy', img: '/emma3.jpg' },
-  { name: 'Jack', img: '/city.jpg' },
-];
+import MiniFlipCard from './MiniFlipCard ';
+
 function CardSwiper() {
   return (
     <div>
+      <div className='w-full'>
+        <div className='flex border-b-2 text-sm border-gray-300'>
+          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+            Boys
+          </div>
+
+          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+            Girls
+          </div>
+
+          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+            Couples
+          </div>
+        </div>
+      </div>
+
+      <div className='w-full flex justify-end text-xs items-center mt-2 mr-4 mb-[-5px] px-2'>
+        <div className='border-b mr-2'> Click the cards to flip</div>
+        <MiniFlipCard />
+      </div>
       <Swiper
         effect={'coverflow'} // 3D effect
         spaceBetween={50}
@@ -45,8 +56,15 @@ function CardSwiper() {
         // }}
       >
         {users.map((user) => (
-          <SwiperSlide key={user.name} className='swiper-slide relative z-0'>
-            <Card name={user.name} img={user.img} />
+          <SwiperSlide key={user.id} className='swiper-slide relative z-0'>
+            <Card
+              name={user.name}
+              age={user.age}
+              bio={user.bio}
+              hobbies={user.hobbies}
+              img={user.img}
+              height={user.height}
+            />
           </SwiperSlide>
         ))}
         <div className='slider-controller'>

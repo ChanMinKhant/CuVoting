@@ -6,5 +6,4 @@
 
 .drop-open {
   max-height: 300px; /* Large enough to fit the dropdown content */
-  margin-top: 10px; /* Adds spacing when expanded */
 }
