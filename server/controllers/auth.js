@@ -10,6 +10,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   //   const err = new CustomError('You are already logged in', 400);
   //   return next(err);
   // }
+  const as = await User.find();
+  console.log(as);
   const {
     email,
     password,
@@ -26,7 +28,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  if (user && isPending.length > 0) {
+  if (user || isPending.length > 0) {
     await Otp.deleteMany({ email });
     user.password = password;
     await user.save();
@@ -126,6 +128,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   const user = await User.findOne({
     email,
   });
+  console.log(email, otp);
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
