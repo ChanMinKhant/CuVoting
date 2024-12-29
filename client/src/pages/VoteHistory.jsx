@@ -18,7 +18,7 @@ function VoteHistory() {
       <div>
         {isLoggedIn && voted ? (
           <div className='flex flex-col px-2 items-center h-[100vh] py-4 bg-white'>
-            {/* history.map(......) */}
+            {/* history.map(......) etc*/}
             <div className='mt-2 bg-[#f1f5f8] justify-between flex p-2 w-full h-[65px] shadow-md'>
               <div className='flex flex-col'>
                 <div className='font-bold text-[18px]'>Nandar</div>
