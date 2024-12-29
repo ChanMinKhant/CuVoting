@@ -20,7 +20,7 @@ ContestantProps) {
     typeof height === 'string' ? height.replace(/"/g, "'") : 'N/A';
 
   return (
-    <div className='relative w-full aspect-[3/4] overflow-hidden rounded-2xl shadow-lg'>
+    <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg'>
       <img
         src={
           'https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fi.pinimg.com%2F736x%2F9d%2Ff7%2F12%2F9df71280ef9bcceb74f507a168ddecee--one-piece-d-luffy.jpg&sp=1735459984Tb76cf75cc21e22a6d0a6c8a2e61b3660792d76b8116ffb87ba25fd9fc863ea79'
