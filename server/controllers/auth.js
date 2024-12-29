@@ -4,14 +4,19 @@ const bcrypt = require('bcrypt');
 const CustomError = require('../utils/customError');
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
+const { sendMail } = require('../utils/sendMail');
+const {
+  registerSchema,
+  loginSchema,
+  otpSchema,
+  deviceIdSchema,
+} = require('../validate/auth');
 
 exports.register = asyncHandler(async (req, res, next) => {
   // if (req.user) {
   //   const err = new CustomError('You are already logged in', 400);
   //   return next(err);
   // }
-  const as = await User.find();
-  console.log(as);
   const {
     email,
     password,
@@ -21,6 +26,11 @@ exports.register = asyncHandler(async (req, res, next) => {
     year,
     deviceId,
   } = req.body;
+  const { error } = registerSchema.validate(req.body);
+  if (error) {
+    const err = new CustomError(error.details[0].message, 400);
+    return next(err);
+  }
   let user = await User.findOne({ email });
   const isPending = await Otp.find({ email });
   if (user?.isVerified) {
@@ -64,23 +74,21 @@ exports.register = asyncHandler(async (req, res, next) => {
   }
 
   //send otp here
+  const message = `Your OTP is ${otp}`;
+  try {
+    const subject = 'OTP for email verification';
+    await sendMail(email, subject, message);
+  } catch (error) {
+    await user.deleteOne();
+    await otpDoc.deleteOne();
+    console.log(error);
+    const err = new CustomError('Email could not be sent', 500);
+    return next(err);
+  }
   res.status(200).send({
     success: true,
     message: 'OTP has been sent to your email.',
   });
-  // const message = `Your OTP is ${otp}`;
-  // try {
-  //   await sendEmail({
-  //     email,
-  //     subject: 'Verify Your Email',
-  //     message,
-  //   });
-  // } catch (error) {
-  //   await user.deleteOne();
-  //   await otpDoc.deleteOne();
-  //   const err = new CustomError('Email could not be sent', 500);
-  //   return next(err);
-  // }
 });
 
 exports.login = asyncHandler(async (req, res, next) => {
@@ -89,6 +97,11 @@ exports.login = asyncHandler(async (req, res, next) => {
   //   return next(err);
   // }
   const { email, password } = req.body;
+  const { error } = loginSchema.validate(req.body);
+  if (error) {
+    const err = new CustomError(error.details[0].message, 400);
+    return next(err);
+  }
   // find the user in the database
   const user = await User.findOne({ email }, '+password');
   if (!user || !user?.isVerified) {
@@ -125,6 +138,11 @@ exports.login = asyncHandler(async (req, res, next) => {
 
 exports.submitOtp = asyncHandler(async (req, res, next) => {
   const { email, otp } = req.body;
+  const { error } = otpSchema.validate(req.body);
+  if (error) {
+    const err = new CustomError(error.details[0].message, 400);
+    return next(err);
+  }
   const user = await User.findOne({
     email,
   });
@@ -163,6 +181,14 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     secure: true,
   });
 
+  // send mail to user
+  const message = 'Your account has been verified';
+  const subject = 'Account verified';
+  try {
+    await sendMail(email, subject, message);
+  } catch (error) {
+    console.log(error);
+  }
   res.status(200).send({
     success: true,
     message: 'OTP verified successfully',
@@ -172,6 +198,11 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
 //deviceId
 exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
   const { deviceId } = req.body;
+  const { error } = deviceIdSchema.validate(req.body);
+  if (error) {
+    const err = new CustomError(error.details[0].message, 400);
+    return next(err);
+  }
   const user = await User.findOne({ deviceId });
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
@@ -180,12 +211,18 @@ exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
 
   res.status(200).send({
     success: true,
+    user,
     message: 'you can login this accound with this device',
   });
 });
 
 exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
   const { deviceId } = req.body;
+  const { error } = deviceIdSchema.validate(req.body);
+  if (error) {
+    const err = new CustomError(error.details[0].message, 400);
+    return next(err);
+  }
   const user = await User.findOne({ deviceId });
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
