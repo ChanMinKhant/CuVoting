@@ -10,6 +10,7 @@ import Register from './pages/Auth/Register/Regsiter';
 import SubmitOtp from './pages/Auth/Register/Otp';
 import SelectionPage from './pages/Selection/Selection';
 import Front from './pages/Front';
+import MissVotingPage from './pages/Selection/card';
 function App() {
   return (
     <div className='sm:flex sm:justify-center'>
@@ -28,6 +29,7 @@ function App() {
           <Route path='/otp' element={<SubmitOtp />}></Route>
           // selection pages
           <Route path='/selection' element={<SelectionPage />}></Route>
+          <Route path='/aaa' element={<MissVotingPage />}></Route>
         </Routes>
         {/* <Footer /> */}
       </div>
