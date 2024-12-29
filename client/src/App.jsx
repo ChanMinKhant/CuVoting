@@ -3,7 +3,7 @@ import Home from './pages/home';
 import CandidateProfile from './pages/CandidateProfile ';
 import SignUpPage from './pages/Signup';
 import Nav from './components/Nav';
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 import Vote from './pages/Vote';
 import VoteCata from './pages/VoteCata';
 import Register from './pages/Auth/Register/Regsiter';
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className='sm:flex sm:justify-center'>
       <div className='max-w-screen-sm'>
-        {/* <Nav /> */}
+        <Nav />
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/vote/:cate' element={<Vote />}></Route>
