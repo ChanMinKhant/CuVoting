@@ -69,7 +69,7 @@ const VotingResult = () => {
       </div>
       <div className='border-b-2'>
         {percentages.map((person) => (
-          <div key={person.id} className='my-4 border-t'>
+          <div key={person.id} className='my-4 border-t pt-2'>
             <div className='flex justify-between mb-[-10px]'>
               <h4 className='text-[15px]'>{person.name}</h4>
               <div className='text-[13px]'>

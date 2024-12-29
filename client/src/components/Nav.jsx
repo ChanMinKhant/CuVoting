@@ -156,13 +156,13 @@ const Nav = () => {
         >
           <div>Voting Results</div>
         </Link>
-        <Link
+        {/* <Link
           className='text-md hover:bg-blue-300 px-3 rounded py-2 border-b border-gray-300'
           to={'/voting_results'}
           onClick={toggleMenu}
         >
           <div>Contact Us</div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );
