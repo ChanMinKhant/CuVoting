@@ -26,7 +26,7 @@ const Modal = ({ isOpen, onClose }) => {
       ...prevVotes,
       [category]: prevVotes[category] + 1,
     }));
-    // onClose();
+    onClose();
   };
 
   if (!isOpen) return null;

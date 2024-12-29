@@ -81,14 +81,12 @@ const Nav = () => {
 
   return (
     <div className='max-w-screen-sm sticky top-0 z-[50] w-[100vw]'>
-      {/* Navbar */}
       <nav className='flex justify-between w-full items-center px-4 py-2 bg-gradient-to-r from-[#6a11cb] to-[#2575fc] text-white shadow-md'>
         <div className='text-lg font-semibold'>
           <span className='tracking-wider'>UCSP</span>{' '}
           <span className='italic'>Voting</span>
         </div>
 
-        {/* Hamburger Icon (visible on small screens) */}
         <div className=''>
           <button
             onClick={toggleMenu}
@@ -129,9 +127,8 @@ const Nav = () => {
         </div>
       </nav>
 
-      {/* Dropdown Menu */}
       <div
-        className={`flex flex-col bg-[#f0f8ff] max-w-[640px] fixed  px-2 top-[50px] overflow-hidden shadow-lg transition-transform transform ${
+        className={`flex border border-purple-800 rounded-sm flex-col bg-[#f0f8ff] max-w-[640px] fixed  px-2 top-[50px] overflow-hidden shadow-lg transition-transform transform ${
           isMenuOpen
             ? 'translate-y-0 opacity-100 w-full'
             : '-translate-y-full w-0 opacity-0'
@@ -140,21 +137,28 @@ const Nav = () => {
       >
         <Link
           className='text-md hover:bg-blue-300 px-3 rounded py-2 border-b border-gray-300'
-          to={'/vote/boys'}
+          to={'/home'}
+          onClick={toggleMenu}
+        >
+          <div>Home</div>
+        </Link>
+        <Link
+          className='text-md hover:bg-blue-300 px-3 rounded-full py-2 border-b border-gray-300'
+          to={'/vote_history'}
           onClick={toggleMenu}
         >
           <div>Vote History</div>
         </Link>
         <Link
           className='text-md hover:bg-blue-300 px-3 rounded py-2 border-b border-gray-300'
-          to={'/vote/girls'}
+          to={'/vote_history'}
           onClick={toggleMenu}
         >
           <div>Voting Results</div>
         </Link>
         <Link
           className='text-md hover:bg-blue-300 px-3 rounded py-2 border-b border-gray-300'
-          to={'/vote/couples'}
+          to={'/vote_history'}
           onClick={toggleMenu}
         >
           <div>Contact Us</div>

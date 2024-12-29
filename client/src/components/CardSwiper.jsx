@@ -10,23 +10,26 @@ function CardSwiper() {
   return (
     <div>
       <div className='w-full'>
-        <div className='flex border-b-2 text-sm border-gray-300'>
-          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+        <div className='flex border-b-2 text-sm border-gray-300 pb-2'>
+          <div className='w-1/3 text-center py-2 mx-[3px] cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600 '>
             Boys
           </div>
 
-          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+          <div className='w-1/3 text-center py-2 mx-[3px] cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600 '>
             Girls
           </div>
 
-          <div className='w-1/3 text-center py-2 cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600'>
+          <div className='w-1/3 text-center py-2 mx-[3px] cursor-pointer hover:text-purple-600 hover:border-b-2 hover:border-purple-600 '>
             Couples
           </div>
         </div>
       </div>
 
       <div className='w-full flex justify-end text-xs items-center mt-2 mr-4 mb-[-5px] px-2'>
-        <div className='border-b mr-2'> Click the cards to flip</div>
+        <div className='border-b px-2 py-[2px] mr-2 rounded-md shadow-[10px_10px_20px_#bebebe,-10px_-10px_20px_#ffffff,inset_10px_10px_20px_#bebebe,inset_-10px_-10px_10px_#ffffff]'>
+          {' '}
+          Click the cards to flip
+        </div>
         <MiniFlipCard />
       </div>
       <Swiper

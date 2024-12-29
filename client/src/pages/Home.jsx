@@ -17,44 +17,6 @@ function Home() {
       {/* <div className='flex flex-col sm:flex-row  w-full justify-evenly'> */}
       <hr className='border-t-2 border-gray-300 my-2 rounded-full m-auto w-[50%] sm:hidden' />
 
-      {/* <div className='my-2 sm:text-[17px] text-sm w-full sm:w-[45%]'>
-        <div>Choose categorie to vote</div>
-        <Link
-          to='/vote/boys'
-          className='w-full border-b-2 flex justify-between px-2 my-4'
-        >
-          <div>Boys</div>
-          <img
-            src='/right-up.png'
-            alt='image'
-            className='sm:w-6 sm:h-6 w-4 h-4'
-          />
-        </Link>
-        <Link
-          to='/vote/girls'
-          className='w-full border-b-2 flex justify-between px-2 my-4'
-        >
-          <div>girls</div>
-          <img
-            src='/right-up.png'
-            alt='image'
-            className='sm:w-6 sm:h-6 w-4 h-4'
-          />
-        </Link>
-        <Link
-          to='/vote/cluples'
-          className='w-full border-b-2 flex justify-between px-2 my-4'
-        >
-          <div>couple</div>
-          <img
-            src='/right-up.png'
-            alt='image'
-            className='sm:w-6 sm:h-6 w-4 h-4'
-          />
-        </Link>
-      </div> */}
-      {/* </div> */}
-
       <CardSwiper />
       <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
 

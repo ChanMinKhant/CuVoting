@@ -36,7 +36,7 @@ const ContestantCard = ({ img, name, age, bio, hobbies, height }) => {
         ></div>
 
         {/* Text Section */}
-        <div className='flex justify-between p-5 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 rounded-b-2xl'>
+        <div className='flex justify-between h-1/3 p-5 bg-gradient-to-t from-gray-900 via-gray-800 to-gray-700 rounded-b-2xl'>
           <div>
             <h3 className='text-lg font-bold text-white tracking-wide'>
               {name}
@@ -44,7 +44,7 @@ const ContestantCard = ({ img, name, age, bio, hobbies, height }) => {
             <p className='text-gray-300'>Age: {age}</p>
           </div>
           <button
-            className='mt-2 w-[100px] py-[2px] text-center text-md font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg shadow-md hover:shadow-lg hover:opacity-90 active:scale-95 transition-all duration-300'
+            className='mt-2 h-[40px] w-[100px] py-[2px] text-center text-md font-semibold text-white bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 rounded-lg shadow-md hover:shadow-lg hover:opacity-90 active:scale-95 transition-all duration-300'
             onClick={handleVoteClick}
           >
             Vote Me

@@ -4,23 +4,25 @@ import CandidateProfile from './pages/CandidateProfile ';
 import SignUpPage from './pages/Signup';
 import Nav from './components/Nav';
 // import Footer from './components/Footer';
-import Vote from './pages/Vote';
+import VoteHistory from './pages/VoteHistory';
 import VoteCata from './pages/VoteCata';
 import Register from './pages/Auth/Register/Regsiter';
 import SubmitOtp from './pages/Auth/Register/Otp';
 import SelectionPage from './pages/Selection/Selection';
+import Front from './pages/Front';
 function App() {
   return (
     <div className='sm:flex sm:justify-center'>
       <div className='max-w-screen-sm'>
         <Nav />
         <Routes>
-          <Route path='/' element={<Home />}></Route>
-          <Route path='/vote/:cate' element={<Vote />}></Route>
+          <Route path='/home' element={<Home />}></Route>
+          <Route path='/' element={<Front />}></Route>
+          <Route path='/vote_history' element={<VoteHistory />}></Route>
           <Route path='/vote_categories' element={<VoteCata />}></Route>
           <Route path='/signup' element={<SignUpPage />}></Route>
           <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
-          // register pages
+          // register page
           <Route path='/register' element={<Register />}></Route>
           // otp pages
           <Route path='/otp' element={<SubmitOtp />}></Route>
