@@ -1,5 +1,8 @@
-exports.sendEmail = async (email, subject, message) => {
+const nodemailer = require('nodemailer');
+
+exports.sendMail = async (email, subject, message) => {
   try {
+    console.log(email, subject, message);
     if (!email) {
       throw new Error('Please provide email');
     }
