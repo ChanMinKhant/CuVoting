@@ -11,6 +11,7 @@ import SubmitOtp from './pages/Auth/Register/Otp';
 import SelectionPage from './pages/Selection/Selection';
 import Front from './pages/Front';
 import MissVotingPage from './pages/Selection/card';
+import VotingResult from './pages/VotingResult';
 function App() {
   return (
     <div className='sm:flex sm:justify-center'>
@@ -20,6 +21,7 @@ function App() {
           <Route path='/home' element={<Home />}></Route>
           <Route path='/' element={<Front />}></Route>
           <Route path='/vote_history' element={<VoteHistory />}></Route>
+          <Route path='/voting_results' element={<VotingResult />}></Route>
           <Route path='/vote_categories' element={<VoteCata />}></Route>
           <Route path='/signup' element={<SignUpPage />}></Route>
           <Route path='/candidates/:id' element={<CandidateProfile />}></Route>
