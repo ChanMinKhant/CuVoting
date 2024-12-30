@@ -1,6 +1,7 @@
 import React from 'react';
 import { Progress } from 'antd';
 import 'antd/dist/reset.css';
+import { Link } from 'react-router-dom';
 const contestants = [
   {
     id: 1,
@@ -38,13 +39,33 @@ const percentages = contestants.map((contestant) => ({
   percentage: ((contestant.voteCount / totalVotes) * 100).toFixed(2), // Format to 2 decimal places
 }));
 const VotingResult = () => {
-  const allowed = true;
+  const allowed = false;
   if (!allowed) {
     return (
-      <div className='w-full p-4 h-[100vh] flex justify-center items-center'>
-        <div className='text-center'>
-          We have decided to hide the results untill the selection is over to
-          make things more exicting.
+      <div className='w-full h-[100vh] flex justify-center items-center bg-gradient-to-b from-blue-100 to-white'>
+        <div className='text-center flex flex-col h-full p-8 rounded-lg shadow-2xl bg-white border border-gray-200'>
+          <div className='mt-[30px] text-2xl font-bold text-gray-500'>
+            <img
+              src='/hidden.png'
+              alt='Exciting'
+              className='mx-auto mb-6 w-[130px] h-[130px]'
+            />
+            {/* animate-bounce */}
+          </div>
+          <div className='text-lg font-semibold text-gray-800 mb-4'>
+            We have decided to hide the results until the selection is over to
+            make things more exciting.
+          </div>
+          <p className='text-gray-600 italic mb-6'>
+            Come back when the selection is over.
+          </p>
+          <Link
+            to='/home'
+            className='text-white bg-blue-500 px-4 py-2 rounded-lg shadow hover:bg-blue-600 transition'
+          >
+            Go back to Home
+          </Link>
+          {/* <div className='h-4 w-4 mx-auto bg-gray-500 rounded-full animate-bounce mt-[20px]'></div> */}
         </div>
       </div>
     );

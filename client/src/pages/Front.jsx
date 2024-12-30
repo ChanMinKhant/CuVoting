@@ -7,12 +7,12 @@ function Front() {
       style={{ backgroundImage: 'url(/background.jpg)' }}
     >
       {/* Overlay */}
-      <div className='absolute inset-0 bg-gradient-to-b from-purple-900/70 to-black/90'></div>
+      <div className='absolute inset-0 bg-gradient-to-b from-purple-700/50 to-black/70'></div>
 
       {/* Content */}
       <div className='relative z-10 text-center'>
         <h1 className='text-5xl font-extrabold text-white mb-6 tracking-wider'>
-          <span className='bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500'>
+          <span className='bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500 '>
             UCSP Voting
           </span>
         </h1>
