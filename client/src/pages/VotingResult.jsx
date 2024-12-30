@@ -88,10 +88,10 @@ const VotingResult = () => {
           Titel : <span className='font-normal'>Queen</span>
         </div>
         <div className='font-bold my-2'>
-          Winner: <span className='font-normal'>Natalia (40 votes)</span>
+          Winner: <span className='font-normal'>Diana (40 votes)</span>
         </div>
         <div className='text-xl text-[gold] text-center p-2 my-4 bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 rounded-lg shadow-lg shadow-pink-500/50'>
-          Congratulation Natalia 🏆.
+          Congratulation Diana 🏆.
         </div>
       </div>
     </div>
