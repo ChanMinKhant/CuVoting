@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Front() {
   return (
     <div
@@ -18,9 +20,12 @@ function Front() {
           Cast your vote and make your voice heard on the UCSP platform. Join
           the community today!
         </p>
-        <button className='px-8 py-3 text-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform duration-300'>
+        <Link
+          to='/home'
+          className='px-8 py-3 text-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform duration-300'
+        >
           Vote Now
-        </button>
+        </Link>
       </div>
 
       {/* Floating Decorative Elements */}
