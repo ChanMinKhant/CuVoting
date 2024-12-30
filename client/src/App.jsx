@@ -3,7 +3,6 @@ import Home from './pages/Home';
 import CandidateProfile from './pages/CandidateProfile ';
 import SignUpPage from './pages/Signup';
 import Nav from './components/Nav';
-// import Footer from './components/Footer;
 import VoteHistory from './pages/VoteHistory';
 import VoteCata from './pages/VoteCata';
 import Register from './pages/Auth/Register/Regsiter';
