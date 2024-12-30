@@ -6,7 +6,7 @@ const Modal = ({ isOpen, onClose }: any) => {
   const votingStarted = true;
   console.log(isOpen, onClose);
   console.log('Modal rendered');
-  const [votes, setVotes] = useState({
+  const [votes, setVotes] = useState<{ [key: string]: boolean }>({
     smile: false,
     pretty: false,
     innocent: false,
@@ -18,7 +18,7 @@ const Modal = ({ isOpen, onClose }: any) => {
     { id: 3, title: 'Innocent', key: 'innocent' },
   ];
 
-  const toggleVote = (categoryKey) => {
+  const toggleVote = (categoryKey: string) => {
     setVotes((prevVotes) => ({
       ...prevVotes,
       [categoryKey]: !prevVotes[categoryKey],
