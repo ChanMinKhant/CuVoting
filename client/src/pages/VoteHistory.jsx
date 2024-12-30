@@ -22,12 +22,27 @@ function VoteHistory() {
             <div className='mt-2 bg-[#f1f5f8] justify-between flex p-2 w-full h-[65px] shadow-md'>
               <div className='flex flex-col'>
                 <div className='font-bold text-[18px]'>Nandar</div>
+                <div className='text-gray-500 font-sm'>Title - smile</div>
+              </div>
+              <div>
+                <button
+                  onClick={openModal}
+                  className='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-2 border border-red-500 hover:border-transparent text-sm rounded'
+                >
+                  calcel vote
+                </button>
+                <Cancel isOpen={isModalOpen} onClose={closeModal} />
+              </div>
+            </div>
+            <div className='mt-2 bg-[#f1f5f8] justify-between flex p-2 w-full h-[65px] shadow-md'>
+              <div className='flex flex-col'>
+                <div className='font-bold text-[18px]'>Diana</div>
                 <div className='text-gray-500 font-sm'>Title - queen</div>
               </div>
               <div>
                 <button
                   onClick={openModal}
-                  class='bg-transparent hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-4 border border-red-500 hover:border-transparent rounded'
+                  className='bg-transparent text-sm hover:bg-red-500 text-red-700 font-semibold hover:text-white py-2 px-2 border border-red-500 hover:border-transparent rounded'
                 >
                   calcel vote
                 </button>

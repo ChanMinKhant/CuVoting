@@ -47,7 +47,7 @@ const Modal = ({ isOpen, onClose }) => {
         {/* Vote for Smile Queen */}
         <div className='mb-2'>
           {catas.map((cata) => (
-            <div>
+            <div key={cata.id}>
               {/* <p className='font-medium'>Vote for {cata.title}</p> */}
               <button
                 className='mt-2 px-2 py-[3px] bg-blue-500 text-sm text-white rounded hover:bg-blue-600'

@@ -67,6 +67,7 @@ function CardSwiper() {
               hobbies={user.hobbies}
               img={user.img}
               height={user.height}
+              id={user.id}
             />
           </SwiperSlide>
         ))}
