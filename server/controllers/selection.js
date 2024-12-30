@@ -110,6 +110,7 @@ exports.getUserVotedHistories = asyncHandler(async (req, res, next) => {
   });
 });
 
+// need to implement
 exports.deleteVote = asyncHandler(async (req, res, next) => {
   if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
@@ -139,4 +140,12 @@ exports.deleteVote = asyncHandler(async (req, res, next) => {
     success: true,
     message: 'Vote deleted',
   });
+});
+
+exports.getWinners = asyncHandler(async (req, res, next) => {
+  const Result = await Result.find();
+  if (!Result) {
+    const err = new CustomError('Something went wrong', 500);
+    return next(err);
+  }
 });
