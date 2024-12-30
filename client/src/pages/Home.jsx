@@ -16,14 +16,15 @@ function Home() {
 
       {/* <div className='flex flex-col sm:flex-row  w-full justify-evenly'> */}
       <hr className='border-t-2 border-gray-300 my-2 rounded-full m-auto w-[50%] sm:hidden' />
-
       <CardSwiper />
       <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
 
-      <div className='text-center text-sm my-2 px-2'>
+      <div className='text-center text-sm my-2 px-2 text-gray-600'>
         "The person you vote for today might become your partner one day. So,
         choose your vote wisely! 🤔"
       </div>
+      <br />
+      <br />
       {/* <button class='bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-1 px-2 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 text-sm transition-transform duration-300'>
               Vote Now
             </button> */}
