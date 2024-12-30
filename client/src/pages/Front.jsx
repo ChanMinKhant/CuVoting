@@ -1,16 +1,31 @@
 function Front() {
   return (
     <div
-      className='w-full h-[100vh] bg-cover bg-center flex flex-col justify-center items-center text-white'
+      className='w-full h-[100vh] bg-cover bg-center flex flex-col justify-center items-center text-white relative overflow-hidden'
       style={{ backgroundImage: 'url(/background.jpg)' }}
     >
-      <h1 className='text-4xl text-black font-bold mb-4'>UCSP Voting</h1>
-      <p className='text-xl text-black mb-6'>
-        Welcome to the UCSP Voting platform!
-      </p>
-      <button className='px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition duration-300'>
-        Sign Up
-      </button>
+      {/* Overlay */}
+      <div className='absolute inset-0 bg-gradient-to-b from-purple-900/70 to-black/90'></div>
+
+      {/* Content */}
+      <div className='relative z-10 text-center'>
+        <h1 className='text-5xl font-extrabold text-white mb-6 tracking-wider'>
+          <span className='bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500'>
+            UCSP Voting
+          </span>
+        </h1>
+        <p className='text-lg text-gray-300 mb-8 max-w-md mx-auto leading-relaxed'>
+          Cast your vote and make your voice heard on the UCSP platform. Join
+          the community today!
+        </p>
+        <button className='px-8 py-3 text-lg bg-gradient-to-r from-pink-500 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform duration-300'>
+          Vote Now
+        </button>
+      </div>
+
+      {/* Floating Decorative Elements */}
+      <div className='absolute top-20 left-10 w-32 h-32 bg-pink-500/20 blur-3xl rounded-full animate-pulse'></div>
+      <div className='absolute bottom-10 right-10 w-48 h-48 bg-purple-500/20 blur-3xl rounded-full animate-pulse'></div>
     </div>
   );
 }
