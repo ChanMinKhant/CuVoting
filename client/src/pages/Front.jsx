@@ -26,6 +26,12 @@ function Front() {
         >
           Vote Now
         </Link>
+        <Link
+          to='/signup'
+          className='ml-4 mt-4 px-8 py-3 text-lg bg-gradient-to-r from-green-500 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition transform duration-300'
+        >
+          Sign Up
+        </Link>
       </div>
 
       {/* Floating Decorative Elements */}
