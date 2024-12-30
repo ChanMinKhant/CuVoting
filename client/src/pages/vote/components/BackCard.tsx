@@ -45,7 +45,7 @@ const BackCard = ({ img, name, age, height, bio, hobbies }: any) => {
             Hobbies:
           </h4>
           <ul className='list-disc text-sm list-inside mt-0 text-gray-700'>
-            {hobbies.map((item, index) => (
+            {hobbies.map((item: any, index: any) => (
               <li className='mt-[2px]' key={index}>
                 {item}
               </li>
