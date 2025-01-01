@@ -1,4 +1,5 @@
 const joi = require('joi');
+const user = require('../models/user');
 
 exports.registerSchema = joi.object({
   email: joi
@@ -9,9 +10,12 @@ exports.registerSchema = joi.object({
   password: joi.string().required(),
   confirmPassword: joi.string().required(),
   username: joi.string().required(),
-  section: joi.string(),
-  year: joi.string(),
-  deviceId: joi.string(),
+  section: joi.string().allow(''),
+  year: joi.string().allow(''),
+  deviceId: joi.string().allow(''),
+  userType: joi.string().allow(''),
+  major: joi.string().allow(''),
+  occupation: joi.string().allow(''),
 });
 
 exports.loginSchema = joi.object({

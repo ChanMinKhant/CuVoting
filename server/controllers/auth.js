@@ -26,7 +26,9 @@ exports.register = asyncHandler(async (req, res, next) => {
     year,
     deviceId,
   } = req.body;
+  console.log(req.body);
   const { error } = registerSchema.validate(req.body);
+  console.log(error);
   if (error) {
     const err = new CustomError(error.details[0].message, 400);
     return next(err);
@@ -41,6 +43,12 @@ exports.register = asyncHandler(async (req, res, next) => {
   if (user || isPending.length > 0) {
     await Otp.deleteMany({ email });
     user.password = password;
+    user.deviceId = deviceId;
+    user.username = username;
+    // user.section = section;
+    // user.year = year;
+    // user.major = major;
+    // user.occupation = occupation;
     await user.save();
   } else {
     user = await User.create({
