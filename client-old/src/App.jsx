@@ -15,7 +15,6 @@ function App() {
   return (
     <div className='sm:flex sm:justify-center'>
       <div className='max-w-screen-sm'>
-        <Nav />
         <Routes>
           <Route path='/home' element={<Home />}></Route>
           <Route path='/' element={<Front />}></Route>
