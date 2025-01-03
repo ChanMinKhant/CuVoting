@@ -26,10 +26,10 @@ exports.register = asyncHandler(async (req, res, next) => {
   console.log('Register Request Body:', req.body);
 
   // Validate input
-  const { error } = registerSchema.validate(req.body);
-  if (error) {
-    return next(new CustomError(error.details[0].message, 400));
-  }
+  // const { error } = registerSchema.validate(req.body);
+  // if (error) {
+  //   return next(new CustomError(error.details[0].message, 400));
+  // }
 
   if (password !== confirmPassword) {
     return next(new CustomError('Passwords do not match', 400));
@@ -37,8 +37,10 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   try {
     // Check if user exists
-    let user = await User.findOne({ email });
-    const isPending = await Otp.find({ email });
+    const [user, isPending] = await Promise.all([
+      User.findOne({ email }),
+      Otp.find({ email }),
+    ]);
 
     if (user?.isVerified) {
       return next(new CustomError('User already exists', 400));
@@ -76,10 +78,11 @@ exports.register = asyncHandler(async (req, res, next) => {
     const message = `Your OTP is ${otp}`;
     try {
       const subject = 'OTP for email verification';
-      await sendMail(email, subject, message);
+      sendMail(email, subject, message).catch((mailError) => {
+        console.error('Mail Error:', mailError);
+      });
     } catch (mailError) {
       console.error('Mail Error:', mailError);
-      await user.deleteOne();
       await otpDoc.deleteOne();
       return next(new CustomError('Email could not be sent', 500));
     }
