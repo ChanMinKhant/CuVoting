@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { register } from '../../../services/auth';
 
@@ -41,6 +41,8 @@ const RegisterForm: React.FC = () => {
   const majorRef = useRef<HTMLSelectElement>(null);
   const yearRef = useRef<HTMLSelectElement>(null);
   const occupationRef = useRef<HTMLInputElement>(null);
+
+  const navigate = useNavigate();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -110,7 +112,7 @@ const RegisterForm: React.FC = () => {
           // save email to session storage
           sessionStorage.setItem('email', formData.email);
           // go to otp page
-          window.location.href = '/otp';
+          navigate('/otp');
         }
       } catch (error: any) {
         sessionStorage.setItem('email', formData.email);

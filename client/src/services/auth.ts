@@ -11,6 +11,15 @@ export const register = async (userData: any) => {
   }
 };
 
+export const login = async (userData: any) => {
+  try {
+    const response = await apiService.post(`${authBaseUrl}/login`, userData);
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};
+
 //submit otp
 export const submitOtp = async (email: String, otp: String) => {
   try {

@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
+import { login } from '../../../services/auth';
 
 interface FormData {
   usernameOrEmail: string;
@@ -18,6 +19,7 @@ const LoginForm: React.FC = () => {
 
   const usernameOrEmailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -49,7 +51,7 @@ const LoginForm: React.FC = () => {
     return errors;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Partial<FormData> = {};
 
@@ -64,7 +66,20 @@ const LoginForm: React.FC = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      console.log('Form submitted:', formData);
+      try {
+        const data = await login(formData);
+        if (data) {
+          console.log('Logged in successfully');
+          // redirect to home page
+          navigate('/home');
+        }
+      } catch (error: any) {
+        if (error.status === 401) {
+          setErrors({ password: 'Invalid username or password' });
+        } else {
+          console.error(error);
+        }
+      }
     }
   };
 

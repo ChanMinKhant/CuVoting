@@ -1,18 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { submitOtp } from '../../../services/auth';
+import { useNavigate } from 'react-router-dom';
 
 const OtpPage: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const navigate = useNavigate();
 
   const email: string | null = sessionStorage.getItem('email');
   if (!email) {
-    // Redirect to login page if email is not found in session storage
-    // You can also redirect to any other page
-    window.location.href = '/login';
+    navigate('/home');
   }
 
-  const handleChange = (
+  const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number
   ) => {
@@ -24,6 +24,8 @@ const OtpPage: React.FC = () => {
 
       if (index < 5) {
         inputRefs.current[index + 1]?.focus();
+      } else {
+        await handleSubmit(newOtp);
       }
     } else if (value === '') {
       const newOtp = [...otp];
@@ -41,25 +43,45 @@ const OtpPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const otpValue = otp.join('');
+  const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
+    const pasteData = e.clipboardData.getData('text');
+    if (/^\d{6}$/.test(pasteData)) {
+      const newOtp = pasteData.split('');
+      setOtp(newOtp);
+      inputRefs.current[5]?.focus();
+      handleSubmit(newOtp);
+    }
+  };
+
+  const handleSubmit = async (otpArray = otp) => {
+    const otpValue = otpArray.join('');
     console.log('OTP Submitted:', otpValue);
     try {
       const data = await submitOtp(email!, otpValue);
       if (data.success) {
-        alert('account is verified successfully');
+        alert('Account is verified successfully');
+        navigate('/home');
       }
     } catch (error: any) {
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    inputRefs.current[0]?.focus();
+  }, []);
+
   return (
     <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
       <div className='bg-white p-8 rounded-lg shadow-md w-full max-w-md'>
         <h2 className='text-2xl font-bold mb-6 text-center'>Enter OTP</h2>
-        <form onSubmit={handleSubmit} className='space-y-4'>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className='space-y-4'
+        >
           <div className='flex justify-center space-x-2'>
             {otp.map((digit, index) => (
               <input
@@ -70,6 +92,7 @@ const OtpPage: React.FC = () => {
                 value={digit}
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
+                onPaste={handlePaste}
                 className='w-12 h-12 text-center text-2xl border rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all'
               />
             ))}
