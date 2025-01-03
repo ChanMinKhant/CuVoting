@@ -3,7 +3,7 @@ const User = require('../models/user');
 const Vote = require('../models/vote');
 const Result = require('../models/result');
 const asyncHandler = require('express-async-handler');
-const CustomError = require('../utils/customError');
+const CustomError = require('../utils/CustomError');
 const mongoose = require('mongoose');
 const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
