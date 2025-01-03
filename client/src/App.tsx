@@ -6,15 +6,9 @@ import VotingPage from './pages/vote/VotingPage';
 import Login from './pages/auth/login/Login';
 import Otp from './pages/auth/signup/Otp';
 import Hero from './pages/hero/Hero';
-import { getAllSelections } from './services/selection';
 // import Nav from './pages/components/Nav';
 
 function App() {
-  const dataa = async () => {
-    const daa = await getAllSelections();
-    console.log(daa);
-  };
-  dataa();
   return (
     <>
       <Router>

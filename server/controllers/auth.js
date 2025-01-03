@@ -24,7 +24,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     username,
     section,
     year,
-    deviceId,
+    deviceId = '123',
   } = req.body;
   console.log(req.body);
   const { error } = registerSchema.validate(req.body);
@@ -84,8 +84,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   //send otp here
   const message = `Your OTP is ${otp}`;
   try {
-    // const subject = 'OTP for email verification';
-    // await sendMail(email, subject, message);
+    const subject = 'OTP for email verification';
+    await sendMail(email, subject, message);
   } catch (error) {
     await user.deleteOne();
     await otpDoc.deleteOne();
