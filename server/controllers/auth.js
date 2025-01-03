@@ -84,8 +84,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   //send otp here
   const message = `Your OTP is ${otp}`;
   try {
-    const subject = 'OTP for email verification';
-    await sendMail(email, subject, message);
+    // const subject = 'OTP for email verification';
+    // await sendMail(email, subject, message);
   } catch (error) {
     await user.deleteOne();
     await otpDoc.deleteOne();
@@ -159,6 +159,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
   }
+  console.log(user._id);
   const otpDoc = await Otp.findOne({ email });
   if (!otpDoc) {
     const err = new CustomError('Invalid OTP', 400);
@@ -177,9 +178,13 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   await user.save();
 
   //generate token
-  const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE || '30d',
-  });
+  const token = jwt.sign(
+    { id: user._id.toString() },
+    process.env.TOKEN_SECRET,
+    {
+      expiresIn: process.env.JWT_EXPIRE || '30d',
+    }
+  );
 
   //set cookie
   res.cookie('jwt', token, {

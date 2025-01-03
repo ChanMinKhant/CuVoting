@@ -6,7 +6,7 @@ import VotingPage from './pages/vote/VotingPage';
 import Login from './pages/auth/login/Login';
 import Otp from './pages/auth/signup/Otp';
 import Hero from './pages/hero/Hero';
-import Nav from './pages/components/Nav';
+// import Nav from './pages/components/Nav';
 
 function App() {
   return (

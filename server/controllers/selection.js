@@ -9,18 +9,19 @@ const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
 exports.getSelections = asyncHandler(async (req, res, next) => {
   // query for boy, girls, and couples
-  const { gender } = req.query;
-  console.log(gender);
+  // const { gender } = req.query;
+  // console.log(gender);
   if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
     return next(err);
   }
+  console.log(req.userId);
   const user = await User.findById(req.userId);
   if (!user) {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const Selections = await Selection.find({ gender });
+  const Selections = await Selection.find();
   res.status(200).send({
     success: true,
     data: Selections,

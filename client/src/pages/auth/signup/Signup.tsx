@@ -113,6 +113,7 @@ const RegisterForm: React.FC = () => {
           window.location.href = '/otp';
         }
       } catch (error: any) {
+        sessionStorage.setItem('email', formData.email);
         console.log(error);
       }
     }
