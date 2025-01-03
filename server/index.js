@@ -14,12 +14,21 @@ const cors = require('cors');
 app.use(express.json());
 app.use(cookieParser());
 //from local host 5173
-app.use(
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  })
-);
+if (process.env.NODE_ENV === 'production') {
+  app.use(
+    cors({
+      origin: [process.env.CLIENT_URL],
+      credentials: true,
+    })
+  );
+} else {
+  app.use(
+    cors({
+      origin: ['http://localhost:5173', process.env.CLIENT_URL],
+      credentials: true,
+    })
+  );
+}
 // app.use(helmet());
 // app.use(morgan('dev'));
 // app.use(mongoSanitize());
@@ -66,3 +75,5 @@ process.on('unhandledRejection', (reason, promise) => {
   console.error('Unhandled Rejection at:', promise, 'reason:', reason);
   process.exit(1); // To exit with a 'failure' code
 });
+
+module.exports = app;
