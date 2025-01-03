@@ -11,21 +11,17 @@ import Hero from './pages/hero/Hero';
 function App() {
   return (
     <>
-      <div className='sm:flex sm:justify-center'>
-        <div className='max-w-screen-sm'>
-          <Router>
-            {/* <Nav /> */}
-            <Routes>
-              <Route path='/' element={<Hero />} />
-              <Route path='/signup' element={<Signup />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/otp' element={<Otp />} />
-              <Route path='/home' element={<VotingPage />} />
-              <Route path='*' element={<h1>Not Found</h1>} />
-            </Routes>
-          </Router>
-        </div>
-      </div>
+      <Router>
+        {/* <Nav /> */}
+        <Routes>
+          <Route path='/' element={<Hero />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/otp' element={<Otp />} />
+          <Route path='/home' element={<VotingPage />} />
+          <Route path='*' element={<h1>Not Found</h1>} />
+        </Routes>
+      </Router>
     </>
   );
 }
