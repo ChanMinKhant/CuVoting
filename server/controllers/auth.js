@@ -1,7 +1,7 @@
 const User = require('../models/user');
 const Otp = require('../models/otp');
 const bcrypt = require('bcrypt');
-const CustomError = require('../utils/customError');
+const CustomError = require('../utils/CustomError');
 const asyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const { sendMail } = require('../utils/sendMail');

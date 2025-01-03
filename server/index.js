@@ -10,6 +10,11 @@ const cors = require('cors');
 // const morgan = require('morgan');
 // const mongoSanitize = require('express-mongo-sanitize');
 // const expressRateLimit = require('express-rate-limit');
+// Handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+  console.error('There was an uncaught error', err);
+  process.exit(1); // Mandatory (as per the Node.js docs)
+});
 
 app.use(express.json());
 app.use(cookieParser());
@@ -63,12 +68,6 @@ const startServer = async () => {
 };
 
 startServer();
-
-// Handle uncaught exceptions
-process.on('uncaughtException', (err) => {
-  console.error('There was an uncaught error', err);
-  process.exit(1); // Mandatory (as per the Node.js docs)
-});
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {

@@ -1,5 +1,5 @@
 const asyncErrorHandler = require('../utils/asyncErrorHandler');
-const customError = require('../utils/customError');
+const CustomError = require('../utils/CustomError');
 const util = require('util');
 const User = require('../models/userModel');
 //i am not sure it is good or not/ for refresh token or access token
@@ -11,7 +11,7 @@ exports.protect = asyncErrorHandler(async (req, res, next) => {
     token = authHeader.split(' ')[1];
   }
   if (!token) {
-    return next(new customError('You are not logged in', 401));
+    return next(new CustomError('You are not logged in', 401));
   }
 
   //valitate the tokenken
@@ -22,7 +22,7 @@ exports.protect = asyncErrorHandler(async (req, res, next) => {
   //if the user exits
   const user = await User.findById(decoded.id);
   if (!user) {
-    return next(new customError('The user does not exist', 401));
+    return next(new CustomError('The user does not exist', 401));
   }
 
   //if the user changed password after the token was issued
@@ -30,7 +30,7 @@ exports.protect = asyncErrorHandler(async (req, res, next) => {
 
   if (user.isPasswordChanged(decoded.iat)) {
     return next(
-      new customError(
+      new CustomError(
         'the password has been changed recently. Please log in again',
         401
       )
