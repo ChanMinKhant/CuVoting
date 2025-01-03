@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const CustomError = require('../utils/customError');
+const CustomError = require('../utils/CustomError');
 const asyncHandler = require('express-async-handler');
 
 exports.verifyJWT = asyncHandler(async (req, res, next) => {
