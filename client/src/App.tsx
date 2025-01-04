@@ -9,6 +9,7 @@ import Hero from './pages/hero/Hero';
 // import Nav from './pages/components/Nav';
 
 function App() {
+  console.log('hello');
   return (
     <>
       <Router>
