@@ -32,3 +32,12 @@ export const submitOtp = async (email: String, otp: String) => {
     throw error.response.data;
   }
 };
+
+export const getUser = async () => {
+  try {
+    const response = await apiService.post(`${authBaseUrl}/get-user`);
+    return response.data;
+  } catch (error: any) {
+    throw error.response.data;
+  }
+};

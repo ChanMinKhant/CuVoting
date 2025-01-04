@@ -1,18 +1,9 @@
-import { useEffect } from 'react';
 import CardSwiper from './components/CardSwiper';
 import VotingAnimation from './components/VotingAnimation';
-import { getAllSelections } from '../../services/selection';
 // import './home.css';
 function VotingPage() {
   // call get all slection
 
-  useEffect(() => {
-    const fetchdata = async () => {
-      const data = await getAllSelections();
-      console.log(data);
-    };
-    fetchdata();
-  }, []);
   return (
     <div className='w-full h-full p-4 mt-0 flex flex-col '>
       <div className='text-center my-0'>

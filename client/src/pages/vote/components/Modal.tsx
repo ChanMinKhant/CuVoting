@@ -4,8 +4,6 @@ import { memo } from 'react';
 
 const Modal = ({ isOpen, onClose }: any) => {
   const votingStarted = true;
-  console.log(isOpen, onClose);
-  console.log('Modal rendered');
   const [votes, setVotes] = useState<{ [key: string]: boolean }>({
     smile: false,
     pretty: false,

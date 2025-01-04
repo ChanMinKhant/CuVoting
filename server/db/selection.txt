@@ -1,32 +1,142 @@
 [
-  { "number": 1, "name": "Alex", "gender": "boy" },
-  { "number": 2, "name": "John", "gender": "boy" },
-  { "number": 3, "name": "Michael", "gender": "boy" },
-  { "number": 4, "name": "Daniel", "gender": "boy" },
-  { "number": 5, "name": "James", "gender": "boy" },
-  { "number": 6, "name": "Ethan", "gender": "boy" },
-  { "number": 7, "name": "Ryan", "gender": "boy" },
-  { "number": 8, "name": "Liam", "gender": "boy" },
-  { "number": 9, "name": "Noah", "gender": "boy" },
-  { "number": 10, "name": "William", "gender": "boy" },
-  { "number": 11, "name": "Emily", "gender": "girl" },
-  { "number": 12, "name": "Sophia", "gender": "girl" },
-  { "number": 13, "name": "Olivia", "gender": "girl" },
-  { "number": 14, "name": "Emma", "gender": "girl" },
-  { "number": 15, "name": "Isabella", "gender": "girl" },
-  { "number": 16, "name": "Mia", "gender": "girl" },
-  { "number": 17, "name": "Charlotte", "gender": "girl" },
-  { "number": 18, "name": "Amelia", "gender": "girl" },
-  { "number": 19, "name": "Harper", "gender": "girl" },
-  { "number": 20, "name": "Ava", "gender": "girl" },
-  { "number": 21, "name": "Alex & Emily", "gender": "couple" },
-  { "number": 22, "name": "John & Sophia", "gender": "couple" },
-  { "number": 23, "name": "Michael & Olivia", "gender": "couple" },
-  { "number": 24, "name": "Daniel & Emma", "gender": "couple" },
-  { "number": 25, "name": "James & Isabella", "gender": "couple" },
-  { "number": 26, "name": "Ethan & Mia", "gender": "couple" },
-  { "number": 27, "name": "Ryan & Charlotte", "gender": "couple" },
-  { "number": 28, "name": "Liam & Amelia", "gender": "couple" },
-  { "number": 29, "name": "Noah & Harper", "gender": "couple" },
-  { "number": 30, "name": "William & Ava", "gender": "couple" }
+  {
+    "number": 1,
+    "name": "Ko Min",
+    "age": 20,
+    "height": 170,
+    "gender": "boy"
+  },
+  {
+    "number": 2,
+    "name": "Aung Ko",
+    "age": 22,
+    "height": 175,
+    "gender": "boy"
+  },
+  {
+    "number": 3,
+    "name": "Nyein Chan",
+    "age": 21,
+    "height": 168,
+    "gender": "boy"
+  },
+  {
+    "number": 4,
+    "name": "Kyaw Zin",
+    "age": 23,
+    "height": 172,
+    "gender": "boy"
+  },
+  {
+    "number": 5,
+    "name": "Thu Rain",
+    "age": 19,
+    "height": 169,
+    "gender": "boy"
+  },
+  {
+    "number": 6,
+    "name": "Hlaing Min",
+    "age": 24,
+    "height": 180,
+    "gender": "boy"
+  },
+  {
+    "number": 7,
+    "name": "Zaw Win",
+    "age": 25,
+    "height": 176,
+    "gender": "boy"
+  },
+  {
+    "number": 8,
+    "name": "Kaung Myat",
+    "age": 21,
+    "height": 174,
+    "gender": "boy"
+  },
+  {
+    "number": 9,
+    "name": "Htet Aung",
+    "age": 20,
+    "height": 171,
+    "gender": "boy"
+  },
+  {
+    "number": 10,
+    "name": "Min Thant",
+    "age": 22,
+    "height": 177,
+    "gender": "boy"
+  },
+  {
+    "number": 1,
+    "name": "Su Su",
+    "age": 20,
+    "height": 160,
+    "gender": "girl"
+  },
+  {
+    "number": 2,
+    "name": "Ei Mon",
+    "age": 21,
+    "height": 158,
+    "gender": "girl"
+  },
+  {
+    "number": 3,
+    "name": "Thin Zar",
+    "age": 22,
+    "height": 162,
+    "gender": "girl"
+  },
+  {
+    "number": 4,
+    "name": "Nay Chi",
+    "age": 23,
+    "height": 165,
+    "gender": "girl"
+  },
+  {
+    "number": 5,
+    "name": "Phyu Sin",
+    "age": 19,
+    "height": 159,
+    "gender": "girl"
+  },
+  {
+    "number": 6,
+    "name": "Hnin Wai",
+    "age": 24,
+    "height": 166,
+    "gender": "girl"
+  },
+  {
+    "number": 7,
+    "name": "Yin May",
+    "age": 25,
+    "height": 164,
+    "gender": "girl"
+  },
+  {
+    "number": 8,
+    "name": "Thandar",
+    "age": 20,
+    "height": 161,
+    "gender": "girl"
+  },
+  {
+    "number": 9,
+    "name": "Aye Chan",
+    "age": 21,
+    "height": 163,
+    "gender": "girl"
+  },
+  {
+    "number": 10,
+    "name": "Nandar",
+    "age": 22,
+    "height": 167,
+    "gender": "girl"
+  }
 ]

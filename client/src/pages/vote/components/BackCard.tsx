@@ -2,7 +2,6 @@
 import { memo } from 'react';
 
 const BackCard = ({ img, name, age, height, bio, hobbies }: any) => {
-  console.log('BackCard rendered');
   return (
     <div className='text-[#000000] border h-full bg-white shadow-xl flex flex-col justify-evenly items-center max-w-sm mx-auto rounded-xl overflow-hidden  hover:shadow-2xl transition-all duration-300 '>
       {/* bg-gradient-to-br from-purple-100 via-purple-600 to-indigo-800 */}

@@ -1,8 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { register } from '../../../services/auth';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
+import { useAppSelector } from '../../../store/store';
 
 interface FormData {
   username: string;
@@ -46,6 +47,13 @@ const RegisterForm: React.FC = () => {
   const occupationRef = useRef<HTMLInputElement>(null);
 
   const navigate = useNavigate();
+  const { user, status } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (status === 'succeeded' && user) {
+      navigate('/home');
+    }
+  }, [status, user, navigate]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>

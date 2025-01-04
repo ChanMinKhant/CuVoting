@@ -2,7 +2,6 @@ import './votingAnimation.css';
 // use memo to prevent re-rendering
 
 function VotingAnimation() {
-  console.log('VotingAnimation rendered');
   return (
     <div className='relative w-48 h-[115px] mx-auto mt-8'>
       {/* Voting Box */}

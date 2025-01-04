@@ -4,7 +4,6 @@ import { memo } from 'react';
 
 function FrontCard({ name, age, height, img, id, setIsModalOpen }: any) {
   const [isVoted, setIsVoted] = useState(false);
-  console.log('FrontCard rendered');
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
     setIsModalOpen(true); // Open the modal

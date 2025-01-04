@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { login } from '../../../services/auth';
+import { useAppSelector } from '../../../store/store';
 
 interface FormData {
   usernameOrEmail: string;
@@ -20,6 +21,14 @@ const LoginForm: React.FC = () => {
   const usernameOrEmailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+
+  const { user, status } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (status === 'succeeded' && user) {
+      navigate('/home');
+    }
+  }, [status, user, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

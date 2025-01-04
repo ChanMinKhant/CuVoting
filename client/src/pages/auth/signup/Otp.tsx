@@ -1,15 +1,24 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { submitOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '../../../store/store';
 
 const OtpPage: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
 
+  const { user, status } = useAppSelector((state) => state.user);
+
+  useEffect(() => {
+    if (status === 'succeeded' && user) {
+      navigate('/home');
+    }
+  }, [status, user, navigate]);
+
   const email: string | null = sessionStorage.getItem('email');
   if (!email) {
-    navigate('/home');
+    navigate('/signup');
   }
 
   const handleChange = async (
