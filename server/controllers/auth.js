@@ -33,6 +33,14 @@ exports.register = asyncHandler(async (req, res, next) => {
     const err = new CustomError(error.details[0].message, 400);
     return next(err);
   }
+  const isAlreadyRegisteredDevice = await User.findOne({ deviceId });
+  if (isAlreadyRegisteredDevice) {
+    const err = new CustomError(
+      `You've already register with ${isAlreadyRegisteredDevice.email}, you can login with this email`,
+      400
+    );
+    return next(err);
+  }
   let user = await User.findOne({ email });
   const isPending = await Otp.find({ email });
   if (user?.isVerified) {
@@ -45,10 +53,10 @@ exports.register = asyncHandler(async (req, res, next) => {
     user.password = password;
     user.deviceId = deviceId;
     user.username = username;
-    // user.section = section;
-    // user.year = year;
-    // user.major = major;
-    // user.occupation = occupation;
+    user.section = section;
+    user.year = year;
+    user.major = major;
+    user.occupation = occupation;
     await user.save();
   } else {
     user = await User.create({

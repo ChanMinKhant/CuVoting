@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { register } from '../../../services/auth';
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 interface FormData {
   username: string;
@@ -13,6 +14,7 @@ interface FormData {
   major?: string;
   year?: string;
   occupation?: string;
+  deviceId: string;
 }
 
 const RegisterForm: React.FC = () => {
@@ -26,6 +28,7 @@ const RegisterForm: React.FC = () => {
     major: '',
     year: '',
     occupation: '',
+    deviceId: '',
   });
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
@@ -76,6 +79,13 @@ const RegisterForm: React.FC = () => {
     return errors;
   };
 
+  const getFingerprint = async () => {
+    const fp = await FingerprintJS.load();
+    const result = await fp.get();
+    // setFingerprint(result.visitorId); // Unique fingerprint
+    return result.visitorId;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const newErrors: Partial<FormData> = {};
@@ -103,6 +113,9 @@ const RegisterForm: React.FC = () => {
     }
 
     setErrors(newErrors);
+
+    const deviceId = await getFingerprint();
+    setFormData((prev) => ({ ...prev, deviceId }));
 
     if (Object.keys(newErrors).length === 0) {
       try {
