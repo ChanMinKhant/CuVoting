@@ -254,3 +254,19 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
     expiresIn: process.env.JWT_EXPIRE || '30d',
   });
 });
+
+exports.getMe = asyncHandler(async (req, res, next) => {
+  if (!req.userId) {
+    const err = new CustomError('You are not login!', 400);
+    return next(err);
+  }
+  const user = await User.findById(req.userId);
+  if (!user) {
+    const err = new CustomError('User not found', 404);
+    return next(err);
+  }
+  res.status(200).send({
+    success: true,
+    user,
+  });
+});

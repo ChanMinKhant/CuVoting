@@ -4,6 +4,8 @@ const selectionSchema = new mongoose.Schema(
   {
     number: { type: Number, required: true },
     name: { type: String, required: true },
+    age: { type: Number, required: true },
+    height: { type: Number, required: true },
     gender: { type: String, required: true, enum: ['boy', 'girl', 'couple'] },
   },
   { timestamps: true }
