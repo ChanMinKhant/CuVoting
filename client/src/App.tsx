@@ -1,6 +1,6 @@
 import './App.css';
 // router
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Signup from './pages/auth/signup/Signup';
 import VotingPage from './pages/vote/VotingPage';
 import Login from './pages/auth/login/Login';
