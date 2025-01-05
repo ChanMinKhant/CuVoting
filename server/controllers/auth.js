@@ -24,16 +24,20 @@ exports.register = asyncHandler(async (req, res, next) => {
     username,
     section,
     year,
-    deviceId = '123',
+    major,
+    deviceId,
   } = req.body;
   console.log(req.body);
   const { error } = registerSchema.validate(req.body);
-  console.log(error);
+  // console.log(error);
   if (error) {
     const err = new CustomError(error.details[0].message, 400);
     return next(err);
   }
-  const isAlreadyRegisteredDevice = await User.findOne({ deviceId });
+  const isAlreadyRegisteredDevice = await User.findOne({
+    deviceId,
+    isVerified: true,
+  });
   if (isAlreadyRegisteredDevice) {
     const err = new CustomError(
       `You've already register with ${isAlreadyRegisteredDevice.email}, you can login with this email`,
@@ -41,6 +45,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     );
     return next(err);
   }
+
   let user = await User.findOne({ email });
   const isPending = await Otp.find({ email });
   if (user?.isVerified) {
@@ -50,26 +55,15 @@ exports.register = asyncHandler(async (req, res, next) => {
 
   if (user || isPending.length > 0) {
     await Otp.deleteMany({ email });
-    user.password = password;
-    user.deviceId = deviceId;
-    user.username = username;
-    user.section = section;
-    user.year = year;
-    user.major = major;
-    user.occupation = occupation;
-    await user.save();
-  } else {
-    user = await User.create({
-      email,
-      password,
-      deviceId,
-    });
+    await user.deleteOne();
   }
 
   if (password !== confirmPassword) {
     const err = new CustomError('Passwords do not match', 400);
     return next(err);
   }
+
+  user = await User.create(req.body);
 
   //send otp
   const otp = Math.floor(100000 + Math.random() * 900000);

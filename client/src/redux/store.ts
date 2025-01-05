@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { useDispatch, useSelector } from 'react-redux';
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import userReducer from '../store/features/userSlice';
 import selectionReducer from '../store/features/selectionSlice'; // Import the selection reducer
 
 const store = configureStore({
   reducer: {
     user: userReducer,
-    selection: selectionReducer, // Add the selection reducer
+    selections: selectionReducer, // Changed from 'selection' to 'selections'
   },
   // ...existing code...
 });

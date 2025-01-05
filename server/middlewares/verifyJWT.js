@@ -23,6 +23,12 @@ exports.verifyJWT = asyncHandler(async (req, res, next) => {
 
   // verify token
   jwt.verify(token, process.env.TOKEN_SECRET, (err, decodedToken) => {
+    // req.userId = decodedToken.id;
+    // next();
+    if (err) {
+      const error = new CustomError('Authentication failed', 401);
+      return next(error);
+    }
     req.userId = decodedToken.id;
     next();
   });

@@ -1,6 +1,6 @@
 import './App.css';
 // router
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import Signup from './pages/auth/signup/Signup';
 import VotingPage from './pages/vote/VotingPage';
 import Login from './pages/auth/login/Login';
@@ -14,18 +14,12 @@ import { fetchAllSelections } from './store/features/selectionSlice';
 
 function App() {
   const dispatch = useAppDispatch();
-  const {
-    user,
-    status: userStatus,
-    error: userError,
-  } = useAppSelector((state) => state.user);
-  const {
-    selections,
-    status: selectionStatus,
-    error: selectionError,
-  } = useAppSelector((state) => state.selections); // Corrected state slice name
-  console.log(user);
-  console.log(selections);
+
+  const { status: userStatus } = useAppSelector((state) => state.user);
+  console.log(useAppSelector((state) => state.selections));
+  const { status: selectionStatus } = useAppSelector(
+    (state) => state.selections // Changed from 'state.selection' to 'state.selections'
+  ); // Ensure using 'selection'
 
   useEffect(() => {
     if (userStatus === 'idle') {
@@ -34,28 +28,19 @@ function App() {
     if (selectionStatus === 'idle') {
       dispatch(fetchAllSelections());
     }
-
-    if (userStatus === 'failed') {
-      console.log(userError);
-    }
-    if (selectionStatus === 'failed') {
-      console.log(selectionError);
-    }
   }, [userStatus, selectionStatus, dispatch]);
 
   return (
     <>
-      <Router>
-        {/* <Nav /> */}
-        <Routes>
-          <Route path='/' element={<Hero />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/otp' element={<Otp />} />
-          <Route path='/home' element={<VotingPage />} />
-          <Route path='*' element={<h1>Not Found</h1>} />
-        </Routes>
-      </Router>
+      {/* <Nav /> */}
+      <Routes>
+        <Route path='/' element={<Hero />} />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/otp' element={<Otp />} />
+        <Route path='/home' element={<VotingPage />} />
+        <Route path='*' element={<h1>Not Found</h1>} />
+      </Routes>
     </>
   );
 }

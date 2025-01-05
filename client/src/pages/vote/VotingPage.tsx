@@ -1,7 +1,26 @@
+import { useEffect } from 'react';
+import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
 import VotingAnimation from './components/VotingAnimation';
+import { useNavigate } from 'react-router-dom';
 // import './home.css';
 function VotingPage() {
+  const navigate = useNavigate();
+  const { user, status: userStatus } = useAppSelector((state) => state.user);
+
+  const { selections, status: selectionStatus } = useAppSelector(
+    (state) => state.selections
+  ); // Ensure using 'selection'
+
+  useEffect(() => {
+    if (
+      (userStatus === 'failed' && !user) ||
+      (selectionStatus === 'failed' && selections.length === 0)
+    ) {
+      navigate('/signup'); // Use 'navigate' instead of 'negative'
+    }
+  }, [selectionStatus, user, userStatus, navigate]);
+
   // call get all slection
 
   return (

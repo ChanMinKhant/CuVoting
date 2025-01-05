@@ -5,13 +5,13 @@ import { login } from '../../../services/auth';
 import { useAppSelector } from '../../../store/store';
 
 interface FormData {
-  usernameOrEmail: string;
+  email: string;
   password: string;
 }
 
 const LoginForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
-    usernameOrEmail: '',
+    email: '',
     password: '',
   });
 
@@ -64,8 +64,7 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     const newErrors: Partial<FormData> = {};
 
-    if (!formData.usernameOrEmail)
-      newErrors.usernameOrEmail = 'Username or Email is required';
+    if (!formData.email) newErrors.email = 'email is required';
 
     const passwordErrors = validatePassword(formData.password);
     if (passwordErrors.length > 0) {
@@ -79,8 +78,7 @@ const LoginForm: React.FC = () => {
         const data = await login(formData);
         if (data) {
           console.log('Logged in successfully');
-          // redirect to home page
-          navigate('/home');
+          window.location.href = '/home';
         }
       } catch (error: any) {
         if (error.status === 401) {
@@ -101,19 +99,17 @@ const LoginForm: React.FC = () => {
             <input
               ref={usernameOrEmailRef}
               type='text'
-              name='usernameOrEmail'
-              value={formData.usernameOrEmail}
+              name='email'
+              value={formData.email}
               onChange={handleChange}
               onKeyDown={(e) => handleKeyDown(e, passwordRef)}
               placeholder='Username or Email'
               className={`w-full p-2 border rounded-full ${
-                errors.usernameOrEmail ? 'border-red-500' : 'border-gray-300'
+                errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
             />
-            {errors.usernameOrEmail && (
-              <p className='text-red-500 text-sm mt-1'>
-                {errors.usernameOrEmail}
-              </p>
+            {errors.email && (
+              <p className='text-red-500 text-sm mt-1'>{errors.email}</p>
             )}
           </div>
           <div className='relative'>

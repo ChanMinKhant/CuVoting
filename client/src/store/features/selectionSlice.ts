@@ -14,7 +14,7 @@ const initialState: SelectionState = {
 };
 
 export const fetchAllSelections = createAsyncThunk(
-  'selection/fetchAllSelections',
+  'selections/fetchAllSelections', // action name matches slice name
   async (_, { rejectWithValue }) => {
     try {
       console.log('fetching selections');
@@ -22,13 +22,13 @@ export const fetchAllSelections = createAsyncThunk(
       console.log(response);
       return response;
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.message); // Ensure error is a string
     }
   }
 );
 
 const selectionSlice = createSlice({
-  name: 'selections',
+  name: 'selections', // Slice name should match the reducer key
   initialState,
   reducers: {},
   extraReducers: (builder) => {

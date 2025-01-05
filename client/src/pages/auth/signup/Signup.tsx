@@ -53,6 +53,10 @@ const RegisterForm: React.FC = () => {
     if (status === 'succeeded' && user) {
       navigate('/home');
     }
+    // set device id
+    getFingerprint().then((id) => {
+      setFormData((prev) => ({ ...prev, deviceId: id }));
+    });
   }, [status, user, navigate]);
 
   const handleChange = (
@@ -60,7 +64,6 @@ const RegisterForm: React.FC = () => {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
   const handleKeyDown = (
@@ -121,9 +124,6 @@ const RegisterForm: React.FC = () => {
     }
 
     setErrors(newErrors);
-
-    const deviceId = await getFingerprint();
-    setFormData((prev) => ({ ...prev, deviceId }));
 
     if (Object.keys(newErrors).length === 0) {
       try {

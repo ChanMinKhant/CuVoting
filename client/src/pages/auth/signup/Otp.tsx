@@ -69,7 +69,7 @@ const OtpPage: React.FC = () => {
       const data = await submitOtp(email!, otpValue);
       if (data.success) {
         alert('Account is verified successfully');
-        navigate('/home');
+        window.location.href = '/home';
       }
     } catch (error: any) {
       console.error(error);
