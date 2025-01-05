@@ -5,19 +5,35 @@ import './cardSwiper.css';
 import users from './db.json';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
 import MiniFlipCard from './MiniFlipCard';
-import { useRef, useCallback, useState } from 'react';
+import { useRef, useCallback, useState, useEffect } from 'react';
+import { useAppSelector } from '../../../store/store';
 
 function CardSwiper() {
   const cardRefs = useRef<any[]>([]);
-  const [activeTab, setActiveTab] = useState<'Boys' | 'Girls' | 'Couples'>(
-    'Boys'
+  const [activeTab, setActiveTab] = useState<'boy' | 'girl' | 'couple'>('boy');
+  const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
+
+  const { selections, status: selectionStatus } = useAppSelector(
+    (state) => state.selections
   );
+
+  useEffect(() => {
+    if (selectionStatus === 'succeeded') {
+      console.log(selections);
+      const filterSelections = selections?.filter(
+        (selection) => selection.gender === activeTab
+      );
+      setFilteredSelections(filterSelections);
+    }
+
+    console.log(filteredSelections);
+  }, [selections, activeTab]);
 
   const resetAllFlips = useCallback(() => {
     cardRefs.current.forEach((ref) => ref?.resetFlip());
   }, []);
 
-  const handleTabClick = (tab: 'Boys' | 'Girls' | 'Couples') => {
+  const handleTabClick = (tab: 'boy' | 'girl' | 'couple') => {
     setActiveTab(tab);
     console.log(`Currently active tab: ${tab}`);
   };
@@ -28,31 +44,31 @@ function CardSwiper() {
         <div className='flex border-b-2 text-sm border-gray-300 pb-2'>
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'Boys'
+              activeTab === 'boy'
                 ? 'text-purple-600 border-b-2 border-purple-600'
                 : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
             }`}
-            onClick={() => handleTabClick('Boys')}
+            onClick={() => handleTabClick('boy')}
           >
             Boys
           </div>
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'Girls'
+              activeTab === 'girl'
                 ? 'text-purple-600 border-b-2 border-purple-600'
                 : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
             }`}
-            onClick={() => handleTabClick('Girls')}
+            onClick={() => handleTabClick('girl')}
           >
             Girls
           </div>
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'Couples'
+              activeTab === 'couple'
                 ? 'text-purple-600 border-b-2 border-purple-600'
                 : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
             }`}
-            onClick={() => handleTabClick('Couples')}
+            onClick={() => handleTabClick('couple')}
           >
             Couples
           </div>
@@ -69,9 +85,10 @@ function CardSwiper() {
         effect={'coverflow'} // 3D effect
         spaceBetween={50}
         grabCursor={true}
-        slidesPerView={'auto'}
+        slidesPerView={'auto'} // Set slidesPerView back to 'auto'
         centeredSlides={true} // Center the active slide
-        loop={true} // Enable looping of slides
+        loop={true} // Enable looping
+        watchOverflow={true} // Automatically disable loop if not enough slides
         coverflowEffect={{
           rotate: 0, // Slight rotation for a natural overlap effect
           stretch: 0, // Keep all slides the same width
@@ -87,17 +104,15 @@ function CardSwiper() {
         modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
         className='swiper-container z-0'
       >
-        {users.map((user, index) => (
-          <SwiperSlide key={user.id} className='swiper-slide relative z-0'>
+        {filteredSelections?.map((selection, index) => (
+          <SwiperSlide
+            key={selection._id}
+            className='swiper-slide relative z-0'
+          >
             <Card
               ref={(el) => (cardRefs.current[index] = el)}
-              name={user.name}
-              age={user.age}
-              bio={user.bio}
-              hobbies={user.hobbies}
-              img={user.img}
-              height={user.height}
-              id={user.id}
+              selection={selection}
+              activeTab={activeTab}
             />
           </SwiperSlide>
         ))}

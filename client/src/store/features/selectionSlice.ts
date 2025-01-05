@@ -1,14 +1,44 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllSelections } from '../../services/selection';
 
+// // Define a type for the slice state
+// age
+// :
+// 22
+// gender
+// :
+// "boy"
+// height
+// :
+// 177
+// name
+// :
+// "Min Thant"
+// number
+// :
+// 10
+// _id
+// :
+// "677a9214d29d4a878dd9cbd3"
 interface SelectionState {
-  selections: any[];
+  age: number;
+  gender: string;
+  height: number;
+  name: string;
+  number: number;
+  _id: string;
+}
+
+interface SelectionsState {
+  selections: SelectionState[] | [];
+  userVotedTitles: any[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
 
-const initialState: SelectionState = {
+const initialState: SelectionsState = {
   selections: [],
+  userVotedTitles: [],
   status: 'idle',
   error: null,
 };
@@ -38,7 +68,8 @@ const selectionSlice = createSlice({
       })
       .addCase(fetchAllSelections.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.selections = action.payload;
+        state.selections = action.payload.data;
+        state.userVotedTitles = action.payload.userVotedTitles;
       })
       .addCase(fetchAllSelections.rejected, (state, action) => {
         state.status = 'failed';

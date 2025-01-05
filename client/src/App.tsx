@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from './store/store';
 import { useEffect } from 'react';
 import { fetchCurrentUser } from './store/features/userSlice';
 import { fetchAllSelections } from './store/features/selectionSlice';
+import { ToastContainer } from 'react-toastify';
 // import Nav from './pages/components/Nav';
 
 function App() {
@@ -18,12 +19,13 @@ function App() {
   const { status: userStatus } = useAppSelector((state) => state.user);
   console.log(useAppSelector((state) => state.selections));
   const { status: selectionStatus } = useAppSelector(
-    (state) => state.selections // Changed from 'state.selection' to 'state.selections'
-  ); // Ensure using 'selection'
+    (state) => state.selections
+  );
 
   useEffect(() => {
     if (userStatus === 'idle') {
       dispatch(fetchCurrentUser());
+      // toast.success('Welcome to the voting app');
     }
     if (selectionStatus === 'idle') {
       dispatch(fetchAllSelections());
@@ -41,6 +43,7 @@ function App() {
         <Route path='/home' element={<VotingPage />} />
         <Route path='*' element={<h1>Not Found</h1>} />
       </Routes>
+      <ToastContainer />
     </>
   );
 }

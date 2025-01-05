@@ -7,6 +7,6 @@ export const getAllSelections = async (): Promise<any> => {
     const response = await apiService.get(`${selectionBaseUrl}`);
     return response.data;
   } catch (error: any) {
-    throw error.response.data;
+    throw error.response;
   }
 };

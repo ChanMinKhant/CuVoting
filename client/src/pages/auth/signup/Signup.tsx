@@ -4,6 +4,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import { register } from '../../../services/auth';
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useAppSelector } from '../../../store/store';
+import { toast } from 'react-toastify';
 
 interface FormData {
   username: string;
@@ -54,9 +55,11 @@ const RegisterForm: React.FC = () => {
       navigate('/home');
     }
     // set device id
-    getFingerprint().then((id) => {
-      setFormData((prev) => ({ ...prev, deviceId: id }));
-    });
+    if (formData.deviceId === '') {
+      getFingerprint().then((fp) => {
+        setFormData((prev) => ({ ...prev, deviceId: fp }));
+      });
+    }
   }, [status, user, navigate]);
 
   const handleChange = (
@@ -81,12 +84,12 @@ const RegisterForm: React.FC = () => {
     if (password.length < 8) {
       errors.push('Password must be at least 8 characters long');
     }
-    if (!/[A-Z]/.test(password)) {
-      errors.push('Password must contain at least one uppercase letter');
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      errors.push('Password must contain at least one special character');
-    }
+    // if (!/[A-Z]/.test(password)) {
+    //   errors.push('Password must contain at least one uppercase letter');
+    // }
+    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    //   errors.push('Password must contain at least one special character');
+    // }
     return errors;
   };
 
@@ -128,16 +131,11 @@ const RegisterForm: React.FC = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         const data = await register(formData);
-        if (data.success) {
-          alert('User registered successfully');
-          // save email to session storage
-          sessionStorage.setItem('email', formData.email);
-          // go to otp page
-          navigate('/otp');
-        }
-      } catch (error: any) {
+        alert('User registered successfully');
         sessionStorage.setItem('email', formData.email);
-        console.log(error);
+        navigate('/otp');
+      } catch (error: any) {
+        console.log(error?.data?.message);
       }
     }
   };

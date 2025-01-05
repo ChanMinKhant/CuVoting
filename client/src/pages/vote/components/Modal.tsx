@@ -1,27 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // memo
 import { memo } from 'react';
 
-const Modal = ({ isOpen, onClose }: any) => {
+const GirlTitles = ['queen', 'attraction', 'glory', 'smile'];
+
+const BoyTitles = ['king', 'smart', 'handsome'];
+
+const CoupleTitles = ['bestCouple'];
+
+const Modal = ({ isOpen, onClose, activeTab }: any) => {
   const votingStarted = true;
-  const [votes, setVotes] = useState<{ [key: string]: boolean }>({
-    smile: false,
-    pretty: false,
-    innocent: false,
-  });
+  const [votes, setVotes] = useState<string[]>([]);
 
-  const categories = [
-    { id: 1, title: 'Smile', key: 'smile' },
-    { id: 2, title: 'Pretty', key: 'pretty' },
-    { id: 3, title: 'Innocent', key: 'innocent' },
-  ];
+  useEffect(() => {
+    if (activeTab === 'boy') {
+      setVotes(BoyTitles);
+    } else if (activeTab === 'girl') {
+      setVotes(GirlTitles);
+    } else if (activeTab === 'couple') {
+      setVotes(CoupleTitles);
+    }
+  }, [activeTab]);
+  // const categories = [
+  //   { id: 1, title: 'Smile', key: 'smile' },
+  //   { id: 2, title: 'Pretty', key: 'pretty' },
+  //   { id: 3, title: 'Innocent', key: 'innocent' },
+  // ];
 
-  const toggleVote = (categoryKey: string) => {
-    setVotes((prevVotes) => ({
-      ...prevVotes,
-      [categoryKey]: !prevVotes[categoryKey],
-    }));
-  };
+  // const toggleVote = (categoryKey: string) => {
+  //   setVotes((prevVotes) => ({
+  //     ...prevVotes,
+  //     [categoryKey]: !prevVotes[categoryKey],
+  //   }));
+  // };
 
   if (!isOpen) return null;
 
@@ -40,15 +51,12 @@ const Modal = ({ isOpen, onClose }: any) => {
               Vote for Categories
             </h2>
             <div className='grid gap-4'>
-              {categories.map((category) => (
-                <div
-                  key={category.id}
-                  className='flex justify-between items-center'
-                >
+              {votes.map((category, index) => (
+                <div key={index} className='flex justify-between items-center'>
                   <span className='text-[#f50579] font-bold font-medium '>
-                    {category.title}
+                    {category}
                   </span>
-                  {votes[category.key] ? (
+                  {/* {votes[category.key] ? (
                     <button
                       className='px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-red-600 transition'
                       onClick={() => toggleVote(category.key)}
@@ -62,7 +70,7 @@ const Modal = ({ isOpen, onClose }: any) => {
                     >
                       Vote
                     </button>
-                  )}
+                  )} */}
                 </div>
               ))}
             </div>

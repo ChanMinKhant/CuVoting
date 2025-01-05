@@ -2,7 +2,8 @@ import { useState } from 'react';
 // memo
 import { memo } from 'react';
 
-function FrontCard({ name, age, height, img, id, setIsModalOpen }: any) {
+function FrontCard({ selection, setIsModalOpen }: any) {
+  const { name, age, height, number, _id } = selection;
   const [isVoted, setIsVoted] = useState(false);
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
@@ -15,21 +16,21 @@ function FrontCard({ name, age, height, img, id, setIsModalOpen }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Card Image */}
         <img
-          src={img}
+          src={`/img.jpg`}
           alt={`Contestant ${name}`}
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
         />
         {/* Gradient Overlay */}
         <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent'></div>
         {/* Card Details */}
-        <div className='absolute bottom-0 left-0 right-0 p-4 text-white'>
+        <div className='absolute bottom-0 left-0 p-4 text-white text-left'>
           <h2 className='text-3xl font-extrabold mb-1'>{name}</h2>
           <p className='text-sm opacity-90'>Height: {height}</p>
           <p className='text-sm opacity-90'>Age: {age}</p>
         </div>
         {/* Badge */}
         <div className='absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full px-4 py-1 shadow-md'>
-          <span className='text-white font-bold'>#{id}</span>
+          <span className='text-white font-bold'>#{_id}</span>
         </div>
         {/* Vote Button */}
         <button

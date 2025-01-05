@@ -29,7 +29,7 @@ export const submitOtp = async (email: String, otp: String) => {
     });
     return response.data;
   } catch (error: any) {
-    throw error.response.data;
+    throw error.response;
   }
 };
 
@@ -38,6 +38,6 @@ export const getUser = async () => {
     const response = await apiService.post(`${authBaseUrl}/get-user`);
     return response.data;
   } catch (error: any) {
-    throw error.response.data;
+    throw error.response;
   }
 };
