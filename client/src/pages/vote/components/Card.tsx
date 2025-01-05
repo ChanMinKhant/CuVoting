@@ -43,30 +43,34 @@ const Card = forwardRef(
             className='relative w-[240px] mt-2 h-[360px] rounded-2xl overflow-hidden shadow-xl group'
             onClick={handleFlip}
           >
-            <FrontCard selection={selection} setIsModalOpen={setIsModalOpen} />
+            <FrontCard
+              selection={selection}
+              setIsModalOpen={setIsModalOpen}
+              activeTab={activeTab}
+            />
           </div>
 
           <div
             className='relative w-[240px] h-[360px] mx-auto mt-2 rounded-2xl overflow-hidden shadow-xl bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 flex items-center justify-center text-white text-xl font-semibold'
             onClick={handleFlip}
           >
-            {/* <BackCard
-            img={img}
-            name={name}
-            age={age}
-            height={height}
-            bio={bio}
-            hobbies={hobbies}
-            id={id}
-          /> */}
+            <BackCard
+            // img={img}
+            // name={name}
+            // age={age}
+            // height={height}
+            // bio={bio}
+            // hobbies={hobbies}
+            // id={id}
+            />
           </div>
         </ReactCardFlip>
 
-        <Modal
+        {/* <Modal
           isOpen={isModalOpen}
           onClose={closeModal}
           activeTab={activeTab}
-        />
+        /> */}
       </div>
     );
   }

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 // memo
 import { memo } from 'react';
+import Modal from './Modal';
 
 function FrontCard({ selection, setIsModalOpen }: any) {
-  const { name, age, height, number, _id } = selection;
+  const { name, age, height, _id } = selection;
   const [isVoted, setIsVoted] = useState(false);
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
@@ -45,6 +46,7 @@ function FrontCard({ selection, setIsModalOpen }: any) {
           vote me
         </button>
       </div>
+      <Modal />
     </div>
   );
 }

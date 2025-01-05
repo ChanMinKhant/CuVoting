@@ -81,55 +81,62 @@ function CardSwiper() {
         </div>
         <MiniFlipCard />
       </div>
-      <Swiper
-        effect={'coverflow'} // 3D effect
-        spaceBetween={50}
-        grabCursor={true}
-        slidesPerView={'auto'} // Set slidesPerView back to 'auto'
-        centeredSlides={true} // Center the active slide
-        loop={true} // Enable looping
-        watchOverflow={true} // Automatically disable loop if not enough slides
-        coverflowEffect={{
-          rotate: 0, // Slight rotation for a natural overlap effect
-          stretch: 0, // Keep all slides the same width
-          depth: 100, // Make the overlapping effect more pronounced
-          modifier: 2.5, // Controls the curve intensity
-          slideShadows: true, // Enable slide shadows for depth
-        }}
-        pagination={{ el: '.swiper-pagination', clickable: true }}
-        navigation={{
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        }}
-        modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
-        className='swiper-container z-0'
-      >
-        {filteredSelections?.map((selection, index) => (
-          <SwiperSlide
-            key={selection._id}
-            className='swiper-slide relative z-0'
-          >
-            <Card
-              ref={(el) => (cardRefs.current[index] = el)}
-              selection={selection}
-              activeTab={activeTab}
-            />
-          </SwiperSlide>
-        ))}
-        <div className='slider-controller'>
-          <div
-            className='swiper-button-prev slider-arrow'
-            onClick={resetAllFlips}
-          ></div>
+      {filteredSelections.length > 0 ? (
+        <Swiper
+          effect={'coverflow'} // 3D effect
+          spaceBetween={50}
+          grabCursor={true}
+          slidesPerView={'auto'} // Set slidesPerView back to 'auto'
+          centeredSlides={true} // Center the active slide
+          loop={true} // Enable looping
+          watchOverflow={true} // Automatically disable loop if not enough slides
+          coverflowEffect={{
+            rotate: 0, // Slight rotation for a natural overlap effect
+            stretch: 0, // Keep all slides the same width
+            depth: 100, // Make the overlapping effect more pronounced
+            modifier: 2.5, // Controls the curve intensity
+            slideShadows: true, // Enable slide shadows for depth
+          }}
+          pagination={{ el: '.swiper-pagination', clickable: true }}
+          navigation={{
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          }}
+          modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
+          className='swiper-container z-0'
+        >
+          {filteredSelections?.map((selection, index) => (
+            <SwiperSlide
+              key={selection._id}
+              className='swiper-slide relative z-0'
+            >
+              <Card
+                ref={(el) => (cardRefs.current[index] = el)}
+                selection={selection}
+                activeTab={activeTab}
+              />
+            </SwiperSlide>
+          ))}
+          <div className='slider-controller'>
+            <div
+              className='swiper-button-prev slider-arrow'
+              onClick={resetAllFlips}
+            ></div>
+          </div>
+          <div className='slider-controller'>
+            <div
+              className='swiper-button-next slider-arrow'
+              onClick={resetAllFlips}
+            ></div>
+            <div className='swiper-pagination'></div>
+          </div>
+        </Swiper>
+      ) : (
+        <div className='text-center text-2xl text-red-500'>
+          No Selections Found. Please check your network connection or report to
+          admin.
         </div>
-        <div className='slider-controller'>
-          <div
-            className='swiper-button-next slider-arrow'
-            onClick={resetAllFlips}
-          ></div>
-          <div className='swiper-pagination'></div>
-        </div>
-      </Swiper>
+      )}
     </div>
   );
 }

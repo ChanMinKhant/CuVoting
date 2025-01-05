@@ -34,6 +34,11 @@ const Modal = ({ isOpen, onClose, activeTab }: any) => {
   //   }));
   // };
 
+  const handleVouteClick = (event: any) => {
+    event.stopPropagation();
+    console.log('voted');
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -56,6 +61,13 @@ const Modal = ({ isOpen, onClose, activeTab }: any) => {
                   <span className='text-[#f50579] font-bold font-medium '>
                     {category}
                   </span>
+
+                  <button
+                    className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-blue-600 transition'
+                    onClick={handleVouteClick}
+                  >
+                    Vote
+                  </button>
                   {/* {votes[category.key] ? (
                     <button
                       className='px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-red-600 transition'
