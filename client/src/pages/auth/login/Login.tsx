@@ -81,11 +81,7 @@ const LoginForm: React.FC = () => {
           window.location.href = '/home';
         }
       } catch (error: any) {
-        if (error.status === 401) {
-          setErrors({ password: 'Invalid username or password' });
-        } else {
-          console.error(error);
-        }
+        console.error(error);
       }
     }
   };
