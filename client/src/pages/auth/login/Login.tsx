@@ -51,12 +51,12 @@ const LoginForm: React.FC = () => {
     if (password.length < 8) {
       errors.push('Password must be at least 8 characters long');
     }
-    if (!/[A-Z]/.test(password)) {
-      errors.push('Password must contain at least one uppercase letter');
-    }
-    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-      errors.push('Password must contain at least one special character');
-    }
+    // if (!/[A-Z]/.test(password)) {
+    //   errors.push('Password must contain at least one uppercase letter');
+    // }
+    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    //   errors.push('Password must contain at least one special character');
+    // }
     return errors;
   };
 
