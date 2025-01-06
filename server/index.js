@@ -22,7 +22,12 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ['http://localhost:5173', process.env.CLIENT_URL, 'https://ucspyay.site', https://www.ucspyay.site'],
+    origin: [
+      'http://localhost:5173',
+      process.env.CLIENT_URL,
+      'https://ucspyay.site',
+      'https://www.ucspyay.site',
+    ],
     credentials: true,
   })
 );
