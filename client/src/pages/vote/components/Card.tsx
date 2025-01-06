@@ -7,7 +7,6 @@ import {
 } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import BackCard from './BackCard';
-import Modal from './Modal';
 import FrontCard from './FrontCard';
 
 const Card = forwardRef(
@@ -19,7 +18,7 @@ const Card = forwardRef(
     ref
   ) => {
     const [isFlipped, setIsFlipped] = useState(false);
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [isModalOpen, setIsModalOpen] = useState(false);
     console.log(selection);
     // return;
 
@@ -34,8 +33,6 @@ const Card = forwardRef(
       setIsFlipped((prev) => !prev);
     }, []);
 
-    const closeModal = useCallback(() => setIsModalOpen(false), []);
-
     return (
       <div>
         <ReactCardFlip isFlipped={isFlipped} flipDirection='horizontal'>
@@ -45,7 +42,7 @@ const Card = forwardRef(
           >
             <FrontCard
               selection={selection}
-              setIsModalOpen={setIsModalOpen}
+              // setIsModalOpen={setIsModalOpen}
               activeTab={activeTab}
             />
           </div>

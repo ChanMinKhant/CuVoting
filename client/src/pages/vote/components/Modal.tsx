@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 // memo
 import { memo } from 'react';
+import { vote } from '../../../services/selection';
+import { useAppSelector } from '../../../store/store';
+import { Link } from 'react-router-dom';
 
 const GirlTitles = ['queen', 'attraction', 'glory', 'smile'];
 
@@ -8,35 +11,46 @@ const BoyTitles = ['king', 'smart', 'handsome'];
 
 const CoupleTitles = ['bestCouple'];
 
-const Modal = ({ isOpen, onClose, activeTab }: any) => {
+const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
   const votingStarted = true;
   const [votes, setVotes] = useState<string[]>([]);
-
+  const { userVotedTitles, status } = useAppSelector(
+    (state) => state.selections
+  );
+  useEffect(() => {
+    if (status === 'succeeded') {
+      console.log(userVotedTitles);
+    }
+  }, [status]);
   useEffect(() => {
     if (activeTab === 'boy') {
-      setVotes(BoyTitles);
+      const filteredTitles = BoyTitles.filter(
+        (title) => !userVotedTitles.includes(title)
+      );
+      console.log(filteredTitles);
+      setVotes(filteredTitles);
     } else if (activeTab === 'girl') {
-      setVotes(GirlTitles);
+      const filteredTitles = GirlTitles.filter(
+        (title) => !userVotedTitles.includes(title)
+      );
+      setVotes(filteredTitles);
     } else if (activeTab === 'couple') {
-      setVotes(CoupleTitles);
+      const filteredTitles = CoupleTitles.filter(
+        (title) => !userVotedTitles.includes(title)
+      );
+      setVotes(filteredTitles);
     }
   }, [activeTab]);
-  // const categories = [
-  //   { id: 1, title: 'Smile', key: 'smile' },
-  //   { id: 2, title: 'Pretty', key: 'pretty' },
-  //   { id: 3, title: 'Innocent', key: 'innocent' },
-  // ];
 
-  // const toggleVote = (categoryKey: string) => {
-  //   setVotes((prevVotes) => ({
-  //     ...prevVotes,
-  //     [categoryKey]: !prevVotes[categoryKey],
-  //   }));
-  // };
-
-  const handleVouteClick = (event: any) => {
-    event.stopPropagation();
-    console.log('voted');
+  const handleVouteClick = async (category: string) => {
+    console.log(selectionId);
+    console.log(category);
+    try {
+      const data = await vote(selectionId, category);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   if (!isOpen) return null;
@@ -56,35 +70,37 @@ const Modal = ({ isOpen, onClose, activeTab }: any) => {
               Vote for Categories
             </h2>
             <div className='grid gap-4'>
-              {votes.map((category, index) => (
-                <div key={index} className='flex justify-between items-center'>
-                  <span className='text-[#f50579] font-bold font-medium '>
-                    {category}
-                  </span>
-
-                  <button
-                    className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-blue-600 transition'
-                    onClick={handleVouteClick}
+              {votes.length > 0 ? (
+                votes.map((category, index) => (
+                  <div
+                    key={index}
+                    className='flex justify-between items-center'
                   >
-                    Vote
-                  </button>
-                  {/* {votes[category.key] ? (
-                    <button
-                      className='px-4 py-2 bg-red-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-red-600 transition'
-                      onClick={() => toggleVote(category.key)}
-                    >
-                      Unvote
-                    </button>
-                  ) : (
+                    <span className='text-[#f50579] font-bold font-medium '>
+                      {category}
+                    </span>
+
                     <button
                       className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-blue-600 transition'
-                      onClick={() => toggleVote(category.key)}
+                      onClick={() => handleVouteClick(category)}
                     >
                       Vote
                     </button>
-                  )} */}
+                  </div>
+                ))
+              ) : (
+                <div>
+                  <div className='text-center text-gray-600 text-lg font-medium'>
+                    You have voted for all categories
+                  </div>
+                  <Link
+                    to='/vote-history'
+                    className='text-blue-500 hover:underline'
+                  >
+                    check your vote hostory
+                  </Link>
                 </div>
-              ))}
+              )}
             </div>
           </div>
         ) : (

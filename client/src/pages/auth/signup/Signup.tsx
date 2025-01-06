@@ -130,12 +130,14 @@ const RegisterForm: React.FC = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const data = await register(formData);
+        await register(formData);
         alert('User registered successfully');
         sessionStorage.setItem('email', formData.email);
         navigate('/otp');
+        toast.success('User registered successfully');
       } catch (error: any) {
         console.log(error?.data?.message);
+        toast.error(error?.data?.message) || 'something went wrong';
       }
     }
   };

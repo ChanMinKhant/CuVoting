@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 // memo
 import { memo } from 'react';
 import Modal from './Modal';
 
-function FrontCard({ selection, setIsModalOpen }: any) {
+function FrontCard({ selection, activeTab }: any) {
   const { name, age, height, _id } = selection;
   const [isVoted, setIsVoted] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
     setIsModalOpen(true); // Open the modal
     setIsVoted(!isVoted); // Toggle vote status
   };
+
+  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
     <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
@@ -46,7 +50,12 @@ function FrontCard({ selection, setIsModalOpen }: any) {
           vote me
         </button>
       </div>
-      <Modal />
+      <Modal
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        activeTab={activeTab}
+        selectionId={_id}
+      />
     </div>
   );
 }

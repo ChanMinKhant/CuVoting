@@ -24,7 +24,7 @@ function VotingPage() {
   // call get all slection
 
   return (
-    <div className='w-full h-full p-4 mt-0 flex flex-col '>
+    <div className='w-full h-full p-4 mt-0 flex flex-col select-none '>
       <div className='text-center my-0'>
         <h1 className='text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500'>
           UCS(Pyay) Voting
@@ -39,7 +39,7 @@ function VotingPage() {
       <CardSwiper />
       <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
 
-      <div className='text-center text-sm my-2 px-2 text-gray-600'>
+      <div className='text-center text-sm my-2 px-2 text-gray-600 select-text'>
         "The person you vote for today might become your partner one day. So,
         choose your vote wisely! 🤔"
       </div>

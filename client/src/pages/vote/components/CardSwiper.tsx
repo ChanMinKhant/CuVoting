@@ -2,7 +2,6 @@ import 'swiper/swiper-bundle.css'; // Import Swiper styles
 import Card from './Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './cardSwiper.css';
-import users from './db.json';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
 import MiniFlipCard from './MiniFlipCard';
 import { useRef, useCallback, useState, useEffect } from 'react';
