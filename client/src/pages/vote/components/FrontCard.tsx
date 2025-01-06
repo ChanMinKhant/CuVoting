@@ -4,7 +4,7 @@ import { memo } from 'react';
 import Modal from './Modal';
 
 function FrontCard({ selection, activeTab }: any) {
-  const { name, age, height, _id } = selection;
+  const { name, age, height, _id, number } = selection;
   const [isVoted, setIsVoted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -21,7 +21,7 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Card Image */}
         <img
-          src={`/img.jpg`}
+          src={activeTab === 'boy' ? '/boy.jpg' : '/img.jpg'}
           alt={`Contestant ${name}`}
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
         />
@@ -35,7 +35,7 @@ function FrontCard({ selection, activeTab }: any) {
         </div>
         {/* Badge */}
         <div className='absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full px-4 py-1 shadow-md'>
-          <span className='text-white font-bold'>#{_id}</span>
+          <span className='text-white font-bold'>#{number}</span>
         </div>
         {/* Vote Button */}
         <button
