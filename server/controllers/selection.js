@@ -105,7 +105,7 @@ exports.getUserVotedHistories = asyncHandler(async (req, res, next) => {
     { user: req.userId },
     '-createdAt -updatedAt'
   ).populate('selectionId', 'name number gender');
-  console.log(votes);
+  // console.log(votes);
   res.status(200).send({
     success: true,
     data: votes,
@@ -123,7 +123,7 @@ exports.deleteVote = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const { voteId } = req.body;
+  const { voteId } = req.params;
   const vote = await Vote.findById(voteId);
   if (!vote) {
     const err = new CustomError('Vote not found', 404);
@@ -133,11 +133,19 @@ exports.deleteVote = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Unauthorized', 401);
     return next(err);
   }
-  const result = await Vote.findByIdAndDelete(voteId);
-  if (!result) {
-    const err = new CustomError('Something went wrong', 500);
-    return next(err);
-  }
+  await vote.deleteOne();
+
+  user.votedTitles = user.votedTitles.filter(
+    (title) => title !== vote.category
+  );
+  await user.save();
+  const result = await Result.findOne({
+    selectionId: new mongoose.Types.ObjectId(vote.selectionId),
+    category: vote.category,
+  });
+  console.log(result);
+  result.count -= 1;
+  await result.save();
   res.status(200).send({
     success: true,
     message: 'Vote deleted',

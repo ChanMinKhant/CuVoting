@@ -34,3 +34,15 @@ export const getVoteHistory = async () => {
     throw error.response;
   }
 };
+
+// delete-vote
+export const deleteVote = async (id: string) => {
+  try {
+    const response = await apiService.delete(
+      `${selectionBaseUrl}/delete-vote/${id}`
+    );
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};

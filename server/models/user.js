@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true, select: false },
-    votes: [{ type: String }],
+    // votes: [{ type: String }],
     votedTitles: {
       type: [String],
       enum: [...BoyTitles, ...GirlTitles, ...CoupleTitles],

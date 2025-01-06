@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { fetchCurrentUser } from './store/features/userSlice';
 import { fetchAllSelections } from './store/features/selectionSlice';
 import { ToastContainer } from 'react-toastify';
+import VoteHistory from './pages/vote-history/VoteHistory';
 // import Nav from './pages/components/Nav';
 
 function App() {
@@ -32,8 +33,6 @@ function App() {
     }
   }, [userStatus, selectionStatus, dispatch]);
 
-
-
   return (
     <>
       {/* <Nav /> */}
@@ -43,6 +42,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/otp' element={<Otp />} />
         <Route path='/home' element={<VotingPage />} />
+        <Route path='/vote-history' element={<VoteHistory />} />
         <Route path='*' element={<h1>Not Found</h1>} />
       </Routes>
       <ToastContainer />
