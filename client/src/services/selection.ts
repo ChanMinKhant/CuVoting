@@ -24,3 +24,13 @@ export const vote = async (selectionId: string, title: string) => {
     throw error.response;
   }
 };
+
+//vote-history
+export const getVoteHistory = async () => {
+  try {
+    const response = await apiService.get(`${selectionBaseUrl}/vote-history`);
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};

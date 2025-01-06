@@ -101,10 +101,11 @@ exports.getUserVotedHistories = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const votes = await Vote.find({ user: req.userId }).populate(
-    'selectionId',
-    'name number'
-  );
+  const votes = await Vote.find(
+    { user: req.userId },
+    '-createdAt -updatedAt'
+  ).populate('selectionId', 'name number gender');
+  console.log(votes);
   res.status(200).send({
     success: true,
     data: votes,
