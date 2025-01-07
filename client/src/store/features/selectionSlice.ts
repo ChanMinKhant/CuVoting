@@ -83,9 +83,9 @@ const selectionSlice = createSlice({
         state.selections = action.payload.data;
         state.userVotedTitles = action.payload.userVotedTitles;
       })
-      .addCase(fetchAllSelections.rejected, (state, action) => {
+      .addCase(fetchAllSelections.rejected, (state) => {
         state.status = 'failed';
-        state.error = action.payload as string;
+        // state.error = action.payload as string;
       });
   },
 });
