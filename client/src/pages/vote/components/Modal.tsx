@@ -48,7 +48,7 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
     // console.log(selectionId);
     // console.log(category);
     try {
-      const data = await vote(selectionId, category);
+      await vote(selectionId, category);
       dispatch(removeUserVotedTitles(category));
       setVotes((prev) => prev.filter((title) => title !== category));
       // console.log(data);
