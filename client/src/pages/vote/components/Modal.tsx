@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 // memo
 import { memo } from 'react';
 import { vote } from '../../../services/selection';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { Link } from 'react-router-dom';
+import { removeUserVotedTitles } from '../../../store/features/selectionSlice';
 
 const GirlTitles = ['queen', 'attraction', 'glory', 'smile'];
 
@@ -17,9 +18,10 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
   const { userVotedTitles, status } = useAppSelector(
     (state) => state.selections
   );
+  const dispatch = useAppDispatch(); // Move this line to the top level of the component
   useEffect(() => {
     if (status === 'succeeded') {
-      console.log(userVotedTitles);
+      // console.log(userVotedTitles);
     }
   }, [status]);
   useEffect(() => {
@@ -27,7 +29,7 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
       const filteredTitles = BoyTitles.filter(
         (title) => !userVotedTitles.includes(title)
       );
-      console.log(filteredTitles);
+      // console.log(filteredTitles);
       setVotes(filteredTitles);
     } else if (activeTab === 'girl') {
       const filteredTitles = GirlTitles.filter(
@@ -43,11 +45,13 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
   }, [activeTab]);
 
   const handleVouteClick = async (category: string) => {
-    console.log(selectionId);
-    console.log(category);
+    // console.log(selectionId);
+    // console.log(category);
     try {
       const data = await vote(selectionId, category);
-      console.log(data);
+      dispatch(removeUserVotedTitles(category));
+      setVotes((prev) => prev.filter((title) => title !== category));
+      // console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -71,23 +75,33 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
             </h2>
             <div className='grid gap-4'>
               {votes.length > 0 ? (
-                votes.map((category, index) => (
-                  <div
-                    key={index}
-                    className='flex justify-between items-center'
-                  >
-                    <span className='text-[#f50579] font-bold font-medium '>
-                      {category}
-                    </span>
-
-                    <button
-                      className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-blue-600 transition'
-                      onClick={() => handleVouteClick(category)}
+                <>
+                  {votes.map((category, index) => (
+                    <div
+                      key={index}
+                      className='flex justify-between items-center'
                     >
-                      Vote
-                    </button>
+                      <span className='text-[#f50579] font-bold font-medium '>
+                        {category}
+                      </span>
+
+                      <button
+                        className='px-4 py-2 bg-blue-500 text-white text-sm font-medium rounded-full shadow-md hover:bg-blue-600 transition'
+                        onClick={() => handleVouteClick(category)}
+                      >
+                        Vote
+                      </button>
+                    </div>
+                  ))}
+                  <div className='text-center mt-4'>
+                    <Link
+                      to='/vote-history'
+                      className='text-blue-500 hover:underline'
+                    >
+                      Check your vote history
+                    </Link>
                   </div>
-                ))
+                </>
               ) : (
                 <div>
                   <div className='text-center text-gray-600 text-lg font-medium'>
@@ -97,7 +111,7 @@ const Modal = ({ isOpen, onClose, activeTab, selectionId }: any) => {
                     to='/vote-history'
                     className='text-blue-500 hover:underline'
                   >
-                    check your vote hostory
+                    Check your vote history
                   </Link>
                 </div>
               )}

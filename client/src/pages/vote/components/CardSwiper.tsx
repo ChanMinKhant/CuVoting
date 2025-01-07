@@ -87,7 +87,7 @@ function CardSwiper() {
           grabCursor={true}
           slidesPerView={'auto'} // Set slidesPerView back to 'auto'
           centeredSlides={true} // Center the active slide
-          loop={true} // Enable looping
+          loop={filteredSelections.length > 3 ? true : false} // Enable looping
           watchOverflow={true} // Automatically disable loop if not enough slides
           coverflowEffect={{
             rotate: 0, // Slight rotation for a natural overlap effect

@@ -60,7 +60,19 @@ export const fetchAllSelections = createAsyncThunk(
 const selectionSlice = createSlice({
   name: 'selections', // Slice name should match the reducer key
   initialState,
-  reducers: {},
+  reducers: {
+    // remove userVotedTitles from the array payload is string.
+    removeUserVotedTitles: (state, action) => {
+      // console.log(action.payload);
+      state.userVotedTitles = state.userVotedTitles.filter(
+        (title) => title !== action.payload
+      );
+      console.log(state.userVotedTitles);
+    },
+    addUserVotedTitles: (state, action) => {
+      state.userVotedTitles.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllSelections.pending, (state) => {
@@ -79,3 +91,5 @@ const selectionSlice = createSlice({
 });
 
 export default selectionSlice.reducer;
+export const { removeUserVotedTitles, addUserVotedTitles } =
+  selectionSlice.actions;
