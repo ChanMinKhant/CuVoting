@@ -48,7 +48,7 @@ function VotingPage() {
       {/* <button class='bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-1 px-2 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 text-sm transition-transform duration-300'>
               Vote Now
             </button> */}
-      <VotingAnimation />
+      {/* <VotingAnimation /> */}
     </div>
   );
 }
