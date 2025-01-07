@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
-import VotingAnimation from './components/VotingAnimation';
 import { useNavigate } from 'react-router-dom';
 // import './home.css';
 function VotingPage() {
