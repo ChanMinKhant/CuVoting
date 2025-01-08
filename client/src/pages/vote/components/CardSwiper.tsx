@@ -98,16 +98,16 @@ function CardSwiper() {
           grabCursor={true}
           slidesPerView={'auto'} // Set slidesPerView back to 'auto'
           centeredSlides={true} // Center the active slide
-          loop={filteredSelections.length > 3 ? true : false} // Enable looping
+          loop={filteredSelections.length > 5} // Enable looping
           watchOverflow={true} // Automatically disable loop if not enough slides
           coverflowEffect={{
             rotate: 0, // Slight rotation for a natural overlap effect
             stretch: 0, // Keep all slides the same width
             depth: 100, // Make the overlapping effect more pronounced
             modifier: 2.5, // Controls the curve intensity
-            slideShadows: true, // Enable slide shadows for depth
+            slideShadows: false, // Enable slide shadows for depth
           }}
-          pagination={{ el: '.swiper-pagination', clickable: true }}
+          pagination={false}
           navigation={{
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
