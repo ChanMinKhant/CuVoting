@@ -30,6 +30,14 @@ function CardSwiper() {
     // console.log(filteredSelections);
   }, [selections, activeTab]);
 
+  const { activeTab: activeTabFromStore } = useAppSelector(
+    (state) => state.modal
+  );
+
+  useEffect(() => {
+    setActiveTab(activeTabFromStore);
+  }, [activeTabFromStore]);
+
   const resetAllFlips = useCallback(() => {
     cardRefs.current.forEach((ref) => ref?.resetFlip());
   }, []);

@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { vote } from '../../../services/selection';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { Link } from 'react-router-dom';
-import { removeUserVotedTitles } from '../../../store/features/selectionSlice';
+import { addUserVotedTitles } from '../../../store/features/selectionSlice';
 import { closeModal } from '../../../store/features/modalSlice';
 
 const GirlTitles = ['queen', 'attraction', 'glory', 'smile'];
@@ -77,6 +77,7 @@ const Modal = () =>
 
     useEffect(() => {
       let filteredTitles: string[] = [];
+
       if (status === 'succeeded') {
         if (activeTab === 'boy') {
           filteredTitles = BoyTitles.filter(
@@ -91,17 +92,24 @@ const Modal = () =>
             (title) => !userVotedTitles.includes(title)
           );
         }
+        console.log(filteredTitles);
         setVotes(filteredTitles);
       }
     }, [status, activeTab, userVotedTitles]);
 
     const handleVoteClick = async (category: string) => {
       try {
-        // await vote(id, category);
-        dispatch(removeUserVotedTitles(category));
-        setVotes((prev) => prev.filter((title) => title !== category));
-      } catch (error) {
+        if (selectionId) {
+          await vote(selectionId, category);
+          dispatch(addUserVotedTitles(category));
+          setVotes((prev) => prev.filter((title) => title !== category));
+        }
+      } catch (error: any) {
         console.log(error);
+        if (error.data?.message === 'You have already voted for this title') {
+          dispatch(addUserVotedTitles(category));
+          setVotes((prev) => prev.filter((title) => title !== category));
+        }
       }
     };
 
@@ -139,6 +147,14 @@ const Modal = () =>
                     </button>
                   </div>
                 ))}
+                <div className='text-center mt-4'>
+                  <Link
+                    to='/vote-history'
+                    className='text-blue-500 hover:underline'
+                  >
+                    Check your vote history
+                  </Link>
+                </div>
                 {/* {votes.length > 0 ? (
           <>
             {votes.map((category, index) => (

@@ -7,7 +7,7 @@ interface ModalState {
 }
 
 const initialState: ModalState = {
-  isOpen: true,
+  isOpen: false,
   activeTab: 'boy',
   selectionId: null,
 };

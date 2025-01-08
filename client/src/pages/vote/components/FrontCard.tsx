@@ -1,7 +1,6 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 // memo
 import { memo } from 'react';
-import Modal from './Modal';
 import { useAppDispatch } from '../../../store/store';
 import { openModal } from '../../../store/features/modalSlice';
 
@@ -9,16 +8,12 @@ function FrontCard({ selection, activeTab }: any) {
   const dispatch = useAppDispatch();
   const { name, age, height, _id, number } = selection;
   const [isVoted, setIsVoted] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
-    setIsModalOpen(true); // Open the modal
     setIsVoted(!isVoted); // Toggle vote status
     dispatch(openModal({ activeTab, selectionId: _id }));
   };
-
-  const closeModal = useCallback(() => setIsModalOpen(false), []);
 
   return (
     <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
