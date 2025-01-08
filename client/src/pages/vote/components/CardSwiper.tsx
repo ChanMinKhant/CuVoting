@@ -5,9 +5,11 @@ import './cardSwiper.css';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
 import MiniFlipCard from './MiniFlipCard';
 import { useRef, useCallback, useState, useEffect } from 'react';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
+import { changeActiveTab } from '../../../store/features/modalSlice';
 
 function CardSwiper() {
+  const dispatch = useAppDispatch();
   const cardRefs = useRef<any[]>([]);
   const [activeTab, setActiveTab] = useState<'boy' | 'girl' | 'couple'>('boy');
   const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
@@ -18,14 +20,14 @@ function CardSwiper() {
 
   useEffect(() => {
     if (selectionStatus === 'succeeded') {
-      console.log(selections);
+      // console.log(selections);
       const filterSelections = selections?.filter(
         (selection) => selection.gender === activeTab
       );
       setFilteredSelections(filterSelections);
     }
 
-    console.log(filteredSelections);
+    // console.log(filteredSelections);
   }, [selections, activeTab]);
 
   const resetAllFlips = useCallback(() => {
@@ -35,6 +37,7 @@ function CardSwiper() {
   const handleTabClick = (tab: 'boy' | 'girl' | 'couple') => {
     setActiveTab(tab);
     console.log(`Currently active tab: ${tab}`);
+    dispatch(changeActiveTab(tab));
   };
 
   return (

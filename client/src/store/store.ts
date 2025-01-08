@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './features/userSlice';
 import selectionReducer from './features/selectionSlice';
+import modalReducer from './features/modalSlice'; // Add this line
 import {
   TypedUseSelectorHook,
   useDispatch,
@@ -12,6 +13,7 @@ const store = configureStore({
   reducer: {
     user: userReducer,
     selections: selectionReducer,
+    modal: modalReducer, // Add this line
   },
 });
 

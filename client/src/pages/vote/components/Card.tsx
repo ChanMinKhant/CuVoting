@@ -19,7 +19,7 @@ const Card = forwardRef(
   ) => {
     const [isFlipped, setIsFlipped] = useState(false);
     // const [isModalOpen, setIsModalOpen] = useState(false);
-    console.log(selection);
+    // console.log(selection);
     // return;
 
     useImperativeHandle(ref, () => ({

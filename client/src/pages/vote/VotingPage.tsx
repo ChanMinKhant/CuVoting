@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
 import { useNavigate } from 'react-router-dom';
+import Modal from './components/Modal';
 // import './home.css';
 function VotingPage() {
   const navigate = useNavigate();
@@ -48,6 +49,7 @@ function VotingPage() {
               Vote Now
             </button> */}
       {/* <VotingAnimation /> */}
+      <Modal />
     </div>
   );
 }
