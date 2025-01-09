@@ -27,6 +27,7 @@ app.use(
       process.env.CLIENT_URL,
       'https://ucspyay.site',
       'https://www.ucspyay.site',
+      'https://api.ucspyay.site', // Added new DNS domain
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Added methods
