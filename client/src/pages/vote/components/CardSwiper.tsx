@@ -21,10 +21,31 @@ function CardSwiper() {
   useEffect(() => {
     if (selectionStatus === 'succeeded') {
       // console.log(selections);
-      const filterSelections = selections?.filter(
-        (selection) => selection.gender === activeTab
-      );
-      setFilteredSelections(filterSelections);
+      if (activeTab !== 'couple') {
+        const filterSelections = selections?.filter(
+          (selection) => selection.gender === activeTab
+        );
+        setFilteredSelections(filterSelections);
+      } else {
+        const boy = selections?.filter(
+          (selection) => selection.gender === 'boy'
+        );
+        const girl = selections?.filter(
+          (selection) => selection.gender === 'girl'
+        );
+        console.log(boy);
+        console.log(girl);
+        const filteredSelection: any[] = [];
+
+        // i want to merge the two arrays with the same number use 2 dimensional array
+        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => {
+          const boySelection = boy[number - 1];
+          const girlSelection = girl[number - 1];
+          filteredSelection.push([boySelection, girlSelection]);
+        });
+        console.log(filteredSelection);
+        setFilteredSelections(filteredSelection);
+      }
     }
 
     // console.log(filteredSelections);
@@ -115,18 +136,34 @@ function CardSwiper() {
           modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
           className='swiper-container z-0'
         >
-          {filteredSelections?.map((selection, index) => (
-            <SwiperSlide
-              key={selection._id}
-              className='swiper-slide relative z-0'
-            >
-              <Card
-                ref={(el) => (cardRefs.current[index] = el)}
-                selection={selection}
-                activeTab={activeTab}
-              />
-            </SwiperSlide>
-          ))}
+          {filteredSelections?.map((selection, index) =>
+            activeTab !== 'couple' ? (
+              <SwiperSlide key={index}>
+                <Card
+                  activeTab={activeTab}
+                  ref={(ref) => (cardRefs.current[index] = ref)}
+                  selection={selection}
+                />
+              </SwiperSlide>
+            ) : (
+              <div>
+                <SwiperSlide key={index}>
+                  {/* <Card
+                    activeTab={activeTab}
+                    ref={(ref) => (cardRefs.current[index] = ref)}
+                    selection={selection[index][0]}
+                  />
+                </SwiperSlide>
+                <SwiperSlide key={index}>
+                  <Card
+                    activeTab={activeTab}
+                    ref={(ref) => (cardRefs.current[index] = ref)}
+                    selection={selection[index][1]}
+                  /> */}
+                </SwiperSlide>
+              </div>
+            )
+          )}
           <div className='slider-controller'>
             <div
               className='swiper-button-prev slider-arrow'

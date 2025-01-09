@@ -35,9 +35,9 @@ app.use(
   })
 );
 
-app.use(helmet());
+// app.use(helmet());
 app.use(morgan('dev'));
-app.use(mongoSanitize());
+// app.use(mongoSanitize());
 // app.use(
 //   expressRateLimit({
 //     windowMs: 15 * 60 * 1000, // 5 minutes

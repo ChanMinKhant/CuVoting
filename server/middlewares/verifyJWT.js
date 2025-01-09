@@ -4,7 +4,6 @@ const asyncHandler = require('express-async-handler');
 
 exports.verifyJWT = asyncHandler(async (req, res, next) => {
   const token = req?.cookies?.jwt; // cookies.jwt // iam not sure cookie or authrization
-  console.log(req.cookies);
   if (!token) {
     const err = new CustomError('Authentication failed', 401);
     return next(err);

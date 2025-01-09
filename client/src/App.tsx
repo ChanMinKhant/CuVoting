@@ -36,16 +36,20 @@ function App() {
   return (
     <>
       {/* <Nav /> */}
-      <Routes>
-        <Route path='/' element={<Hero />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/otp' element={<Otp />} />
-        <Route path='/home' element={<VotingPage />} />
-        <Route path='/vote-history' element={<VoteHistory />} />
-        <Route path='*' element={<h1>Not Found</h1>} />
-      </Routes>
-      <ToastContainer />
+      <div className='flex justinfy-center items-center'>
+        <div className='max-w-screen-sm w-full mx-auto'>
+          <Routes>
+            <Route path='/' element={<Hero />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/otp' element={<Otp />} />
+            <Route path='/home' element={<VotingPage />} />
+            <Route path='/vote-history' element={<VoteHistory />} />
+            <Route path='*' element={<h1>Not Found</h1>} />
+          </Routes>
+          <ToastContainer />
+        </div>
+      </div>
     </>
   );
 }
