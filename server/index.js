@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 3000;
 const router = require('./routes/index');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const mongoSanitize = require('express-mongo-sanitize');
+// const helmet = require('helmet');
+// const morgan = require('morgan');
+// const mongoSanitize = require('express-mongo-sanitize');
 // const expressRateLimit = require('express-rate-limit');
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
@@ -20,30 +20,13 @@ app.use(express.json());
 app.use(cookieParser());
 //from local host 5173
 
-app.use(
-  cors({
-    origin: [
-      'http://localhost:5173',
-      process.env.CLIENT_URL,
-      'https://ucspyay.site',
-      'https://www.ucspyay.site',
-      'https://api.ucspyay.site', // Added new DNS domain
-    ],
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Added methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Added allowedHeaders
-  })
-);
+const corsOptions = {
+  origin: 'https://www.ucspyay.site',
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
-// app.use(helmet());
-app.use(morgan('dev'));
-// app.use(mongoSanitize());
-// app.use(
-//   expressRateLimit({
-//     windowMs: 15 * 60 * 1000, // 5 minutes
-//     max: 100,
-//   })
-// );
+app.use(cors(corsOptions));
 
 app.use('/api', router);
 

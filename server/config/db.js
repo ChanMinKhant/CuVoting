@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const connectToDatabase = async () => {
   try {
-    const mongoUri =
-      process.env.MONGO_URI || 'mongodb://localhost:27017/voting';
+    const mongoUri = process.env.MONGO_URI;
 
     await mongoose.connect(mongoUri);
     console.log('Successfully connected to MongoDB');
