@@ -6,9 +6,9 @@ const PORT = process.env.PORT || 3000;
 const router = require('./routes/index');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-// const helmet = require('helmet');
-// const morgan = require('morgan');
-// const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const mongoSanitize = require('express-mongo-sanitize');
 // const expressRateLimit = require('express-rate-limit');
 // Handle uncaught exceptions
 process.on('uncaughtException', (err) => {
@@ -32,15 +32,15 @@ app.use(
   })
 );
 
-// app.use(helmet());
-// app.use(morgan('dev'));
-// app.use(mongoSanitize());
-// app.use(
-//   expressRateLimit({
-//     windowMs: 15 * 60 * 1000, // 15 minutes
-//     max: 100,
-//   })
-// );
+app.use(helmet());
+app.use(morgan('dev'));
+app.use(mongoSanitize());
+app.use(
+  expressRateLimit({
+    windowMs: 15 * 60 * 1000, // 5 minutes
+    max: 100,
+  })
+);
 
 app.use('/api', router);
 

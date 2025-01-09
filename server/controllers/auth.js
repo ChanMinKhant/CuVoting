@@ -126,14 +126,12 @@ exports.login = asyncHandler(async (req, res, next) => {
   }
   // generate token
   const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE || '30d',
+    expiresIn: '365d',
   });
 
   // set cookie
   res.cookie('jwt', token, {
-    expires: new Date(
-      Date.now() + (process.env.COOKIE_EXPIRES_IN || 365) * 24 * 60 * 60 * 1000
-    ),
+    maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
     httpOnly: true,
     secure: true,
     sameSite: 'none',
@@ -184,14 +182,14 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     { id: user._id.toString() },
     process.env.TOKEN_SECRET,
     {
-      expiresIn: process.env.JWT_EXPIRE || '30d',
+      expiresIn: '365d',
     }
   );
 
   //set cookie
   res.cookie('jwt', token, {
     httpOnly: true,
-    maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+    maxAge: 365 * 24 * 60 * 60 * 1000, // 30 days
     sameSite: 'None',
     secure: true,
   });
@@ -245,7 +243,7 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
   }
   // generate token
   const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
-    expiresIn: process.env.JWT_EXPIRE || '30d',
+    expiresIn: '365d',
   });
 });
 
