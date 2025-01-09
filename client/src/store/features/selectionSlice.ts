@@ -1,25 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { getAllSelections } from '../../services/selection';
 
-// // Define a type for the slice state
-// age
-// :
-// 22
-// gender
-// :
-// "boy"
-// height
-// :
-// 177
-// name
-// :
-// "Min Thant"
-// number
-// :
-// 10
-// _id
-// :
-// "677a9214d29d4a878dd9cbd3"
 interface SelectionState {
   age: number;
   gender: string;
@@ -31,6 +12,7 @@ interface SelectionState {
 
 interface SelectionsState {
   selections: SelectionState[] | [];
+  filteredSelections: SelectionState[] | any;
   userVotedTitles: any[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
@@ -38,6 +20,7 @@ interface SelectionsState {
 
 const initialState: SelectionsState = {
   selections: [],
+  filteredSelections: [],
   userVotedTitles: [],
   status: 'idle',
   error: null,
@@ -72,6 +55,15 @@ const selectionSlice = createSlice({
     addUserVotedTitles: (state, action) => {
       state.userVotedTitles.push(action.payload);
     },
+    filterSelections: (state, action) => {
+      if (action.payload === 'couple') {
+        const selections = state.selections;
+      } else {
+        state.filteredSelections = state.selections.filter(
+          (selection) => selection === action.payload
+        );
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -91,5 +83,5 @@ const selectionSlice = createSlice({
 });
 
 export default selectionSlice.reducer;
-export const { removeUserVotedTitles, addUserVotedTitles } =
+export const { removeUserVotedTitles, addUserVotedTitles, filterSelections } =
   selectionSlice.actions;

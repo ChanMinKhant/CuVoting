@@ -61,7 +61,7 @@ const Modal = () =>
     // };
     const [votes, setVotes] = useState<string[]>([]);
 
-    const { isOpen, activeTab, selectionId } = useAppSelector(
+    const { isOpen, activeTab, selectionId, name } = useAppSelector(
       (state) => state.modal
     );
     console.log(selectionId);
@@ -127,7 +127,7 @@ const Modal = () =>
           {votingStarted ? (
             <div>
               <h2 className='text-xl font-bold text-gray-700 border-b pb-2 mb-4'>
-                Vote for Categories
+                Vote for {name}
               </h2>
               <div className='grid gap-4'>
                 {votes.map((category, index) => (

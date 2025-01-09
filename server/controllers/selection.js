@@ -45,7 +45,11 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     return next(err);
   }
   // console.log(BoyTitles);
-  if (selection.gender === 'boy' && !BoyTitles.includes(title)) {
+  // for couple. i will count for a boy. mean that if some on vote for a couple, i will count for a boy bcz of same number with girl.
+  if (
+    selection.gender === 'boy' &&
+    ![...BoyTitles, ...CoupleTitles].includes(title)
+  ) {
     const err = new CustomError('Invalid title', 400);
     return next(err);
   }
@@ -55,7 +59,8 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  if (selection.gender === 'couple' && !CoupleTitles.includes(title)) {
+  // for couple. i will count for a boy. mean that if some on vote for a couple, i will count for a boy bcz of same number with girl.
+  if (selection.gender === 'boy' && !CoupleTitles.includes(title)) {
     const err = new CustomError('Invalid title', 400);
     return next(err);
   }

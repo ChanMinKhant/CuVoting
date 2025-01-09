@@ -4,13 +4,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import './cardSwiper.css';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
 import MiniFlipCard from './MiniFlipCard';
-import { useRef, useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import { changeActiveTab } from '../../../store/features/modalSlice';
+import {
+  changeActiveTab,
+  openModal,
+  setName,
+} from '../../../store/features/modalSlice';
 
 function CardSwiper() {
   const dispatch = useAppDispatch();
-  const cardRefs = useRef<any[]>([]);
   const [activeTab, setActiveTab] = useState<'boy' | 'girl' | 'couple'>('boy');
   const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
 
@@ -48,6 +51,11 @@ function CardSwiper() {
           if (boySelection && girlSelection) {
             filteredSelection.push([boySelection, girlSelection]);
           }
+          // const boySelection = boy[number - 1];
+          // const girlSelection = girl[number - 1];
+          // if (boySelection && girlSelection) {
+          //   filteredSelection.push([boySelection, girlSelection]);
+          // }
         }
         console.log(filteredSelection);
         setFilteredSelections(filteredSelection);
@@ -65,14 +73,16 @@ function CardSwiper() {
     setActiveTab(activeTabFromStore);
   }, [activeTabFromStore]);
 
-  const resetAllFlips = useCallback(() => {
-    cardRefs.current.forEach((ref) => ref?.resetFlip());
-  }, []);
-
   const handleTabClick = (tab: 'boy' | 'girl' | 'couple') => {
     setActiveTab(tab);
     console.log(`Currently active tab: ${tab}`);
     dispatch(changeActiveTab(tab));
+  };
+
+  const handleVoteClick = (id: string, name: string[]) => {
+    dispatch(openModal({ activeTab, selectionId: id }));
+    //setName
+    dispatch(setName(name?.join(' & ')));
   };
 
   return (
@@ -121,7 +131,7 @@ function CardSwiper() {
       {filteredSelections.length > 0 ? (
         <Swiper
           effect={'coverflow'} // 3D effect
-          spaceBetween={50}
+          spaceBetween={activeTab !== 'couple' ? 100 : 300} // Space between each slide
           grabCursor={true}
           slidesPerView={'auto'} // Set slidesPerView back to 'auto'
           centeredSlides={true} // Center the active slide
@@ -142,55 +152,51 @@ function CardSwiper() {
           modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
           className='swiper-container z-0'
         >
-          {filteredSelections?.map((selection, index) =>
-            activeTab !== 'couple' ? (
+          {filteredSelections?.map((selection, index) => {
+            return activeTab !== 'couple' ? (
               <SwiperSlide key={index}>
-                <Card
-                  activeTab={activeTab}
-                  ref={(ref) => (cardRefs.current[index] = ref)}
-                  selection={selection}
-                />
+                <Card activeTab={activeTab} selection={selection} />
               </SwiperSlide>
             ) : (
-              <SwiperSlide key={index}>
-                <div>
-                  <Card
-                    activeTab={activeTab}
-                    ref={(ref) => (cardRefs.current[index * 2] = ref)}
-                    selection={selection[0]}
-                  />
-                  <Card
-                    activeTab={activeTab}
-                    ref={(ref) => (cardRefs.current[index * 2 + 1] = ref)}
-                    selection={selection[1]}
-                  />
-                </div>
-                {/* <Card
-                  activeTab={activeTab}
-                  ref={(ref) => (cardRefs.current[index] = ref)}
-                  selection={selection[0]}
-                />
-                <Card
-                  activeTab={activeTab}
-                  ref={(ref) =>
-                    (cardRefs.current[index + filteredSelections.length] = ref)
-                  }
-                  selection={selection[1]}
-                /> */}
-              </SwiperSlide>
-            )
-          )}
+              <>
+                <SwiperSlide key={index}>
+                  <div>
+                    <div className='flex flex-col items-center w-[120px]'>
+                      <Card
+                        activeTab={activeTab}
+                        selection={selection[0]}
+                        size='small'
+                      />
+
+                      <Card
+                        activeTab={activeTab}
+                        selection={selection[1]}
+                        size='small'
+                      />
+                      <div
+                        className='flex justify-center mt-4'
+                        onClick={() =>
+                          handleVoteClick(selection[0]._id, [
+                            selection[0].name,
+                            selection[1].name,
+                          ])
+                        }
+                      >
+                        <button className='bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 transition duration-300'>
+                          vote us
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </>
+            );
+          })}
           <div className='slider-controller'>
-            <div
-              className='swiper-button-prev slider-arrow'
-              onClick={resetAllFlips}
-            ></div>
+            <div className='swiper-button-prev slider-arrow'></div>
           </div>
           <div className='slider-controller'>
-            <div
-              className='swiper-button-next slider-arrow'
-              onClick={resetAllFlips}
-            ></div>
+            <div className='swiper-button-next slider-arrow'></div>
             <div className='swiper-pagination'></div>
           </div>
         </Swiper>

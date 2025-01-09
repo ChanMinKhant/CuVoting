@@ -4,12 +4,14 @@ interface ModalState {
   isOpen: boolean;
   activeTab: 'boy' | 'girl' | 'couple';
   selectionId: string | null;
+  name: string | null;
 }
 
 const initialState: ModalState = {
   isOpen: false,
   activeTab: 'boy',
   selectionId: null,
+  name: null,
 };
 
 const modalSlice = createSlice({
@@ -36,8 +38,12 @@ const modalSlice = createSlice({
     ) => {
       state.activeTab = action.payload;
     },
+    setName(state, action: PayloadAction<string>) {
+      state.name = action.payload;
+    },
   },
 });
 
-export const { openModal, closeModal, changeActiveTab } = modalSlice.actions;
+export const { openModal, closeModal, changeActiveTab, setName } =
+  modalSlice.actions;
 export default modalSlice.reducer;
