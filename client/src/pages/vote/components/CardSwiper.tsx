@@ -27,22 +27,28 @@ function CardSwiper() {
         );
         setFilteredSelections(filterSelections);
       } else {
-        const boy = selections?.filter(
-          (selection) => selection.gender === 'boy'
-        );
-        const girl = selections?.filter(
-          (selection) => selection.gender === 'girl'
-        );
+        const boy = selections
+          ?.filter((selection) => selection.gender === 'boy')
+          .sort((a, b) => a.number - b.number);
+        const girl = selections
+          ?.filter((selection) => selection.gender === 'girl')
+          .sort((a, b) => a.number - b.number);
         console.log(boy);
         console.log(girl);
         const filteredSelection: any[] = [];
 
         // i want to merge the two arrays with the same number use 2 dimensional array
-        [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((number) => {
-          const boySelection = boy[number - 1];
-          const girlSelection = girl[number - 1];
-          filteredSelection.push([boySelection, girlSelection]);
-        });
+        for (let number = 1; number <= 10; number++) {
+          const boySelection = boy.find(
+            (selection) => selection.number === number
+          );
+          const girlSelection = girl.find(
+            (selection) => selection.number === number
+          );
+          if (boySelection && girlSelection) {
+            filteredSelection.push([boySelection, girlSelection]);
+          }
+        }
         console.log(filteredSelection);
         setFilteredSelections(filteredSelection);
       }
@@ -146,22 +152,32 @@ function CardSwiper() {
                 />
               </SwiperSlide>
             ) : (
-              <div>
-                <SwiperSlide key={index}>
-                  {/* <Card
-                    activeTab={activeTab}
-                    ref={(ref) => (cardRefs.current[index] = ref)}
-                    selection={selection[index][0]}
-                  />
-                </SwiperSlide>
-                <SwiperSlide key={index}>
+              <SwiperSlide key={index}>
+                <div>
                   <Card
                     activeTab={activeTab}
-                    ref={(ref) => (cardRefs.current[index] = ref)}
-                    selection={selection[index][1]}
-                  /> */}
-                </SwiperSlide>
-              </div>
+                    ref={(ref) => (cardRefs.current[index * 2] = ref)}
+                    selection={selection[0]}
+                  />
+                  <Card
+                    activeTab={activeTab}
+                    ref={(ref) => (cardRefs.current[index * 2 + 1] = ref)}
+                    selection={selection[1]}
+                  />
+                </div>
+                {/* <Card
+                  activeTab={activeTab}
+                  ref={(ref) => (cardRefs.current[index] = ref)}
+                  selection={selection[0]}
+                />
+                <Card
+                  activeTab={activeTab}
+                  ref={(ref) =>
+                    (cardRefs.current[index + filteredSelections.length] = ref)
+                  }
+                  selection={selection[1]}
+                /> */}
+              </SwiperSlide>
             )
           )}
           <div className='slider-controller'>
