@@ -29,6 +29,8 @@ app.use(
       'https://www.ucspyay.site',
     ],
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Added methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Added allowedHeaders
   })
 );
 
