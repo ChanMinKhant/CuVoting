@@ -10,12 +10,10 @@ const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 exports.getSelections = asyncHandler(async (req, res, next) => {
   // query for boy, girls, and couples
   // const { gender } = req.query;
-  // console.log(gender);
   if (!req.userId) {
     const err = new CustomError('You are not logged in', 400);
     return next(err);
   }
-  console.log(req.userId);
   const user = await User.findById(req.userId);
   if (!user) {
     const err = new CustomError('Something went wrong', 404);
@@ -46,7 +44,7 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Selection not found', 404);
     return next(err);
   }
-  console.log(BoyTitles);
+  // console.log(BoyTitles);
   if (selection.gender === 'boy' && !BoyTitles.includes(title)) {
     const err = new CustomError('Invalid title', 400);
     return next(err);

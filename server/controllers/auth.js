@@ -27,7 +27,6 @@ exports.register = asyncHandler(async (req, res, next) => {
     major,
     deviceId,
   } = req.body;
-  console.log(req.body);
   const { error } = registerSchema.validate(req.body);
   // console.log(error);
   if (error) {

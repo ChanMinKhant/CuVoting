@@ -35,12 +35,12 @@ app.use(
 app.use(helmet());
 app.use(morgan('dev'));
 app.use(mongoSanitize());
-app.use(
-  expressRateLimit({
-    windowMs: 15 * 60 * 1000, // 5 minutes
-    max: 100,
-  })
-);
+// app.use(
+//   expressRateLimit({
+//     windowMs: 15 * 60 * 1000, // 5 minutes
+//     max: 100,
+//   })
+// );
 
 app.use('/api', router);
 
