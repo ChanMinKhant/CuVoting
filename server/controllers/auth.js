@@ -12,93 +12,80 @@ const {
   deviceIdSchema,
 } = require('../validate/auth');
 
+
 exports.register = asyncHandler(async (req, res, next) => {
-  // if (req.user) {
-  //   const err = new CustomError('You are already logged in', 400);
-  //   return next(err);
-  // }
-  const {
-    email,
-    password,
-    confirmPassword,
-    username,
-    section,
-    year,
-    major,
-    deviceId,
-  } = req.body;
+  const { email, password, confirmPassword, deviceId } = req.body;
+
+  // Validate request data
   const { error } = registerSchema.validate(req.body);
-  // console.log(error);
   if (error) {
-    const err = new CustomError(error.details[0].message, 400);
-    return next(err);
-  }
-  const isAlreadyRegisteredDevice = await User.findOne({
-    deviceId,
-    isVerified: true,
-  });
-  if (isAlreadyRegisteredDevice) {
-    const err = new CustomError(
-      `You've already register with ${isAlreadyRegisteredDevice.email}, you can login with this email`,
-      400
-    );
-    return next(err);
+    return next(new CustomError(error.details[0].message, 400));
   }
 
-  let user = await User.findOne({ email });
-  const isPending = await Otp.find({ email });
-  if (user?.isVerified) {
-    const err = new CustomError('User already exists', 400);
-    return next(err);
-  }
-
-  if (user || isPending.length > 0) {
-    await Otp.deleteMany({ email });
-    await user.deleteOne();
-  }
-
+  // Check for password mismatch
   if (password !== confirmPassword) {
-    const err = new CustomError('Passwords do not match', 400);
-    return next(err);
+    return next(new CustomError('Passwords do not match', 400));
   }
 
-  user = await User.create(req.body);
+  // Check if the device is already registered
+  const existingDeviceUser = await User.findOne({ deviceId, isVerified: true });
+  if (existingDeviceUser) {
+    return next(
+      new CustomError(
+        `This device is already registered with ${existingDeviceUser.email}. You can log in with this email.`,
+        400
+      )
+    );
+  }
 
-  //send otp
-  const otp = Math.floor(100000 + Math.random() * 900000);
-  console.log(otp);
+  // Check if the email is already registered or has a pending OTP
+  let existingUser = await User.findOne({ email });
+  const pendingOtps = await Otp.find({ email });
 
-  // hash the otp
-  const hashOtp = bcrypt.hashSync(otp.toString(), 10);
-  const otpData = {
-    otp: hashOtp,
-    email: email,
-  };
+  if (existingUser?.isVerified) {
+    return next(new CustomError('User already exists', 400));
+  }
 
-  const otpDoc = await Otp.create(otpData);
+  // Clean up unverified accounts or pending OTPs
+  if (existingUser || pendingOtps.length > 0) {
+    await Otp.deleteMany({ email });
+    if (existingUser) {
+      await existingUser.deleteOne();
+    }
+  }
+
+  // Create the new user
+  const newUser = await User.create(req.body);
+
+  // Generate and hash OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const hashedOtp = bcrypt.hashSync(otp, 10);
+
+  // Save OTP to database
+  const otpDoc = await Otp.create({ otp: hashedOtp, email });
   if (!otpDoc) {
-    await user.deleteOne();
-    const err = new CustomError('Something went wrong', 500);
-    return next(err);
+    await newUser.deleteOne();
+    return next(new CustomError('Failed to create OTP', 500));
   }
 
-  //send otp here
+  // Send OTP via email
+  const subject = 'OTP for Email Verification';
   const message = `Your OTP is ${otp}`;
   try {
-    const subject = 'OTP for email verification';
     await sendMail(email, subject, message);
-  } catch (error) {
-    await user.deleteOne();
+  } catch (err) {
+    await newUser.deleteOne();
     await otpDoc.deleteOne();
-    console.log(error);
-    const err = new CustomError('Email could not be sent', 500);
-    return next(err);
+    console.error('Email sending error:', err);
+    return next(new CustomError('Failed to send OTP email', 500));
   }
+
   res.status(200).send({
     success: true,
     message: 'OTP has been sent to your email.',
   });
 });
+
 
 exports.login = asyncHandler(async (req, res, next) => {
   // if (req.user) {
