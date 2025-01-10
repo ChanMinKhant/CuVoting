@@ -11,9 +11,9 @@ interface SelectionState {
 }
 
 interface SelectionsState {
-  selections: SelectionState[] | [];
-  filteredSelections: SelectionState[] | any;
-  userVotedTitles: any[];
+  selections: SelectionState[];
+  filteredSelections: SelectionState[]; 
+  userVotedTitles: string[]; 
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -26,41 +26,48 @@ const initialState: SelectionsState = {
   error: null,
 };
 
+// Async thunk to fetch all selections
 export const fetchAllSelections = createAsyncThunk(
-  'selections/fetchAllSelections', // action name matches slice name
+  'selections/fetchAllSelections',
   async (_, { rejectWithValue }) => {
     try {
-      console.log('fetching selections');
-      const response = await getAllSelections();
-      console.log(response);
+      console.log('Fetching selections...');
+      const response = await getAllSelections(); // Ensure this returns the correct structure
+      console.log('Response:', response);
+      if (!response || !response.data || !response.userVotedTitles) {
+        throw new Error('Invalid response structure');
+      }
       return response;
     } catch (error: any) {
-      return rejectWithValue(error.message); // Ensure error is a string
+      return rejectWithValue(error.message || 'An unknown error occurred');
     }
   }
 );
 
 const selectionSlice = createSlice({
-  name: 'selections', // Slice name should match the reducer key
+  name: 'selections',
   initialState,
   reducers: {
-    // remove userVotedTitles from the array payload is string.
+    // Remove a title from the userVotedTitles array
     removeUserVotedTitles: (state, action) => {
-      // console.log(action.payload);
       state.userVotedTitles = state.userVotedTitles.filter(
         (title) => title !== action.payload
       );
-      console.log(state.userVotedTitles);
+      console.log('Updated userVotedTitles:', state.userVotedTitles);
     },
+    // Add a title to the userVotedTitles array
     addUserVotedTitles: (state, action) => {
       state.userVotedTitles.push(action.payload);
     },
+    // Filter selections based on the payload
     filterSelections: (state, action) => {
       if (action.payload === 'couple') {
-        const selections = state.selections;
+        state.filteredSelections = state.selections.filter(
+          (selection) => selection.gender === 'couple'
+        );
       } else {
         state.filteredSelections = state.selections.filter(
-          (selection) => selection === action.payload
+          (selection) => selection._id === action.payload
         );
       }
     },
@@ -75,13 +82,14 @@ const selectionSlice = createSlice({
         state.selections = action.payload.data;
         state.userVotedTitles = action.payload.userVotedTitles;
       })
-      .addCase(fetchAllSelections.rejected, (state) => {
+      .addCase(fetchAllSelections.rejected, (state, action) => {
         state.status = 'failed';
-        // state.error = action.payload as string;
+        state.error = action.payload as string; // Ensure this is a string
       });
   },
 });
 
-export default selectionSlice.reducer;
+// Export actions and reducer
 export const { removeUserVotedTitles, addUserVotedTitles, filterSelections } =
   selectionSlice.actions;
+export default selectionSlice.reducer;
