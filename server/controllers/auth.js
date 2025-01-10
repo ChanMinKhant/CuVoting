@@ -12,6 +12,11 @@ const {
   deviceIdSchema,
 } = require('../validate/auth');
 
+// Utility function to normalize email by removing dots before '@'
+function normalizeEmail(email) {
+  const [local, domain] = email.split('@');
+  return `${local.replace(/\./g, '')}@${domain}`;
+}
 
 exports.register = asyncHandler(async (req, res, next) => {
   const { email, password, confirmPassword, deviceId } = req.body;
@@ -21,6 +26,8 @@ exports.register = asyncHandler(async (req, res, next) => {
   if (error) {
     return next(new CustomError(error.details[0].message, 400));
   }
+
+  req.body.email = normalizeEmail(email);
 
   // Check for password mismatch
   if (password !== confirmPassword) {
@@ -86,7 +93,6 @@ exports.register = asyncHandler(async (req, res, next) => {
   });
 });
 
-
 exports.login = asyncHandler(async (req, res, next) => {
   // if (req.user) {
   //   const err = new CustomError('You are already logged in', 400);
@@ -101,13 +107,13 @@ exports.login = asyncHandler(async (req, res, next) => {
   // find the user in the database
   const user = await User.findOne({ email }, '+password');
   if (!user || !user?.isVerified) {
-    const err = new CustomError('Invalid credentials', 400);
+    const err = new CustomError('invalid email or password', 400);
     return next(err);
   }
   // compare the password
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    const err = new CustomError('Invalid credentials', 400);
+    const err = new CustomError('Invalid email or password', 400);
     return next(err);
   }
   // generate token
