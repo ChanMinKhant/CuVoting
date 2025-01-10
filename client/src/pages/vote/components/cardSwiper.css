@@ -1,3 +1,13 @@
 .swiper-slide {
   width: fit-content;
 }
+
+/* Add styles for lazy loading placeholders if necessary */
+.lazy-load-image-background.blur {
+  filter: blur(8px);
+  transition: filter 0.3s ease-out;
+}
+
+.lazy-load-image-loaded {
+  filter: blur(0);
+}

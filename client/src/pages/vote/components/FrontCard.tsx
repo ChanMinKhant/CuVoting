@@ -2,29 +2,26 @@
 import { memo } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { openModal, setName } from '../../../store/features/modalSlice';
+import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
+import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect
 
 function FrontCard({ selection, activeTab }: any) {
   const dispatch = useAppDispatch();
-  // if (true) {
-  //   console.log(selection);
-  //   return;
-  // }
-  // const { name, age, height, _id, number } = selection;
-  console.log(activeTab);
+
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
     dispatch(openModal({ activeTab, selectionId: selection._id }));
-    //setName
     dispatch(setName(selection?.name));
   };
 
   return (
     <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
-        {/* Card Image */}
-        <img
+        {/* Lazy Loaded Image with Blur Effect */}
+        <LazyLoadImage
           src={selection?.gender === 'boy' ? '/boy.jpg' : '/img.jpg'}
           alt={`Contestant ${selection?.name}`}
+          effect='blur'
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
         />
         {/* Gradient Overlay */}
@@ -49,12 +46,6 @@ function FrontCard({ selection, activeTab }: any) {
           </button>
         ) : null}
       </div>
-      {/* <Modal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        activeTab={activeTab}
-        selectionId={_id}
-      /> */}
     </div>
   );
 }

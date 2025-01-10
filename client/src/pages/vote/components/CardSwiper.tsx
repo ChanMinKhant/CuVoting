@@ -8,6 +8,8 @@ import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { openModal, setName } from '../../../store/features/modalSlice';
 import ActiveTabBar from './ActiveTabBar';
+// import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
+import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect for placeholders
 
 function CardSwiper() {
   const dispatch = useAppDispatch();
@@ -98,7 +100,8 @@ function CardSwiper() {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
           }}
-          modules={[EffectCoverflow, Pagination, Navigation]} // Corrected import usage
+          // lazy={true} // Enable Swiper's lazy loading
+          modules={[EffectCoverflow, Pagination, Navigation]} // Add Lazy module
           className='swiper-container z-0'
         >
           {filteredSelections?.map((selection, index) => {
