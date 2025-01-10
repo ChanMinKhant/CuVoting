@@ -200,6 +200,47 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   });
 });
 
+exports.resendOtp = asyncHandler(async (req, res, next) => {
+  const { email } = req.body;
+  if (!email) {
+    const err = new CustomError('Email is required', 400);
+    return next(err);
+  }
+  const user = await User.findOne({ email });
+  if (!user) {
+    const err = new CustomError('Invalid credentials', 400);
+    return next(err);
+  }
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  const hashedOtp = bcrypt.hashSync(otp, 10);
+  const otpDoc = await Otp.findOneAndUpdate(
+    { email },
+    { otp: hashedOtp, email },
+    { upsert: true, new: true }
+  );
+
+  if (!otpDoc) {
+    const err = new CustomError('Failed to create OTP', 500);
+    return next(err);
+  }
+
+  // Send OTP via email
+  const subject = 'OTP for Email Verification';
+  const message = `Your OTP is ${otp}`;
+  try {
+    await sendMail(email, subject, message);
+  } catch (err) {
+    await otpDoc.deleteOne();
+    console.error('Email sending error:', err);
+    return next(new CustomError('Failed to send OTP email', 500));
+  }
+
+  res.status(200).send({
+    success: true,
+    message: 'OTP has been sent to your email.',
+  });
+});
+
 //deviceId
 exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
   const { deviceId } = req.body;

@@ -6,17 +6,13 @@ import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Upd
 import MiniFlipCard from './MiniFlipCard';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
-import {
-  changeActiveTab,
-  openModal,
-  setName,
-} from '../../../store/features/modalSlice';
+import { openModal, setName } from '../../../store/features/modalSlice';
+import ActiveTabBar from './ActiveTabBar';
 
 function CardSwiper() {
   const dispatch = useAppDispatch();
-  const [activeTab, setActiveTab] = useState<'boy' | 'girl' | 'couple'>('boy');
   const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
-
+  const { activeTab } = useAppSelector((state) => state.modal);
   const { selections, status: selectionStatus } = useAppSelector(
     (state) => state.selections
   );
@@ -65,20 +61,6 @@ function CardSwiper() {
     // console.log(filteredSelections);
   }, [selections, activeTab]);
 
-  const { activeTab: activeTabFromStore } = useAppSelector(
-    (state) => state.modal
-  );
-
-  useEffect(() => {
-    setActiveTab(activeTabFromStore);
-  }, [activeTabFromStore]);
-
-  const handleTabClick = (tab: 'boy' | 'girl' | 'couple') => {
-    setActiveTab(tab);
-    console.log(`Currently active tab: ${tab}`);
-    dispatch(changeActiveTab(tab));
-  };
-
   const handleVoteClick = (id: string, name: string[]) => {
     dispatch(openModal({ activeTab, selectionId: id }));
     //setName
@@ -87,40 +69,7 @@ function CardSwiper() {
 
   return (
     <div>
-      <div className='w-full'>
-        <div className='flex border-b-2 text-sm border-gray-300 pb-2'>
-          <div
-            className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'boy'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
-            }`}
-            onClick={() => handleTabClick('boy')}
-          >
-            Boys
-          </div>
-          <div
-            className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'girl'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
-            }`}
-            onClick={() => handleTabClick('girl')}
-          >
-            Girls
-          </div>
-          <div
-            className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
-              activeTab === 'couple'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
-            }`}
-            onClick={() => handleTabClick('couple')}
-          >
-            Couples
-          </div>
-        </div>
-      </div>
+      <ActiveTabBar />
       <br />
       <div className='w-full flex justify-end text-xs items-center mt-2 mr-4 mb-[-5px] px-2'>
         <div className='border-b px-2 py-[2px] mr-2 rounded-md shadow-[10px_10px_20px_#bebebe,-10px_-10px_20px_#ffffff,inset_10px_10px_20px_#bebebe,inset_-10px_-10px_10px_#ffffff]'>
@@ -154,7 +103,7 @@ function CardSwiper() {
         >
           {filteredSelections?.map((selection, index) => {
             return activeTab !== 'couple' ? (
-              <SwiperSlide key={index}>
+              <SwiperSlide key={selection._id}>
                 <Card activeTab={activeTab} selection={selection} />
               </SwiperSlide>
             ) : (

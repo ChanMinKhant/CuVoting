@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { submitOtp } from '../../../services/auth';
+import { submitOtp, resendOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
 
@@ -7,6 +7,11 @@ const OtpPage: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
   const navigate = useNavigate();
+  const [message, setMessage] = useState<string>(''); // Add state for messages
+  const [errorMessage, setErrorMessage] = useState<string>(''); // Add state for error messages
+  const [isResending, setIsResending] = useState<boolean>(false); // State to manage resend button
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // Add state for submit loading
+  const [resendTimer, setResendTimer] = useState<number>(30); // Initialize to 30 seconds on first load
 
   const { user, status } = useAppSelector((state) => state.user);
 
@@ -63,6 +68,8 @@ const OtpPage: React.FC = () => {
   };
 
   const handleSubmit = async (otpArray = otp) => {
+    setIsSubmitting(true); // Start loading
+    setErrorMessage(''); // Clear previous error messages
     const otpValue = otpArray.join('');
     console.log('OTP Submitted:', otpValue);
     try {
@@ -73,12 +80,50 @@ const OtpPage: React.FC = () => {
       }
     } catch (error: any) {
       console.error(error);
+      setErrorMessage(error?.message || 'Failed to verify OTP.');
+    } finally {
+      setIsSubmitting(false); // End loading
+    }
+  };
+
+  const handleResend = async () => {
+    if (resendTimer > 0) return; // Prevent if timer is active
+    setIsResending(true);
+    setMessage('');
+    setErrorMessage(''); // Clear previous error messages
+    try {
+      const data = await resendOtp(email!);
+      if (data.success) {
+        setMessage('OTP has been resent to your email.');
+        setOtp(new Array(6).fill('')); // Clear OTP inputs
+        setResendTimer(30); // Start 30-second timer
+      }
+    } catch (error: any) {
+      console.error(error);
+      setErrorMessage(error?.message || 'Failed to resend OTP.');
+    } finally {
+      setIsResending(false);
     }
   };
 
   useEffect(() => {
+    let timer: ReturnType<typeof setInterval>;
+    if (resendTimer > 0) {
+      timer = setInterval(() => {
+        setResendTimer((prev) => prev - 1);
+      }, 1000);
+    }
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [resendTimer]);
+
+  useEffect(() => {
     inputRefs.current[0]?.focus();
   }, []);
+
+  // Add a computed value to check if all OTP fields are filled
+  const isOtpComplete = otp.every((digit) => digit !== '');
 
   return (
     <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
@@ -108,11 +153,59 @@ const OtpPage: React.FC = () => {
           </div>
           <button
             type='submit'
-            className='w-full bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
+            disabled={!isOtpComplete || isSubmitting} // Update disabled property
+            className={`w-full bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors flex items-center justify-center ${
+              (!isOtpComplete || isSubmitting) &&
+              'opacity-50 cursor-not-allowed'
+            }`}
           >
-            Verify OTP
+            {isSubmitting ? (
+              <svg
+                className='animate-spin h-5 w-5 mr-3 text-white'
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+              >
+                <circle
+                  className='opacity-25'
+                  cx='12'
+                  cy='12'
+                  r='10'
+                  stroke='currentColor'
+                  strokeWidth='4'
+                ></circle>
+                <path
+                  className='opacity-75'
+                  fill='currentColor'
+                  d='M4 12a8 8 0 018-8v8H4z'
+                ></path>
+              </svg>
+            ) : null}
+            {isSubmitting ? 'Verifying...' : 'Verify OTP'}
           </button>
         </form>
+        {message && (
+          <div className='text-center text-green-500 mb-4'>{message}</div>
+        )}
+        {errorMessage && (
+          <div className='text-center text-red-500 mb-4'>{errorMessage}</div>
+        )}
+        <button
+          type='button'
+          onClick={handleResend}
+          disabled={isResending || resendTimer > 0}
+          className={`mt-4 w-full p-2 rounded-full transition-colors ${
+            resendTimer > 0
+              ? 'bg-gray-400 text-white cursor-not-allowed'
+              : 'bg-blue-500 text-white hover:bg-blue-600'
+          }`}
+        >
+          {isResending
+            ? 'Resending...'
+            : resendTimer > 0
+            ? `Resend OTP (${resendTimer}s)`
+            : 'Resend OTP'}
+        </button>
       </div>
     </div>
   );

@@ -33,6 +33,17 @@ export const submitOtp = async (email: String, otp: String) => {
   }
 };
 
+export const resendOtp = async (email: String) => {
+  try {
+    const response = await apiService.post(`${authBaseUrl}/resend-otp`, {
+      email,
+    });
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};
+
 export const getUser = async () => {
   try {
     const response = await apiService.post(`${authBaseUrl}/get-user`);

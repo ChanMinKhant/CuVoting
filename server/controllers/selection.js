@@ -44,29 +44,28 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Selection not found', 404);
     return next(err);
   }
+  if (user.votedTitles.includes(title)) {
+    const err = new CustomError('You have already voted for this title', 400);
+    return next(err);
+  }
   // console.log(BoyTitles);
   // for couple. i will count for a boy. mean that if some on vote for a couple, i will count for a boy bcz of same number with girl.
   if (
     selection.gender === 'boy' &&
     ![...BoyTitles, ...CoupleTitles].includes(title)
   ) {
-    const err = new CustomError('Invalid title', 400);
+    const err = new CustomError('Invalid title for couple', 400);
     return next(err);
   }
 
   if (selection.gender === 'girl' && !GirlTitles.includes(title)) {
-    const err = new CustomError('Invalid title', 400);
+    const err = new CustomError('Invalid title for girls', 400);
     return next(err);
   }
 
-  // for couple. i will count for a boy. mean that if some on vote for a couple, i will count for a boy bcz of same number with girl.
-  if (selection.gender === 'boy' && !CoupleTitles.includes(title)) {
-    const err = new CustomError('Invalid title', 400);
-    return next(err);
-  }
-
-  if (user.votedTitles.includes(title)) {
-    const err = new CustomError('You have already voted for this title', 400);
+  console.log(selection.gender);
+  if (selection.gender === 'boy' && !BoyTitles.includes(title)) {
+    const err = new CustomError('Invalid title for boys', 400);
     return next(err);
   }
 
