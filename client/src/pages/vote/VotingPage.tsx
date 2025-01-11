@@ -19,7 +19,7 @@ function VotingPage() {
     ) {
       navigate('/signup'); // Use 'navigate' instead of 'negative'
     }
-  }, [selectionStatus, user, userStatus, navigate]);
+  }, [selectionStatus, user, userStatus, selections, navigate]);
 
   // call get all slection
 
