@@ -63,11 +63,7 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-  console.log(selection.gender);
-  if (selection.gender === 'boy' && !BoyTitles.includes(title)) {
-    const err = new CustomError('Invalid title for boys', 400);
-    return next(err);
-  }
+
 
   user.votedTitles.push(title);
   await user.save();
