@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Fingerprint } from 'lucide-react';
-import { detectedDeviceAccount, login } from '../../../services/auth';
+import {
+  detectedDeviceAccount,
+  login,
+  loginWithDeviceId,
+} from '../../../services/auth';
 import { useAppSelector } from '../../../store/store';
 import { getFingerprint } from '../../../utils/helpers';
 
@@ -19,6 +23,7 @@ const LoginForm: React.FC = () => {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [deviceId, setDeviceId] = useState('');
+  const [deviceData, setDeviceData] = useState<any>({});
 
   const email = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -50,6 +55,7 @@ const LoginForm: React.FC = () => {
         deviceId: deviceId,
       });
       console.log(data);
+      setDeviceData(data.user);
     } catch (error: any) {
       console.log(error);
     }
@@ -115,6 +121,20 @@ const LoginForm: React.FC = () => {
     }
   };
 
+  const handleLoginWithDeviceID = async () => {
+    try {
+      const data = await loginWithDeviceId(deviceId);
+      if (data) {
+        console.log('Logged in successfully');
+        window.location.href = '/home';
+      }
+    } catch (error: any) {
+      console.error(error);
+    }
+  };
+  if (deviceData) {
+    console.log(deviceData.email);
+  }
   return (
     <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
       <div className='bg-white p-8 rounded-lg shadow-md w-full max-w-md'>
@@ -173,14 +193,21 @@ const LoginForm: React.FC = () => {
             Sign Up
           </Link>
         </p>
-        <div className='mt-6 bg-gray-100 p-4 rounded-lg'>
-          <h3 className='font-semibold mb-2'>Example Login Credentials:</h3>
-          <p>Username: johndoe</p>
-          <p>Email: john.doe@example.com</p>
-          <p className='text-sm text-gray-500 mt-2'>
-            (Use either username or email to log in)
-          </p>
-        </div>
+
+        {deviceData?.email ? (
+          <div
+            className='mt-4 p-4 bg-gray-200 rounded-lg'
+            onClick={handleLoginWithDeviceID}
+          >
+            <p className='text-center text-gray-700'>
+              Detected Email: {deviceData.email}
+            </p>
+          </div>
+        ) : (
+          <Link to='/signup' className='text-blue-500 hover:underline'>
+            Sign Up
+          </Link>
+        )}
       </div>
     </div>
   );
