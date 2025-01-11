@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { register } from '../../../services/auth';
-import FingerprintJS from '@fingerprintjs/fingerprintjs';
 import { useAppSelector } from '../../../store/store';
 import { toast } from 'react-toastify';
+import { getFingerprint } from '../../../utils/helpers';
 
 interface FormData {
   username: string;
@@ -91,13 +91,6 @@ const RegisterForm: React.FC = () => {
     //   errors.push('Password must contain at least one special character');
     // }
     return errors;
-  };
-
-  const getFingerprint = async () => {
-    const fp = await FingerprintJS.load();
-    const result = await fp.get();
-    // setFingerprint(result.visitorId); // Unique fingerprint
-    return result.visitorId;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

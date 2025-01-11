@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { submitOtp, resendOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
+import { getFingerprint } from '../../../utils/helpers';
 
 const OtpPage: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
@@ -25,7 +26,11 @@ const OtpPage: React.FC = () => {
   if (!email) {
     navigate('/signup');
   }
-
+  const deviceId = getFingerprint().then((fp) => {
+    console.log(fp);
+    return fp;
+  });
+  console.log(deviceId);
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number

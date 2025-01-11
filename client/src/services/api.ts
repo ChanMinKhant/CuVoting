@@ -3,9 +3,9 @@ import axios from 'axios';
 axios.defaults.withCredentials = true;
 
 const apiService = axios.create({
-  // baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000',
   // baseURL: 'https://cu-voting.vercel.app',
-  baseURL: 'https://www.api.ucspyay.site',
+  // baseURL: 'https://www.api.ucspyay.site',
   headers: {
     'Content-Type': 'application/json',
   },

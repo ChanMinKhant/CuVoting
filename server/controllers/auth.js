@@ -295,3 +295,11 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     user,
   });
 });
+
+exports.logout = asyncHandler(async (req, res, next) => {
+  res.cookie('jwt', '', { maxAge: 1 });
+  res.status(200).send({
+    success: true,
+    message: 'Logged out successfully',
+  });
+});
