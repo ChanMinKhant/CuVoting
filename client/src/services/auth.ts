@@ -52,3 +52,40 @@ export const getUser = async () => {
     throw error.response;
   }
 };
+
+export const detectedDeviceAccount = async (deviceData: any) => {
+  try {
+    const response = await apiService.post(
+      `${authBaseUrl}/detected-account`,
+      deviceData
+    );
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};
+
+// login-with-device-id
+
+export const loginWithDeviceId = async (deviceId: any) => {
+  try {
+    const response = await apiService.post(
+      `${authBaseUrl}/login-with-device-id`,
+      {
+        deviceId,
+      }
+    );
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await apiService.post(`${authBaseUrl}/logout`);
+    return response.data;
+  } catch (error: any) {
+    throw error.response;
+  }
+};

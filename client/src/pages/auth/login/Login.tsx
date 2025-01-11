@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
-import { login } from '../../../services/auth';
+import { Eye, EyeOff, Fingerprint } from 'lucide-react';
+import { detectedDeviceAccount, login } from '../../../services/auth';
 import { useAppSelector } from '../../../store/store';
+import { getFingerprint } from '../../../utils/helpers';
 
 interface FormData {
   email: string;
@@ -17,8 +18,9 @@ const LoginForm: React.FC = () => {
 
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showPassword, setShowPassword] = useState(false);
+  const [deviceId, setDeviceId] = useState('');
 
-  const usernameOrEmailRef = useRef<HTMLInputElement>(null);
+  const email = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
@@ -28,7 +30,30 @@ const LoginForm: React.FC = () => {
     if (status === 'succeeded' && user) {
       navigate('/home');
     }
+    if (deviceId === '') {
+      getFingerprint().then((fp) => {
+        console.log(fp);
+        setDeviceId(() => fp);
+      });
+    }
   }, [status, user, navigate]);
+
+  useEffect(() => {
+    if (deviceId) {
+      detectdUser(deviceId);
+    }
+  }, [deviceId]);
+
+  const detectdUser = async (deviceId: string) => {
+    try {
+      const data = await detectedDeviceAccount({
+        deviceId: deviceId,
+      });
+      console.log(data);
+    } catch (error: any) {
+      console.log(error);
+    }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -64,7 +89,11 @@ const LoginForm: React.FC = () => {
     e.preventDefault();
     const newErrors: Partial<FormData> = {};
 
-    if (!formData.email) newErrors.email = 'email is required';
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
 
     const passwordErrors = validatePassword(formData.password);
     if (passwordErrors.length > 0) {
@@ -93,13 +122,13 @@ const LoginForm: React.FC = () => {
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <input
-              ref={usernameOrEmailRef}
+              ref={email}
               type='text'
               name='email'
               value={formData.email}
               onChange={handleChange}
               onKeyDown={(e) => handleKeyDown(e, passwordRef)}
-              placeholder='Username or Email'
+              placeholder='Email'
               className={`w-full p-2 border rounded-full ${
                 errors.email ? 'border-red-500' : 'border-gray-300'
               }`}
