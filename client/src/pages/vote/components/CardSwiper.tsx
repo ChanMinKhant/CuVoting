@@ -81,7 +81,7 @@ function CardSwiper() {
       </div>
       {filteredSelections.length > 0 ? (
         <Swiper
-          effect={'coverflow'} // 3D effect
+          // effect={'coverflow'} // 3D effect
           spaceBetween={activeTab !== 'couple' ? 100 : 300} // Space between each slide
           grabCursor={true}
           slidesPerView={'auto'} // Set slidesPerView back to 'auto'
