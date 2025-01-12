@@ -1,0 +1,276 @@
+[
+  {
+    "number": 3,
+    "sign": "Virgo",
+    "gender": "boy",
+    "favColor": "Black",
+    "talent": "Leadership",
+    "hobby": "Playing games",
+    "personality": "ESFJ-A",
+    "social": ["https://www.facebook.com/zixxxk109?mibextid=ZbWKwL"],
+    "height": 168,
+    "city": "Shwedaung",
+    "ambition": "Hacker"
+  },
+  {
+    "number": 4,
+    "sign": "Taurus",
+    "gender": "girl",
+    "favColor": "White",
+    "talent": "Helping",
+    "hobby": "Football",
+    "personality": "",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL"
+    ],
+    "height": 172,
+    "city": "Sittwe",
+    "ambition": "Software Engineer"
+  },
+  {
+    "number": 2,
+    "sign": "Virgo",
+    "gender": "girl",
+    "favColor": "Sky blue",
+    "talent": "Drawing",
+    "hobby": "Badminton",
+    "personality": "INFJ-A",
+    "social": [
+      "https://www.facebook.com/share/1JiEuCBuLK/?mibextid=wwXIfr",
+      "tg://resolve?domain=roseyy49117"
+    ],
+    "height": 157,
+    "city": "Okshitpin",
+    "ambition": "Software engineer"
+  },
+  {
+    "number": 4,
+    "sign": "Scorpio",
+    "gender": "girl",
+    "favColor": "Purple",
+    "talent": "Learning fast",
+    "hobby": "Dancing",
+    "personality": "ENFJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL",
+      "tg://resolve?domain=Theint9434"
+    ],
+    "height": 160,
+    "city": "Gyobingauk",
+    "ambition": "Graphic Designer"
+  },
+  {
+    "number": 7,
+    "sign": "Naung",
+    "gender": "boy",
+    "favColor": "blue",
+    "talent": "painting",
+    "hobby": "traveling and reading",
+    "personality": "INTJ and Mediator",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61571520477464&mibextid=wwXIfr&mibextid=wwXIfr"
+    ],
+    "height": 182,
+    "city": "Taungoo",
+    "ambition": "The pilot"
+  },
+  {
+    "number": 8,
+    "sign": "Gemini",
+    "gender": "boy",
+    "favColor": "White",
+    "talent": "Playing game",
+    "hobby": "Singing",
+    "personality": "INFJ",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61570806925132&mibextid=ZbWKwL"
+    ],
+    "height": 180.34,
+    "city": "Gyobingauk",
+    "ambition": "Game programmer"
+  },
+  {
+    "number": 7,
+    "sign": "Capricorn",
+    "gender": "boy",
+    "favColor": "Black",
+    "talent": "Riding a motorcycle",
+    "hobby": "Football",
+    "personality": "ISFJ",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100080297103168&mibextid=JRoKGi"
+    ],
+    "height": 177.8,
+    "city": "Gyobinkauk",
+    "ambition": "Crazy biker"
+  },
+  {
+    "number": 10,
+    "sign": "Cancer",
+    "gender": "girl",
+    "favColor": "Purple",
+    "talent": "Dancing",
+    "hobby": "Badminton",
+    "personality": "ENFJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100064387086446&mibextid=ZbWKwL"
+    ],
+    "height": 165,
+    "city": "Pyay",
+    "ambition": "Artist"
+  },
+  {
+    "number": 6,
+    "sign": "Virgo",
+    "gender": "girl",
+    "favColor": "Black",
+    "talent": "Sleeping",
+    "hobby": "Reading",
+    "personality": "INTJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100067872348589&mibextid=ZbWKwL",
+      "https://www.instagram.com/yoonyoon7025?igsh=MWZzeHB6bThlMGM2dQ=="
+    ],
+    "height": 165.1,
+    "city": "Yangon",
+    "ambition": "Businessman"
+  },
+  {
+    "number": 1,
+    "sign": "Sagittarius",
+    "gender": "boy",
+    "favColor": "Brown",
+    "talent": "Playing guitar",
+    "hobby": "Football",
+    "personality": "INFJ-T",
+    "social": [
+      "https://www.instagram.com/nay.wai.htoo?igsh=MXNuNThzaDNxcWp2dg=="
+    ],
+    "height": 164,
+    "city": "Hinthada",
+    "ambition": "Developer"
+  },
+  {
+    "number": 7,
+    "sign": "Cancer",
+    "gender": "girl",
+    "favColor": "Violet",
+    "talent": "Eating",
+    "hobby": "Travelling",
+    "personality": "ISFJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61557174377270&mibextid=ZbWKwL"
+    ],
+    "height": 163,
+    "city": "Pyay",
+    "ambition": "Businesswoman"
+  },
+  {
+    "number": 1,
+    "sign": "Libra",
+    "gender": "girl",
+    "favColor": "Lemon Yellow",
+    "talent": "Singing",
+    "hobby": "Making crochet",
+    "personality": "ENTJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61553857388376&mibextid=ZbWKwL",
+      "https://www.tiktok.com/@1410hnin?_r=1&_d=ef6i0h1l90a8jk&sec_uid=MS4wLjABAAAAlg99yIdxHEBbaOydyJM4mWlzKY15-yh8ufePvaPTDC4_Dbubuy2Lv350HfhHPz4A&share_author_id=7391697997560267777&sharer_language=en&source=h5_t&u_code=ef6i3kh4adi755&timestamp=1736609267&user_id=7391697997560267777&sec_user_id=MS4wLjABAAAAlg99yIdxHEBbaOydyJM4mWlzKY15-yh8ufePvaPTDC4_Dbubuy2Lv350HfhHPz4A&utm_source=copy&utm_campaign=client_share&utm_medium=android&share_iid=7453273102152304401&share_link_id=fa905a65-035e-475a-962d-22cc30c64f8a&share_app_id=1180&ugbiz_name=ACCOUNT&ug_btm=b8727%2Cb0229&social_share_type=5&enable_checksum=1",
+      "https://t.me/HHninThuThuNaing1290"
+    ],
+    "height": 154.94,
+    "city": "Taungoke, Rakhine State",
+    "ambition": "Network Engineer at Home Office"
+  },
+  {
+    "number": 8,
+    "sign": "Aries",
+    "gender": "girl",
+    "favColor": "Lavender",
+    "talent": "Dancing",
+    "hobby": "Baking",
+    "personality": "ESFJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61567779933590&mibextid=ZbWKwL"
+    ],
+    "height": 160,
+    "city": "Shwedaung",
+    "ambition": "Businesswoman"
+  },
+  {
+    "number": 4,
+    "sign": "Scorpio",
+    "gender": "girl",
+    "favColor": "Purple",
+    "talent": "Learning fast",
+    "hobby": "Dancing",
+    "personality": "ENFJ-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100069083251017&mibextid=ZbWKwL",
+      "https://t.me/Theint9434"
+    ],
+    "height": 160,
+    "city": "Gyobingauk",
+    "ambition": "Graphic Designer"
+  },
+  {
+    "number": 2,
+    "sign": "Virgo",
+    "gender": "girl",
+    "favColor": "Sky Blue",
+    "talent": "Drawing",
+    "hobby": "Badminton",
+    "personality": "INFJ-A",
+    "social": [
+      "https://www.facebook.com/share/1JiEuCBuLK/?mibextid=wwXIfr",
+      "https://t.me/roseyy49117"
+    ],
+    "height": 157,
+    "city": "Okshitpin",
+    "ambition": "Software Engineer"
+  },
+  {
+    "number": 5,
+    "sign": "Libra",
+    "gender": "girl",
+    "favColor": "Purple",
+    "talent": "Eating and Sleeping",
+    "hobby": "Reading",
+    "personality": "ENFJ-A",
+    "social": ["https://www.facebook.com/share/12Ks3q6P7Ad/?mibextid=wwXIfr"],
+    "height": 163,
+    "city": "Taungoo",
+    "ambition": "Tutor"
+  },
+  {
+    "number": 10,
+    "sign": "Capricorn",
+    "gender": " Male",
+    "favColor": "White",
+    "talent": "Ctritical thinking and problem solving",
+    "hobby": "sketch",
+    "personality": "INFJ",
+    "social": [
+      "https://www.facebook.com/profile.php?id=61558728510696&mibextid=ZbWKwL",
+      "tele-@naythuta03"
+    ],
+    "height": 180,
+    "city": "Yangon",
+    "ambition": "Game designer"
+  },
+  {
+    "number": 9,
+    "sign": "Cancer",
+    "gender": "girl",
+    "favColor": "Pink",
+    "talent": "Swimming",
+    "hobby": "Eating",
+    "personality": "ESFP-T",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100079839666517&mibextid=ZbWKwL"
+    ],
+    "height": 165,
+    "city": "Sittwe",
+    "ambition": "Software Engineer"
+  }
+]

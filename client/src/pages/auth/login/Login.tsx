@@ -82,12 +82,6 @@ const LoginForm: React.FC = () => {
     if (password.length < 8) {
       errors.push('Password must be at least 8 characters long');
     }
-    // if (!/[A-Z]/.test(password)) {
-    //   errors.push('Password must contain at least one uppercase letter');
-    // }
-    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    //   errors.push('Password must contain at least one special character');
-    // }
     return errors;
   };
 
@@ -97,8 +91,6 @@ const LoginForm: React.FC = () => {
 
     if (!formData.email) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email address';
     }
 
     const passwordErrors = validatePassword(formData.password);
@@ -110,6 +102,7 @@ const LoginForm: React.FC = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
+        console.log('Logging in...');
         const data = await login(formData);
         if (data) {
           console.log('Logged in successfully');
@@ -123,6 +116,7 @@ const LoginForm: React.FC = () => {
 
   const handleLoginWithDeviceID = async () => {
     try {
+      console.log('Logging in with device id...');
       const data = await loginWithDeviceId(deviceId);
       if (data) {
         console.log('Logged in successfully');

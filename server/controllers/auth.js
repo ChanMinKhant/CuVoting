@@ -278,6 +278,20 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
   const token = jwt.sign({ id: user._id }, process.env.TOKEN_SECRET, {
     expiresIn: '365d',
   });
+
+  //set cookie
+  res.cookie('jwt', token, {
+    maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+    path: '/',
+  });
+
+  res.status(200).send({
+    success: true,
+    message: 'Logged in successfully',
+  });
 });
 
 exports.getMe = asyncHandler(async (req, res, next) => {

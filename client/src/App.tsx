@@ -13,7 +13,7 @@ import { fetchAllSelections } from './store/features/selectionSlice';
 import { ToastContainer } from 'react-toastify';
 import VoteHistory from './pages/vote-history/VoteHistory';
 import CoupleCard from './pages/vote/components/CoupleCard';
-// import Nav from './pages/components/Nav';
+import Nav from './pages/components/Nav';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -21,7 +21,7 @@ function App() {
   const { status: userStatus } = useAppSelector((state) => state.user);
   console.log(useAppSelector((state) => state.selections));
   const { status: selectionStatus } = useAppSelector(
-    (state) => state.selections,
+    (state) => state.selections
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <>
-      {/* <Nav /> */}
+      <Nav />
       <div className='flex justinfy-center items-center'>
         <div className='max-w-screen-sm w-full mx-auto'>
           <Routes>

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Modal from './components/Modal';
+import Nav from '../components/Nav';
 // import './home.css';
 function VotingPage() {
   const navigate = useNavigate();
@@ -26,9 +27,11 @@ function VotingPage() {
   return (
     <div className='w-full h-full p-4 mt-0 flex flex-col select-none '>
       <div className='text-center my-0'>
-        <h1 className='text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500'>
-          UCS(Pyay) Voting
-        </h1>
+        <Link to='/'>
+          <h1 className='text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500'>
+            UCS(Pyay) Voting
+          </h1>
+        </Link>
         <p className='text-[14px] font-semibold text-gray-600 mt-[3px]'>
           Every Vote Matters
         </p>
