@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../../services/auth';
 
@@ -7,7 +7,7 @@ const Nav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isShowNav, setIsShowNav] = useState(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
