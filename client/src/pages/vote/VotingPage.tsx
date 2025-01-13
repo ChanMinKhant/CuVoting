@@ -3,14 +3,14 @@ import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from './components/Modal';
-import Nav from '../components/Nav';
+// import Nav from '../components/Nav';
 // import './home.css';
 function VotingPage() {
   const navigate = useNavigate();
   const { user, status: userStatus } = useAppSelector((state) => state.user);
 
   const { selections, status: selectionStatus } = useAppSelector(
-    (state) => state.selections
+    (state) => state.selections,
   ); // Ensure using 'selection'
 
   useEffect(() => {

@@ -2,18 +2,18 @@ import { memo } from 'react';
 import { FaFacebookF } from 'react-icons/fa';
 import { FiExternalLink } from 'react-icons/fi';
 
-interface ProfileData {
-  name: string;
-  section: 'A' | 'B' | 'C';
-  sign: string;
-  favColor: string;
-  talent: string;
-  hobby: string;
-  personality: string;
-  social: string[];
-  city: string;
-  ambition: string;
-}
+// interface ProfileData {
+//   name: string;
+//   section: 'A' | 'B' | 'C';
+//   sign: string;
+//   favColor: string;
+//   talent: string;
+//   hobby: string;
+//   personality: string;
+//   social: string[];
+//   city: string;
+//   ambition: string;
+// }
 
 const ProfileCard = memo(({ selection }: any) => {
   // const selection: ProfileData | null = {

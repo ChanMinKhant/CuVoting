@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff, Fingerprint } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import {
   detectedDeviceAccount,
   login,
@@ -69,7 +69,7 @@ const LoginForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<any>
+    nextRef: React.RefObject<any>,
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();

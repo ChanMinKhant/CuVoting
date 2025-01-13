@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../../services/auth';
@@ -6,6 +6,7 @@ import { logout } from '../../services/auth';
 const Nav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isShowNav, setIsShowNav] = useState(false);
   const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,6 +26,17 @@ const Nav: React.FC = () => {
       // Optionally, you can display an error message to the user here
     }
   };
+
+  console.log(window.location.pathname);
+  useEffect(() => {
+    if (window.location.pathname !== '/home') {
+      setIsShowNav(false);
+    } else {
+      setIsShowNav(true);
+    }
+  }, [window.location.pathname]);
+
+  if (!isShowNav) return null;
 
   return (
     <nav className='bg-gray-800 p-4'>
