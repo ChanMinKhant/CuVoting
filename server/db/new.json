@@ -65,6 +65,21 @@
     "ambition": "Hacker"
   },
   {
+    "number": 3,
+    "sign": "Pisces ♓",
+    "gender": "girl",
+    "favColor": ["Black", "Dark Blue", "Sea Green"],
+    "talent": "abc",
+    "hobby": "Reading",
+    "personality": "ENFP",
+    "social": [
+      "https://www.facebook.com/profile.php?id=100090101713904&mibextid=ZbWKwL"
+    ],
+    "height": 162.56,
+    "city": "Pyay",
+    "ambition": "Detective Member"
+  },
+  {
     "number": 4,
     "name": "Theint Nandar Swe",
     "sign": "Scorpio",

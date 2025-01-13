@@ -15,21 +15,21 @@ interface ProfileData {
   ambition: string;
 }
 
-const ProfileCard = memo(() => {
-  const selection: ProfileData | null = {
-    name: 'John Doe',
-    section: 'A',
-    sign: 'Taurus',
-    favColor: 'white',
-    talent: 'helping',
-    hobby: 'football',
-    personality: 'INFJ-A',
-    social: [
-      'https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL',
-    ],
-    city: 'sittwe',
-    ambition: 'software engineer',
-  };
+const ProfileCard = memo(({ selection }: any) => {
+  // const selection: ProfileData | null = {
+  //   name: 'John Doe',
+  //   section: 'A',
+  //   sign: 'Taurus',
+  //   favColor: 'white',
+  //   talent: 'helping',
+  //   hobby: 'football',
+  //   personality: 'INFJ-A',
+  //   social: [
+  //     'https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL',
+  //   ],
+  //   city: 'sittwe',
+  //   ambition: 'software engineer',
+  // };
   if (!selection) return null;
 
   return (
@@ -55,7 +55,7 @@ const ProfileCard = memo(() => {
           <InfoItem label='Ambition' value={selection.ambition} />
         </div>
         <div className='flex justify-center pt-4'>
-          {selection.social.map((url, index) => (
+          {selection.social.map((url: string, index: number) => (
             <a
               key={index}
               href={url}

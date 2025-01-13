@@ -29,7 +29,7 @@ const Card = ({ selection, activeTab }: any) => {
           className='relative w-[240px] h-[360px] mx-auto mt-2 rounded-2xl overflow-hidden shadow-xl bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 flex items-center justify-center text-white text-xl font-semibold'
           onClick={handleFlip}
         >
-          <BackCard />
+          <BackCard selection={selection} />
         </div>
       </ReactCardFlip>
     </div>

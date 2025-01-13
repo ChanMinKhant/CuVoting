@@ -56,27 +56,27 @@ const VoteHistory = () => {
       <div className='space-y-6'>
         {voteHistory.map((vote: any) => (
           <div
-            key={vote._id}
+            key={vote?._id}
             className='bg-white shadow-lg rounded-lg p-6 flex flex-col md:flex-row items-start md:items-center justify-between transition-transform duration-300 ease-in-out transform hover:translate-y-1 hover:shadow-2xl'
           >
             <div className='flex-1 mb-4 md:mb-0'>
-              <p className='text-2xl font-semibold text-indigo-500 animate-pulse'>{`#${vote.selectionId.number}`}</p>
+              <p className='text-2xl font-semibold text-indigo-500 animate-pulse'>{`#${vote?.selectionId?.number}`}</p>
               <p className='text-lg text-gray-700'>
-                {vote.selectionId.name}{' '}
+                {vote?.selectionId?.name}{' '}
                 {vote.category === 'bestCouple'
-                  ? ` & ${getGirlNameForCouple(vote.selectionId.number)}`
+                  ? ` & ${getGirlNameForCouple(vote?.selectionId?.number)}`
                   : ''}
               </p>
               <p className='text-gray-500'>
                 {vote.category === 'bestCouple'
                   ? 'Couple'
-                  : vote.selectionId.gender}
+                  : vote?.selectionId?.gender}
               </p>
-              <p className='text-gray-500'>{vote.category}</p>
+              <p className='text-gray-500'>{vote?.category}</p>
             </div>
             <button
               className='bg-red-600 text-white px-5 py-2 rounded-lg shadow hover:bg-red-700 transition-colors duration-300'
-              onClick={() => handleDelete(vote._id, vote.category)}
+              onClick={() => handleDelete(vote?._id, vote?.category)}
             >
               Delete
             </button>

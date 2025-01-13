@@ -1,17 +1,29 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
+import { logout } from '../../services/auth';
 
 const Nav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const navigate = useNavigate();
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleLogout = async () => {
+    try {
+      setIsDropdownOpen(false);
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      // Optionally, you can display an error message to the user here
+    }
   };
 
   return (
@@ -37,7 +49,7 @@ const Nav: React.FC = () => {
                 className='w-6 h-6'
                 fill='none'
                 stroke='currentColor'
-                viewBox='0 24 24'
+                viewBox='0 0 24 24'
                 strokeWidth='2'
               >
                 <path
@@ -73,14 +85,13 @@ const Nav: React.FC = () => {
                 <FaHistory className='mr-2' />
                 Vote History
               </Link>
-              <Link
-                to='/logout'
+              <button
                 className='flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100'
-                onClick={() => setIsDropdownOpen(false)}
+                onClick={handleLogout}
               >
                 <FaSignOutAlt className='mr-2' />
                 Logout
-              </Link>
+              </button>
             </div>
           )}
         </div>
