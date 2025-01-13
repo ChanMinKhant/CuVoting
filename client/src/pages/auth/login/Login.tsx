@@ -6,8 +6,10 @@ import {
   login,
   loginWithDeviceId,
 } from '../../../services/auth';
-import { useAppSelector } from '../../../store/store';
+import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { getFingerprint } from '../../../utils/helpers';
+import { fetchCurrentUser } from '../../../store/features/userSlice';
+import { fetchAllSelections } from '../../../store/features/selectionSlice';
 
 interface FormData {
   email: string;
@@ -28,6 +30,7 @@ const LoginForm: React.FC = () => {
   const email = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { user, status } = useAppSelector((state) => state.user);
 
@@ -106,7 +109,9 @@ const LoginForm: React.FC = () => {
         const data = await login(formData);
         if (data) {
           console.log('Logged in successfully');
-          window.location.href = '/home';
+          dispatch(fetchCurrentUser());
+          dispatch(fetchAllSelections());
+          navigate('/home');
         }
       } catch (error: any) {
         console.error(error);
@@ -120,7 +125,9 @@ const LoginForm: React.FC = () => {
       const data = await loginWithDeviceId(deviceId);
       if (data) {
         console.log('Logged in successfully');
-        window.location.href = '/home';
+        dispatch(fetchCurrentUser());
+        dispatch(fetchAllSelections());
+        navigate('/home');
       }
     } catch (error: any) {
       console.error(error);
