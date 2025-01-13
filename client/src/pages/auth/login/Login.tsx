@@ -181,21 +181,28 @@ const LoginForm: React.FC = () => {
             Log In
           </button>
         </form>
-
-        {deviceData?.email ? (
-          <div
-            className='mt-4 p-4 bg-gray-200 rounded-lg'
-            onClick={handleLoginWithDeviceID}
-          >
-            <p className='text-center text-gray-700'>
-              Detected Email: {deviceData.email}
-            </p>
-          </div>
-        ) : (
+        <p className='mt-4 text-center'>
+          Don't have an account?{' '}
           <Link to='/signup' className='text-blue-500 hover:underline'>
             Sign Up
           </Link>
-        )}
+        </p>
+
+        {deviceData?.email ? (
+          <div>
+            <div
+              className='mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors'
+              onClick={handleLoginWithDeviceID}
+            >
+              <div className='text-sm text-center'>
+                You can login to this account
+              </div>
+              <p className='text-center text-yellow-700 text-lg font-semibold'>
+                Detected Email: {deviceData.email}
+              </p>
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
