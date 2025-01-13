@@ -10,13 +10,14 @@ import { openModal, setName } from '../../../store/features/modalSlice';
 import ActiveTabBar from './ActiveTabBar';
 // import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
 import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect for placeholders
+import Loader from '../../../components/Loader';
 
 function CardSwiper() {
   const dispatch = useAppDispatch();
   const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
   const { activeTab } = useAppSelector((state) => state.modal);
   const { selections, status: selectionStatus } = useAppSelector(
-    (state) => state.selections
+    (state) => state.selections,
   );
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function CardSwiper() {
       // console.log(selections);
       if (activeTab !== 'couple') {
         const filterSelections = selections?.filter(
-          (selection) => selection.gender === activeTab
+          (selection) => selection.gender === activeTab,
         );
         setFilteredSelections(filterSelections);
       } else {
@@ -41,10 +42,10 @@ function CardSwiper() {
         // i want to merge the two arrays with the same number use 2 dimensional array
         for (let number = 1; number <= 10; number++) {
           const boySelection = boy.find(
-            (selection) => selection.number === number
+            (selection) => selection.number === number,
           );
           const girlSelection = girl.find(
-            (selection) => selection.number === number
+            (selection) => selection.number === number,
           );
           if (boySelection && girlSelection) {
             filteredSelection.push([boySelection, girlSelection]);
@@ -152,6 +153,8 @@ function CardSwiper() {
             <div className='swiper-pagination'></div>
           </div>
         </Swiper>
+      ) : selectionStatus === 'loading' ? (
+        <Loader />
       ) : (
         <div className='text-center text-2xl text-red-500'>
           No Selections Found. Please check your network connection or report to

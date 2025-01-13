@@ -3,7 +3,7 @@ import { deleteVote, getVoteHistory } from '../../services/selection';
 import { useNavigate } from 'react-router-dom';
 import { removeUserVotedTitles } from '../../store/features/selectionSlice';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import Loader from '../../conponents/Loader';
+import Loader from '../../components/Loader';
 
 const VoteHistory = () => {
   const [voteHistory, setVoteHistory] = useState<any>([]);

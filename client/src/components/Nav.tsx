@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
-import { logout } from '../../services/auth';
+import { logout } from '../services/auth';
 
 const Nav: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isShowNav, setIsShowNav] = useState(false);
-  // const navigate = useNavigate();
+  const location = useLocation(); // useLocation hook to get the current path
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -20,7 +21,6 @@ const Nav: React.FC = () => {
     try {
       const userConfirmed = window.confirm('Are you sure you want to log out?');
       if (!userConfirmed) {
-        // If the user cancels, exit the function early
         return;
       }
 
@@ -29,18 +29,17 @@ const Nav: React.FC = () => {
       window.location.href = '/';
     } catch (error) {
       console.error('Logout failed:', error);
-      // Optionally, you can display an error message to the user here
     }
   };
 
-  console.log(window.location.pathname);
   useEffect(() => {
-    if (window.location.pathname !== '/home') {
+    // Only show the nav bar on the /home route
+    if (location.pathname !== '/home') {
       setIsShowNav(false);
     } else {
       setIsShowNav(true);
     }
-  }, [window.location.pathname]);
+  }, [location.pathname]); // Re-run the effect when location changes
 
   if (!isShowNav) return null;
 
@@ -60,7 +59,6 @@ const Nav: React.FC = () => {
             onClick={toggleDropdown}
             className='ml-4 text-white focus:outline-none'
           >
-            {/* Dropdown Icon */}
             {isDropdownOpen ? (
               <svg
                 xmlns='http://www.w3.org/2000/svg'

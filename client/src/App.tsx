@@ -13,8 +13,8 @@ import { fetchAllSelections } from './store/features/selectionSlice';
 import { ToastContainer } from 'react-toastify';
 import VoteHistory from './pages/vote-history/VoteHistory';
 import CoupleCard from './pages/vote/components/CoupleCard';
-import Nav from './pages/components/Nav';
-import Loader from './conponents/Loader';
+import Nav from './components/Nav';
+import Loader from './components/Loader';
 
 function App() {
   const dispatch = useAppDispatch();
