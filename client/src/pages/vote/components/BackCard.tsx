@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { FaFacebookF } from 'react-icons/fa';
-import { FiExternalLink } from 'react-icons/fi';
 
 // interface ProfileData {
 //   name: string;
@@ -36,12 +35,12 @@ const ProfileCard = memo(({ selection }: any) => {
     <div className='text-[#000000] border h-full bg-white shadow-xl flex flex-col justify-evenly items-center max-w-sm mx-auto rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300'>
       <div className='w-full p-6 space-y-4'>
         <div className='text-center space-y-2'>
-          <h1 className='text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500'>
+          <h1 className='text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500'>
             {selection.name}
           </h1>
-          <div className='text-lg font-semibold text-gray-600'>
+          {/* <div className='text-lg font-semibold text-gray-600'>
             Section {selection.section}
-          </div>
+          </div> */}
         </div>
         {/* <div className='text-2xl font-bold text-center text-blue-500'>
           {selection.sign}
@@ -75,7 +74,7 @@ const ProfileCard = memo(({ selection }: any) => {
           className='text-blue-500 hover:text-blue-600 transition-colors duration-300'
           aria-label='External Link'
         >
-          <FiExternalLink size={24} />
+          {/* <FiExternalLink size={24} /> */}
         </a>
       </div>
     </div>

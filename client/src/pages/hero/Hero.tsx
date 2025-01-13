@@ -2,18 +2,12 @@ import { Link } from 'react-router-dom';
 
 function Front() {
   return (
-    <div
-      className='w-full h-[100vh] bg-gradient-to-r from-purple-800 to-blue-600 flex flex-col justify-center items-center text-white relative overflow-hidden'
-      style={{
-        backgroundImage: 'url(/new-background.jpg)',
-        backgroundBlendMode: 'overlay',
-      }} // Enhanced background styling
-    >
+    <div className='w-full h-[100vh] bg-gradient-to-r from-purple-800 to-blue-600 flex flex-col justify-center items-center text-white relative overflow-hidden'>
       {/* Overlay */}
       <div className='absolute inset-0 bg-black opacity-50'></div>
 
       {/* Content */}
-      <div className='relative z-10 text-center p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-xl'>
+      <div className='relative h-full z-10 text-center p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-xl'>
         <h1 className='text-6xl font-extrabold mb-6 tracking-wide drop-shadow-lg animate-fadeIn'>
           <span className='bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-600'>
             UCSP Fresher Welcome

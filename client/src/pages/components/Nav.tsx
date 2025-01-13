@@ -39,7 +39,7 @@ const Nav: React.FC = () => {
   if (!isShowNav) return null;
 
   return (
-    <nav className='bg-gray-800 p-4'>
+    <nav className='bg-gray-800 w-full max-w-[640px] mx-auto p-4'>
       <div className='container mx-auto flex justify-between items-center'>
         <Link to='/' className='text-white text-lg font-semibold'>
           <span className='italic'>Voting</span>
