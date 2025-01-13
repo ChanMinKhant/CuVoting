@@ -29,7 +29,9 @@ function FrontCard({ selection, activeTab }: any) {
         {/* Card Details */}
         <div className='absolute bottom-0 left-0 p-4 text-white text-left'>
           <h2 className='text-3xl font-extrabold mb-1'>{selection?.name}</h2>
-          <p className='text-sm opacity-90'>Height: {selection?.height}</p>
+          <p className='text-sm opacity-90'>
+            Height: {Math.round(selection?.height)}
+          </p>
           <p className='text-sm opacity-90'>Age: {selection?.age}</p>
         </div>
         {/* Badge */}

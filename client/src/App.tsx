@@ -14,7 +14,6 @@ import { ToastContainer } from 'react-toastify';
 import VoteHistory from './pages/vote-history/VoteHistory';
 import CoupleCard from './pages/vote/components/CoupleCard';
 import Nav from './components/Nav';
-import Loader from './components/Loader';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -48,7 +47,7 @@ function App() {
             <Route path='/home' element={<VotingPage />} />
             <Route path='/test' element={<CoupleCard />} />
             <Route path='/vote-history' element={<VoteHistory />} />
-            <Route path='*' element={<Loader />} />
+            <Route path='*' element={<h1>Not Found</h1>} />
           </Routes>
           <ToastContainer />
         </div>
