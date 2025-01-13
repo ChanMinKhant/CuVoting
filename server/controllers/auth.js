@@ -40,8 +40,8 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(
       new CustomError(
         `This device is already registered with ${existingDeviceUser.email}. You can log in with this email.`,
-        400
-      )
+        400,
+      ),
     );
   }
 
@@ -175,7 +175,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     process.env.TOKEN_SECRET,
     {
       expiresIn: '365d',
-    }
+    },
   );
 
   //set cookie
@@ -216,7 +216,7 @@ exports.resendOtp = asyncHandler(async (req, res, next) => {
   const otpDoc = await Otp.findOneAndUpdate(
     { email },
     { otp: hashedOtp, email },
-    { upsert: true, new: true }
+    { upsert: true, new: true },
   );
 
   if (!otpDoc) {
@@ -311,7 +311,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
 });
 
 exports.logout = asyncHandler(async (req, res, next) => {
-  res.cookie('jwt', '', { maxAge: 1 });
+  res.cookie('jwt', '', { path: '/', maxAge: 1 });
   res.status(200).send({
     success: true,
     message: 'Logged out successfully',

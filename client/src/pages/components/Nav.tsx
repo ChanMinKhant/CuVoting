@@ -18,9 +18,15 @@ const Nav: React.FC = () => {
 
   const handleLogout = async () => {
     try {
+      const userConfirmed = window.confirm('Are you sure you want to log out?');
+      if (!userConfirmed) {
+        // If the user cancels, exit the function early
+        return;
+      }
+
       setIsDropdownOpen(false);
       await logout();
-      navigate('/');
+      window.location.href = '/';
     } catch (error) {
       console.error('Logout failed:', error);
       // Optionally, you can display an error message to the user here

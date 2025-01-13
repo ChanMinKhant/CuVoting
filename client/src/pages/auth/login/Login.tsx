@@ -181,12 +181,6 @@ const LoginForm: React.FC = () => {
             Log In
           </button>
         </form>
-        <p className='mt-4 text-center'>
-          Don't have an account?{' '}
-          <Link to='/signup' className='text-blue-500 hover:underline'>
-            Sign Up
-          </Link>
-        </p>
 
         {deviceData?.email ? (
           <div
