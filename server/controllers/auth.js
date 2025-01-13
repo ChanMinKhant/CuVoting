@@ -40,8 +40,8 @@ exports.register = asyncHandler(async (req, res, next) => {
     return next(
       new CustomError(
         `This device is already registered with ${existingDeviceUser.email}. You can log in with this email.`,
-        400,
-      ),
+        400
+      )
     );
   }
 
@@ -175,7 +175,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
     process.env.TOKEN_SECRET,
     {
       expiresIn: '365d',
-    },
+    }
   );
 
   //set cookie
@@ -216,7 +216,7 @@ exports.resendOtp = asyncHandler(async (req, res, next) => {
   const otpDoc = await Otp.findOneAndUpdate(
     { email },
     { otp: hashedOtp, email },
-    { upsert: true, new: true },
+    { upsert: true, new: true }
   );
 
   if (!otpDoc) {
@@ -249,7 +249,7 @@ exports.detectedDeviceAccount = asyncHandler(async (req, res, next) => {
     const err = new CustomError(error.details[0].message, 400);
     return next(err);
   }
-  const user = await User.findOne({ deviceId });
+  const user = await User.findOne({ deviceId, isVerified: true });
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
@@ -269,7 +269,7 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
     const err = new CustomError(error.details[0].message, 400);
     return next(err);
   }
-  const user = await User.findOne({ deviceId });
+  const user = await User.findOne({ deviceId, isVerified: true });
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
