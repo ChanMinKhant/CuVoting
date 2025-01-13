@@ -55,7 +55,7 @@ const ProfileCard = memo(({ selection }: any) => {
           <InfoItem label='Ambition' value={selection.ambition} />
         </div>
         <div className='flex justify-center pt-4'>
-          {selection.social.map((url: string, index: number) => (
+          {selection?.social?.map((url: string, index: number) => (
             <a
               key={index}
               href={url}
