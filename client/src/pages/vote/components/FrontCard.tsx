@@ -19,7 +19,13 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Lazy Loaded Image with Blur Effect */}
         <LazyLoadImage
-          src={selection?.gender === 'boy' ? '/boy.jpg' : '/img.jpg'}
+          src={
+            selection?.number === 2
+              ? '/2b.jpg'
+              : selection?.gender === 'boy'
+              ? '/boy.jpg'
+              : '/img.jpg'
+          }
           alt={`Contestant ${selection?.name}`}
           effect='blur'
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
