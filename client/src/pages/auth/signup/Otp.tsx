@@ -3,6 +3,7 @@ import { submitOtp, resendOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
 import { getFingerprint } from '../../../utils/helpers';
+import ButtonLoader from '../../../components/ButtonLoader';
 
 const OtpPage: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(new Array(6).fill(''));
@@ -33,7 +34,7 @@ const OtpPage: React.FC = () => {
   console.log(deviceId);
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
@@ -55,7 +56,7 @@ const OtpPage: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -164,28 +165,7 @@ const OtpPage: React.FC = () => {
               'opacity-50 cursor-not-allowed'
             }`}
           >
-            {isSubmitting ? (
-              <svg
-                className='animate-spin h-5 w-5 mr-3 text-white'
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-              >
-                <circle
-                  className='opacity-25'
-                  cx='12'
-                  cy='12'
-                  r='10'
-                  stroke='currentColor'
-                  strokeWidth='4'
-                ></circle>
-                <path
-                  className='opacity-75'
-                  fill='currentColor'
-                  d='M4 12a8 8 0 018-8v8H4z'
-                ></path>
-              </svg>
-            ) : null}
+            {isSubmitting ? <ButtonLoader /> : null}
             {isSubmitting ? 'Verifying...' : 'Verify OTP'}
           </button>
         </form>
