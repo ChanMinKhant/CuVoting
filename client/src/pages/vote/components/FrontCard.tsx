@@ -19,13 +19,9 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Lazy Loaded Image with Blur Effect */}
         <LazyLoadImage
-          src={
-            selection?.number === 2
-              ? '/2b.jpg'
-              : selection?.gender === 'boy'
-              ? '/boy.jpg'
-              : '/img.jpg'
-          }
+          src={`https://www.api.ucspyay.site/n/${selection.number}${
+            selection.gender === 'boy' ? 'b' : 'g'
+          }.JPG`}
           alt={`Contestant ${selection?.name}`}
           effect='blur'
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
@@ -34,7 +30,13 @@ function FrontCard({ selection, activeTab }: any) {
         <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent'></div>
         {/* Card Details */}
         <div className='absolute bottom-0 left-0 p-4 text-white text-left'>
-          <h2 className='text-3xl font-extrabold mb-1'>{selection?.name}</h2>
+          <h2
+            className={`text-2xl font-extrabold mb-3 ${
+              selection?.name.length > 15 ? 'text-xl' : ''
+            }`}
+          >
+            {selection?.name}
+          </h2>
           <p className='text-sm opacity-90'>
             Height: {Math.round(selection?.height)}
           </p>
