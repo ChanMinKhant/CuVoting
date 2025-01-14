@@ -7,7 +7,7 @@ function Front() {
       <div className='absolute inset-0 bg-black opacity-50'></div>
 
       {/* Content */}
-      <div className='relative h-full z-10 text-center p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-xl'>
+      <div className='relative h-full flex flex-col justify-center items-center z-10 text-center p-8 bg-white/10 backdrop-blur-lg rounded-lg shadow-xl'>
         <h1 className='text-6xl font-extrabold mb-6 tracking-wide drop-shadow-lg animate-fadeIn'>
           <span className='bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-red-600'>
             UCSP Fresher Welcome

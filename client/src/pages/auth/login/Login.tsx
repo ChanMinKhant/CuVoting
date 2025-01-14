@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { getFingerprint } from '../../../utils/helpers';
 import { fetchCurrentUser } from '../../../store/features/userSlice';
 import { fetchAllSelections } from '../../../store/features/selectionSlice';
+import ButtonLoader from '../../../components/ButtonLoader';
 
 interface FormData {
   email: string;
@@ -26,7 +27,7 @@ const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [deviceId, setDeviceId] = useState('');
   const [deviceData, setDeviceData] = useState<any>({});
-
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const email = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -106,7 +107,11 @@ const LoginForm: React.FC = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         console.log('Logging in...');
+        setIsSubmitting(true);
+
         const data = await login(formData);
+        setIsSubmitting(false);
+
         if (data) {
           console.log('Logged in successfully');
           dispatch(fetchCurrentUser());
@@ -114,6 +119,8 @@ const LoginForm: React.FC = () => {
           navigate('/home');
         }
       } catch (error: any) {
+        setIsSubmitting(false);
+
         console.error(error);
       }
     }
@@ -183,9 +190,9 @@ const LoginForm: React.FC = () => {
           </div>
           <button
             type='submit'
-            className='w-full bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
+            className='w-full flex justify-center bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
           >
-            Log In
+            {isSubmitting ? <ButtonLoader /> : 'Log in'}
           </button>
         </form>
         <p className='mt-4 text-center'>
