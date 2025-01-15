@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../../store/store';
 import { openModal, setName } from '../../../store/features/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
 import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect
+import { backendUrl } from '../../../services/api';
 
 function FrontCard({ selection, activeTab }: any) {
   const dispatch = useAppDispatch();
@@ -19,20 +20,21 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Lazy Loaded Image with Blur Effect */}
         <LazyLoadImage
-          src={`https://www.api.ucspyay.site/n/${selection.number}${
-            selection.gender === 'boy' ? 'b' : 'g'
+          src={`${backendUrl}/n/${selection?.number}${
+            selection?.gender === 'boy' ? 'b' : 'g'
           }.JPG`}
           alt={`Contestant ${selection?.name}`}
           effect='blur'
-          className='w-full h-full object-cover transition-transform duration-500 hover:scale-105'
+          className='w-full h-full object-cover transition-transform duration-500 hover:scale-105 contrast-30'
         />
         {/* Gradient Overlay */}
-        <div className='absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent'></div>
+        <div className='absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent'></div>
+        {/* <div className='absolute inset-0 bg-gradient-to-b from-black/0 via-black/5 to-transparent'></div> */}
         {/* Card Details */}
         <div className='absolute bottom-0 left-0 p-4 text-white text-left'>
           <h2
             className={`text-2xl font-extrabold mb-3 ${
-              selection?.name.length > 15 ? 'text-xl' : ''
+              selection?.name?.length > 15 ? 'text-xl' : ''
             }`}
           >
             {selection?.name}
@@ -43,8 +45,16 @@ function FrontCard({ selection, activeTab }: any) {
           <p className='text-sm opacity-90'>Age: {selection?.age}</p>
         </div>
         {/* Badge */}
-        <div className='absolute top-3 left-3 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full px-4 py-1 shadow-md'>
-          <span className='text-white font-bold'>#{selection?.number}</span>
+        <div
+          className={`absolute top-3 left-3 rounded-full px-4 py-1 shadow-md ${
+            selection?.gender === 'boy'
+              ? 'bg-gradient-to-r from-green-300 to-green-400'
+              : 'bg-gradient-to-r from-pink-500 to-purple-500'
+          }`}
+        >
+          <span className='text-white font-bold px-2 rounded'>
+            #{selection?.number}
+          </span>
         </div>
         {/* Vote Button */}
         {activeTab !== 'couple' ? (

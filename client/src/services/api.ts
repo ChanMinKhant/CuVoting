@@ -2,10 +2,12 @@ import axios from 'axios';
 
 axios.defaults.withCredentials = true;
 
+export const backendUrl = 'https://www.api.ucspyay.site';
+// export const backendUrl = 'http://localhost:3000';
+// export const backendUrl = 'https://cu-voting.vercel.app';
+
 const apiService = axios.create({
-  // baseURL: 'http://localhost:3000',
-  // baseURL: 'https://cu-voting.vercel.app',
-  baseURL: 'https://www.api.ucspyay.site',
+  baseURL: backendUrl,
   headers: {
     'Content-Type': 'application/json',
   },

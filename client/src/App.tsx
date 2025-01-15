@@ -21,7 +21,7 @@ function App() {
   const { status: userStatus } = useAppSelector((state) => state.user);
   console.log(useAppSelector((state) => state.selections));
   const { status: selectionStatus } = useAppSelector(
-    (state) => state.selections,
+    (state) => state.selections
   );
 
   useEffect(() => {
@@ -37,7 +37,7 @@ function App() {
   return (
     <>
       <Nav />
-      <div className='flex justinfy-center items-center'>
+      <div className='flex justify-center items-center bg-soft-milk'>
         <div className='max-w-screen-sm w-full mx-auto'>
           <Routes>
             <Route path='/' element={<Hero />} />

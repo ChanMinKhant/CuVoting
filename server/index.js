@@ -6,10 +6,17 @@ const PORT = process.env.PORT || 3000;
 const router = require('./routes/index');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const path = require('path');
 process.on('uncaughtException', (err) => {
   console.error('There was an uncaught error', err);
   process.exit(1); // Mandatory (as per the Node.js docs)
 });
+
+app.use(
+  express.static(path.join(__dirname, 'public'), {
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+  })
+);
 
 app.use(express.json());
 app.use(cookieParser());
