@@ -10,7 +10,7 @@ const ProfileCard = memo(({ selection }: any) => {
       <div className='text-center'>
         <h1
           className={`font-bold text-gray-900 ${
-            selection?.name?.length > 15 ? 'text-xl' : 'text-2xl'
+            selection?.name?.length > 13 ? 'text-xl' : 'text-2xl'
           }`}
         >
           {selection?.name}

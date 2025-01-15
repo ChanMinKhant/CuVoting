@@ -47,6 +47,7 @@ function App() {
             <Route path='/home' element={<VotingPage />} />
             <Route path='/test' element={<CoupleCard />} />
             <Route path='/vote-history' element={<VoteHistory />} />
+            <Route path='/helloworld' element={<h1>Hello World!</h1>} />
             <Route path='*' element={<h1>Not Found</h1>} />
           </Routes>
           <ToastContainer />
