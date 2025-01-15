@@ -20,7 +20,7 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         {/* Lazy Loaded Image with Blur Effect */}
         <LazyLoadImage
-          src={`${backendUrl}/n/${selection?.number}${
+          src={`${backendUrl}/webp/${selection?.number}${
             selection?.gender === 'boy' ? 'b' : 'g'
           }.JPG`}
           alt={`Contestant ${selection?.name}`}
