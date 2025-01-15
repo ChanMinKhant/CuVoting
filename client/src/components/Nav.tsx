@@ -28,7 +28,7 @@ const Nav: React.FC = () => {
       await logout();
       window.location.href = '/';
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.log('fail to login');
     }
   };
 

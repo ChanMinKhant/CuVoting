@@ -17,7 +17,7 @@ function CardSwiper() {
   const [filteredSelections, setFilteredSelections] = useState<any[]>([]);
   const { activeTab } = useAppSelector((state) => state.modal);
   const { selections, status: selectionStatus } = useAppSelector(
-    (state) => state.selections,
+    (state) => state.selections
   );
 
   useEffect(() => {
@@ -25,7 +25,7 @@ function CardSwiper() {
       // console.log(selections);
       if (activeTab !== 'couple') {
         const filterSelections = selections?.filter(
-          (selection) => selection.gender === activeTab,
+          (selection) => selection.gender === activeTab
         );
         setFilteredSelections(filterSelections);
       } else {
@@ -35,17 +35,16 @@ function CardSwiper() {
         const girl = selections
           ?.filter((selection) => selection.gender === 'girl')
           .sort((a, b) => a.number - b.number);
-        console.log(boy);
-        console.log(girl);
+
         const filteredSelection: any[] = [];
 
         // i want to merge the two arrays with the same number use 2 dimensional array
         for (let number = 1; number <= 10; number++) {
           const boySelection = boy.find(
-            (selection) => selection.number === number,
+            (selection) => selection.number === number
           );
           const girlSelection = girl.find(
-            (selection) => selection.number === number,
+            (selection) => selection.number === number
           );
           if (boySelection && girlSelection) {
             filteredSelection.push([boySelection, girlSelection]);
@@ -56,7 +55,6 @@ function CardSwiper() {
           //   filteredSelection.push([boySelection, girlSelection]);
           // }
         }
-        console.log(filteredSelection);
         setFilteredSelections(filteredSelection);
       }
     }

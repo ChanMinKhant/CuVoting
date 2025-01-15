@@ -1,12 +1,10 @@
+require('dotenv').config({ path: './../config.env' });
 const Result = require('../models/result');
 const Selection = require('../models/selection');
 const connectToDatabase = require('../config/db');
 const { BoyTitles, GirlTitles, CoupleTitles } = require('../utils/enum');
 
-if (!global.dbConnected) {
-  connectToDatabase();
-  global.dbConnected = true;
-}
+connectToDatabase();
 
 const calculateResult = async () => {
   try {
@@ -19,9 +17,7 @@ const calculateResult = async () => {
         results
           .filter((result) => result.category === title)
           .forEach((result) => {
-            console.log(
-              `Result.selectionId.name = ${result.selectionId.name} = ${result.count}`
-            );
+            console.log(`${result?.selectionId?.name} = ${result.count}`);
           });
       });
     };

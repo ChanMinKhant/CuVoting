@@ -19,7 +19,6 @@ function App() {
   const dispatch = useAppDispatch();
 
   const { status: userStatus } = useAppSelector((state) => state.user);
-  console.log(useAppSelector((state) => state.selections));
   const { status: selectionStatus } = useAppSelector(
     (state) => state.selections
   );

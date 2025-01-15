@@ -16,8 +16,6 @@ const VoteHistory = () => {
   useEffect(() => {
     setIsLoading(true);
     getVoteHistory().then((res) => {
-      console.log(res.data);
-
       setVoteHistory(res.data);
       setIsLoading(false);
     });
@@ -32,8 +30,9 @@ const VoteHistory = () => {
         (vote: any) => vote._id !== id
       );
       setVoteHistory(updatedVoteHistory);
+      setDeletingId(null);
     } catch (error: any) {
-      console.log(error);
+      console.log('error deleting vote');
     } finally {
       setDeletingId(null);
     }

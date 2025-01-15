@@ -98,7 +98,7 @@ const LoginForm: React.FC = () => {
         navigate('/home');
       }
     } catch (error) {
-      console.error(error);
+      console.error('Fail to login with device id');
     }
   };
 

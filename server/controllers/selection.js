@@ -63,8 +63,6 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     return next(err);
   }
 
-
-
   user.votedTitles.push(title);
   await user.save();
   await Vote.create({
@@ -127,7 +125,7 @@ exports.deleteVote = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Vote not found', 404);
     return next(err);
   }
-  if (vote.user.toString() !== req.userId) {
+  if (vote?.user.toString() !== req.userId) {
     const err = new CustomError('Unauthorized', 401);
     return next(err);
   }

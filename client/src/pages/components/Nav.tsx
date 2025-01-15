@@ -21,7 +21,7 @@ const Nav: React.FC = () => {
       await logout();
       navigate('/');
     } catch (error) {
-      console.error('Logout failed:', error);
+      console.error('Logout failed:');
       // Optionally, you can display an error message to the user here
     }
   };

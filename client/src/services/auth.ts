@@ -69,7 +69,6 @@ export const detectedDeviceAccount = async (deviceData: any) => {
 
 export const loginWithDeviceId = async (deviceId: string) => {
   try {
-    console.log(deviceId);
     const response = await apiService.post(
       `${authBaseUrl}/login-with-device-id`,
       {
