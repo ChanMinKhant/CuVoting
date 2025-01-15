@@ -22,7 +22,7 @@ function FrontCard({ selection, activeTab }: any) {
         <LazyLoadImage
           src={`${backendUrl}/webp/${selection?.number}${
             selection?.gender === 'boy' ? 'b' : 'g'
-          }.JPG`}
+          }.webp`}
           alt={`Contestant ${selection?.name}`}
           effect='blur'
           className='w-full h-full object-cover transition-transform duration-500 hover:scale-105 contrast-30'
