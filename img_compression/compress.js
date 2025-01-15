@@ -32,11 +32,11 @@ const compressImages = async () => {
         );
 
         // Compress and save the original type
-        await sharp(inputFilePath)
-          .rotate() // Automatically correct orientation
-          .withMetadata() // Preserve metadata (orientation, etc.)
-          .jpeg({ quality: 90 }) // Compress with normal quality
-          .toFile(outputCompressedFilePath);
+        // await sharp(inputFilePath)
+        //   .rotate() // Automatically correct orientation
+        //   .withMetadata() // Preserve metadata (orientation, etc.)
+        //   .jpeg({ quality: 90 }) // Compress with normal quality
+        //   .toFile(outputCompressedFilePath);
 
         // Convert to WebP and save
         await sharp(inputFilePath)
