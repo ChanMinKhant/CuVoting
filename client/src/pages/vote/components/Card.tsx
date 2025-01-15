@@ -6,7 +6,7 @@ import FrontCard from './FrontCard';
 import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect
 
 const Card = ({ selection, activeTab }: any) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(true);
 
   const handleFlip = useCallback((event: any) => {
     if (event.target.tagName === 'BUTTON' || event.target.closest('button')) {

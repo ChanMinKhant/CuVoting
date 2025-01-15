@@ -20,7 +20,7 @@ function normalizeEmail(email) {
 
 exports.register = asyncHandler(async (req, res, next) => {
   const { email, password, confirmPassword, deviceId } = req.body;
-
+  console.log(req.body);
   // Validate request data
   const { error } = registerSchema.validate(req.body);
   if (error) {

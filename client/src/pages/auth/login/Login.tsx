@@ -73,7 +73,7 @@ const LoginForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<any>,
+    nextRef: React.RefObject<any>
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -147,6 +147,21 @@ const LoginForm: React.FC = () => {
     <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
       <div className='bg-white p-8 rounded-lg shadow-md w-full max-w-md'>
         <h2 className='text-2xl font-bold mb-6 text-center'>Log In</h2>
+        {deviceData?.email ? (
+          <div className='mb-4 select-none'>
+            <div
+              className='mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors'
+              onClick={handleLoginWithDeviceID}
+            >
+              <div className='text-sm text-center'>
+                You can login to this account
+              </div>
+              <p className='text-center text-yellow-700 text-lg font-semibold'>
+                Detected Email: {deviceData.email}
+              </p>
+            </div>
+          </div>
+        ) : null}
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <input
@@ -201,22 +216,6 @@ const LoginForm: React.FC = () => {
             Sign Up
           </Link>
         </p>
-
-        {deviceData?.email ? (
-          <div>
-            <div
-              className='mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors'
-              onClick={handleLoginWithDeviceID}
-            >
-              <div className='text-sm text-center'>
-                You can login to this account
-              </div>
-              <p className='text-center text-yellow-700 text-lg font-semibold'>
-                Detected Email: {deviceData.email}
-              </p>
-            </div>
-          </div>
-        ) : null}
       </div>
     </div>
   );
