@@ -299,7 +299,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     const err = new CustomError('You are not login!', 400);
     return next(err);
   }
-  const user = await User.findById(req.userId);
+  const user = await User.findById(req.userId, '+isBanned');
   if (!user) {
     const err = new CustomError('User not found', 404);
     return next(err);
