@@ -36,7 +36,7 @@ const LoginForm: React.FC = () => {
   const { user, status } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (status === 'succeeded' && user) {
+    if (status === 'succeeded') {
       navigate('/home');
     }
     if (deviceId === '') {

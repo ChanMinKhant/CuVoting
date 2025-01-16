@@ -14,10 +14,7 @@ function VotingPage() {
   ); // Ensure using 'selection'
 
   useEffect(() => {
-    if (
-      (userStatus === 'failed' && !user) ||
-      (selectionStatus === 'failed' && selections.length === 0)
-    ) {
+    if (userStatus === 'failed' || selectionStatus === 'failed') {
       navigate('/signup'); // Use 'navigate' instead of 'negative'
     }
   }, [selections, selectionStatus, user, userStatus, navigate]);
