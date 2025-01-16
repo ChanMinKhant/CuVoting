@@ -40,9 +40,6 @@ function App() {
       console.log(userStatus);
       if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
         console.log('hi');
-        const reasons = ['handsome 😎🔥', 'beautiful 💃✨'];
-        const randomReason =
-          reasons[Math.floor(Math.random() * reasons.length)];
 
         const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
 Reason? Because you're TOO... Pretty — it’s unfair to others! Right? 😂🤣   

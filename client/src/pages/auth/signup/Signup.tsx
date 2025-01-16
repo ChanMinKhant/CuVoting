@@ -124,6 +124,8 @@ const RegisterForm: React.FC = () => {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      setIsSubmitting(true);
+
       try {
         await register(formData);
         alert('User registered successfully');
@@ -133,6 +135,8 @@ const RegisterForm: React.FC = () => {
       } catch (error: any) {
         console.log(error?.data?.message);
         toast.error(error?.data?.message) || 'something went wrong';
+      } finally {
+        setIsSubmitting(false);
       }
     }
   };
