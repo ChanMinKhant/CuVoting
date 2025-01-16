@@ -33,18 +33,22 @@ function App() {
     }
   }, [userStatus, selectionStatus, dispatch]);
 
-  if (userStatus === 'succeeded' && user.isBanned === false) {
-    if (
-      window.confirm(
-        `Dear ${user?.username} We are sorry!😔 You are banned. because you are "So Handsome😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
-      )
-    ) {
-      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-      window.location.href = '/login';
-    } else {
-      // Handle cancel action if needed
+  useEffect(() => {
+    if (userStatus === 'succeeded' && user.isBanned === false) {
+      if (
+        window.confirm(
+          `Dear ${user?.username} We are sorry!😔 You are banned. because you are "So Handsome😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
+        )
+      ) {
+        document.cookie =
+          'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        window.location.href = '/login';
+      } else {
+        // Handle cancel action if needed
+      }
     }
-  }
+  }, [userStatus, user?.isBanned, user?.username]);
+
   return (
     <>
       <Nav />
