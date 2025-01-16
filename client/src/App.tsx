@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import VoteHistory from './pages/vote-history/VoteHistory';
 import CoupleCard from './pages/vote/components/CoupleCard';
 import Nav from './components/Nav';
+import { logout } from './services/auth';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -34,24 +35,31 @@ function App() {
   }, [userStatus, selectionStatus, dispatch]);
 
   useEffect(() => {
-    console.log(user?.user?.isBanned);
-    console.log(userStatus);
-    if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
-      console.log('hi');
-      const reasons = ['handsome 😎🔥', 'beautiful 💃✨'];
-      const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+    const checkBanStatus = async () => {
+      console.log(user?.user?.isBanned);
+      console.log(userStatus);
+      if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
+        console.log('hi');
+        const reasons = ['handsome 😎🔥', 'beautiful 💃✨'];
+        const randomReason =
+          reasons[Math.floor(Math.random() * reasons.length)];
 
-      const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
+        const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
 Reason? Because you're *TOO* ${randomReason} — it’s unfair to others! Right? 😂🤣   
 Sorry, not sorry! 😔💔  
 Tap "Okay" to logout! 👉🚪`;
 
-      if (window.confirm(text)) {
-        document.cookie =
-          'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-        window.location.href = '/login';
+        if (window.confirm(text)) {
+          await logout();
+          window.location.href = '/login';
+        } else {
+          await logout();
+          window.location.href = '/login';
+        }
       }
-    }
+    };
+
+    checkBanStatus();
   }, [userStatus, user?.user?.isBanned, user?.user?.username]);
 
   return (

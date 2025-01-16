@@ -25,6 +25,12 @@ const useFulQueries = () => {
   if (cmd === '-svu') {
     selectionVotedUser(id);
   }
+  if (cmd === '-svu') {
+    selectionVotedUser(id);
+  }
+  if (cmd === '-ub') {
+    banUser(id);
+  }
 };
 
 const userVotedSelection = async (id) => {
@@ -52,5 +58,15 @@ const selectionVotedUser = async (id) => {
     console.log('.....................................');
   });
 };
+
+const banUser = async (id) => {
+  console.log('banUser');
+  const user = await User.findById(id);
+  user.isBanned = true;
+  await user.save();
+  console.log(`user ${user.username} is banned`);
+};
+//ub
+//ban user
 
 useFulQueries();
