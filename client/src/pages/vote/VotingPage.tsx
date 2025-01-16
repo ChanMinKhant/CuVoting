@@ -3,15 +3,14 @@ import { useAppSelector } from '../../store/store';
 import CardSwiper from './components/CardSwiper';
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from './components/Modal';
-// import Nav from '../components/Nav';
-// import './home.css';
-function VotingPage() {
-  const navigate = useNavigate();
-  const { user, status: userStatus } = useAppSelector((state) => state.user);
 
+const VotingPage = () => {
+  const navigate = useNavigate();
+
+  const { user, status: userStatus } = useAppSelector((state) => state.user);
   const { selections, status: selectionStatus } = useAppSelector(
     (state) => state.selections,
-  ); // Ensure using 'selection'
+  );
 
   useEffect(() => {
     if (userStatus === 'failed' || selectionStatus === 'failed') {
@@ -19,39 +18,39 @@ function VotingPage() {
     }
   }, [selections, selectionStatus, user, userStatus, navigate]);
 
-  // call get all slection
-
   return (
-    <div className='w-full h-full p-4 mt-0 flex flex-col select-none '>
+    <div className='w-full h-full p-4 flex flex-col select-none'>
+      {/* Header */}
       <div className='text-center my-0'>
         <Link to='/'>
           <h1 className='text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500'>
             UCS(Pyay) Voting
           </h1>
         </Link>
-        <p className='text-[14px] font-semibold text-gray-600 mt-[3px]'>
+        <p className='text-sm font-semibold text-gray-600 mt-1'>
           Every Vote Matters
         </p>
       </div>
 
-      {/* <div className='flex flex-col sm:flex-row  w-full justify-evenly'> */}
-      <hr className='border-t-2 border-gray-300 my-2 rounded-full m-auto w-[50%] sm:hidden' />
-      <CardSwiper />
-      <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-[50%]' />
+      {/* Divider for smaller screens */}
+      <hr className='border-t-2 border-gray-300 my-2 rounded-full m-auto w-1/2 sm:hidden' />
 
+      {/* Card Swiper */}
+      <CardSwiper />
+
+      {/* Divider */}
+      <hr className='border-t-2 border-gray-300 my-4 rounded-full m-auto w-1/2' />
+
+      {/* Motivational Text */}
       <div className='text-center text-sm my-2 px-2 text-gray-600 select-text'>
         "The person you vote for today might become your partner one day. So,
         choose your vote wisely! 🤔"
       </div>
-      <br />
-      <br />
-      {/* <button class='bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white font-bold py-1 px-2 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 text-sm transition-transform duration-300'>
-              Vote Now
-            </button> */}
-      {/* <VotingAnimation /> */}
+
+      {/* Modal */}
       <Modal />
     </div>
   );
-}
+};
 
 export default VotingPage;

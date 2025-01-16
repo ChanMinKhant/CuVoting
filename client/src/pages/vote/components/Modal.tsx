@@ -21,7 +21,6 @@ const Modal = () => {
   const { isOpen, activeTab, selectionId, name } = useAppSelector(
     (state) => state.modal
   );
-  console.log(selectionId);
   const dispatch = useAppDispatch();
 
   const onClose = () => {
@@ -49,7 +48,6 @@ const Modal = () => {
           (title) => !userVotedTitles.includes(title)
         );
       }
-      console.log(filteredTitles);
       setVotes(filteredTitles);
     }
   }, [status, activeTab, userVotedTitles]);
@@ -63,7 +61,7 @@ const Modal = () => {
         setVotes((prev) => prev.filter((title) => title !== category));
       }
     } catch (error: any) {
-      console.log(error);
+      console.log('error voting');
       if (error.data?.message === 'You have already voted for this title') {
         dispatch(addUserVotedTitles(category));
         setVotes((prev) => prev.filter((title) => title !== category));

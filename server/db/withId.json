@@ -1,0 +1,394 @@
+[{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd73"
+  },
+  "number": 1,
+  "name": "Saw Nay Wai Htoo",
+  "sign": "Sagittarius",
+  "gender": "boy",
+  "favColor": "Brown",
+  "talent": "Playing guitar",
+  "hobby": "Football",
+  "personality": "INFJ-T",
+  "social": [
+    "https://www.instagram.com/nay.wai.htoo?igsh=MXNuNThzaDNxcWp2dg=="
+  ],
+  "height": 164,
+  "city": "Hinthada",
+  "ambition": "Developer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd74"
+  },
+  "number": 1,
+  "name": "Hnin Thu Thu Naing",
+  "sign": "Libra",
+  "gender": "girl",
+  "favColor": "Lemon Yellow",
+  "talent": "Singing",
+  "hobby": "Making crochet",
+  "personality": "ENTJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61553857388376&mibextid=ZbWKwL",
+    "https://www.tiktok.com/@1410hnin?is_from_webapp=1&sender_device=pc",
+    "https://t.me/HHninThuThuNaing1290"
+  ],
+  "height": 154.94,
+  "city": "Taungoke, Rakhine State",
+  "ambition": "Network Engineer at Home Office"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd75"
+  },
+  "number": 2,
+  "name": "Htet Linn Naing",
+  "sign": "Sagittarius",
+  "gender": "boy",
+  "favColor": "White",
+  "talent": "Body-Building",
+  "hobby": "Gym-Playing",
+  "personality": "ENFJ-T",
+  "social": [
+    "fb-https://www.facebook.com/profile.php?id=100092616195332&mibextid=JRoKGi",
+    "tele-@htetlinnnaing111"
+  ],
+  "height": 172,
+  "city": "Kyaukphyu",
+  "ambition": "Graphic Designer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd76"
+  },
+  "number": 2,
+  "name": "Chan Myae Htun",
+  "sign": "Virgo",
+  "gender": "girl",
+  "favColor": "Sky Blue",
+  "talent": "Drawing",
+  "hobby": "Badminton",
+  "personality": "INFJ-A",
+  "social": [
+    "https://www.facebook.com/share/1JiEuCBuLK/?mibextid=wwXIfr",
+    "https://t.me/roseyy49117"
+  ],
+  "height": 157,
+  "city": "Okshitpin",
+  "ambition": "Software Engineer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd77"
+  },
+  "number": 3,
+  "name": "Zayar Lwin",
+  "sign": "Virgo",
+  "gender": "boy",
+  "favColor": "Black",
+  "talent": "Leadership",
+  "hobby": "Playing games",
+  "personality": "ESFJ-A",
+  "social": [
+    "https://www.facebook.com/zixxxk109?mibextid=ZbWKwL"
+  ],
+  "height": 168,
+  "city": "Shwedaung",
+  "ambition": "Hacker"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd78"
+  },
+  "number": 3,
+  "sign": "Pisces ♓",
+  "gender": "girl",
+  "favColor": [
+    "Black",
+    "Dark Blue",
+    "Sea Green"
+  ],
+  "talent": "Research",
+  "hobby": "Football",
+  "personality": "ENFP",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100090101713904&mibextid=ZbWKwL"
+  ],
+  "height": 162.56,
+  "city": "Pyay",
+  "ambition": "Detective Member",
+  "name": "Hnin Eain Khin"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd79"
+  },
+  "number": 4,
+  "sign": "Taurus",
+  "gender": "boy",
+  "favColor": "White",
+  "talent": "Helping",
+  "hobby": "Football Player",
+  "personality": null,
+  "social": [
+    "https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL"
+  ],
+  "height": 172,
+  "city": "Sittwe",
+  "ambition": "Software Engineer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7a"
+  },
+  "number": 4,
+  "name": "Theint Nandar Swe",
+  "sign": "Scorpio",
+  "gender": "girl",
+  "favColor": "Purple",
+  "talent": "Learning fast",
+  "hobby": "Dancing",
+  "personality": "ENFJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL",
+    "tg://resolve?domain=Theint9434"
+  ],
+  "height": 160,
+  "city": "Gyobingauk",
+  "ambition": "Graphic Designer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7b"
+  },
+  "number": 5,
+  "name": "Shin Thant Oo",
+  "sign": "Libra",
+  "gender": "boy",
+  "favColor": "Black",
+  "talent": "Adaptability",
+  "hobby": "Listen to music",
+  "personality": "INFJ-A",
+  "social": [
+    "Fb - https://www.facebook.com/shin.t.oo.10690?mibextid=ZbWKwL",
+    "Tele - @shinthantoo",
+    "Tiktok - @shinthantoo709"
+  ],
+  "height": 173,
+  "city": "Yangon",
+  "ambition": "Web developer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7c"
+  },
+  "number": 5,
+  "name": "Aye Ei Ei",
+  "sign": "Libra",
+  "gender": "girl",
+  "favColor": "Purple",
+  "talent": "Eating and Sleeping",
+  "hobby": "Reading",
+  "personality": "ENFJ-A",
+  "social": [
+    "https://www.facebook.com/share/12Ks3q6P7Ad/?mibextid=wwXIfr"
+  ],
+  "height": 163,
+  "city": "Taungoo",
+  "ambition": "Tutor"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7d"
+  },
+  "number": 6,
+  "name": "Pyae Phyo Kyaw",
+  "sign": "Aries",
+  "gender": "male",
+  "favColor": "Sky blue",
+  "talent": "Continuous learning and adaptability",
+  "hobby": "Badminton",
+  "personality": "INTP",
+  "social": [
+    "Fb - https://www.facebook.com/profile.php?id=100077515087495&mibextid=ZbWKwL",
+    "Insta - https://www.instagram.com/hashito_69?igsh=OGp2cXR3Z2h2bmtv",
+    "Telegram - @Pyaephyokyaw45"
+  ],
+  "height": 178,
+  "city": "Yangon",
+  "ambition": "Entrepreneur"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7e"
+  },
+  "number": 6,
+  "name": "Yoon Shwe Yee",
+  "sign": "Virgo",
+  "gender": "girl",
+  "favColor": "Black",
+  "talent": "Sleeping",
+  "hobby": "Reading",
+  "personality": "INTJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100067872348589&mibextid=ZbWKwL",
+    "https://www.instagram.com/yoonyoon7025?igsh=MWZzeHB6bThlMGM2dQ=="
+  ],
+  "height": 165.1,
+  "city": "Yangon",
+  "ambition": "Businessman"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd7f"
+  },
+  "number": 7,
+  "name": "Pyae Sone Kyaw",
+  "sign": "Capricorn",
+  "gender": "boy",
+  "favColor": "Black",
+  "talent": "Riding a motorcycle",
+  "hobby": "Football",
+  "personality": "ISFJ",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100080297103168&mibextid=JRoKGi"
+  ],
+  "height": 177.8,
+  "city": "Gyobinkauk",
+  "ambition": "Crazy biker"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd80"
+  },
+  "number": 7,
+  "name": "Thiri Thazin Bo",
+  "sign": "Cancer",
+  "gender": "girl",
+  "favColor": "Violet",
+  "talent": "Eating",
+  "hobby": "Travelling",
+  "personality": "ISFJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61557174377270&mibextid=ZbWKwL"
+  ],
+  "height": 163,
+  "city": "Pyay",
+  "ambition": "Businesswoman"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd81"
+  },
+  "number": 8,
+  "name": "So Pyae Aung",
+  "sign": "Gemini",
+  "gender": "boy",
+  "favColor": "White",
+  "talent": "Playing game",
+  "hobby": "Singing",
+  "personality": "INFJ",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61570806925132&mibextid=ZbWKwL"
+  ],
+  "height": 180.34,
+  "city": "Gyobingauk",
+  "ambition": "Game programmer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd82"
+  },
+  "number": 8,
+  "name": "Shoon Myat Thu",
+  "sign": "Aries",
+  "gender": "girl",
+  "favColor": "Lavender",
+  "talent": "Dancing",
+  "hobby": "Baking",
+  "personality": "ESFJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61567779933590&mibextid=ZbWKwL"
+  ],
+  "height": 160,
+  "city": "Shwedaung",
+  "ambition": "Businesswoman"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd83"
+  },
+  "number": 9,
+  "sign": "Sagittarius",
+  "gender": "boy",
+  "favColor": "Blue",
+  "talent": "Painting",
+  "hobby": "Traveling and Reading",
+  "personality": "Mediator",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61571520477464&mibextid=wwXIfr&mibextid=wwXIfr"
+  ],
+  "height": 182,
+  "city": "Taungoo",
+  "ambition": "The Pilot",
+  "name": "Naung Soe Wai"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd84"
+  },
+  "number": 9,
+  "name": "Khaing Myat Wai",
+  "sign": "Cancer",
+  "gender": "girl",
+  "favColor": "Pink",
+  "talent": "Swimming",
+  "hobby": "Eating",
+  "personality": "ESFP-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100079839666517&mibextid=ZbWKwL"
+  ],
+  "height": 165,
+  "city": "Sittwe",
+  "ambition": "Software Engineer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd85"
+  },
+  "number": 10,
+  "name": "Nay Thuta",
+  "sign": "Capricorn",
+  "gender": "boy",
+  "favColor": "White",
+  "talent": "Ctritical thinking and problem solving",
+  "hobby": "sketch",
+  "personality": "INFJ",
+  "social": [
+    "https://www.facebook.com/profile.php?id=61558728510696&mibextid=ZbWKwL",
+    "tele-@naythuta03"
+  ],
+  "height": 180,
+  "city": "Yangon",
+  "ambition": "Game designer"
+},
+{
+  "_id": {
+    "$oid": "6787a19acb8f1b76cee0fd86"
+  },
+  "number": 10,
+  "name": "Kay Zin Lin Lat",
+  "sign": "Cancer",
+  "gender": "girl",
+  "favColor": "Purple",
+  "talent": "Dancing",
+  "hobby": "Badminton",
+  "personality": "ENFJ-T",
+  "social": [
+    "https://www.facebook.com/profile.php?id=100064387086446&mibextid=ZbWKwL"
+  ],
+  "height": 165,
+  "city": "Pyay",
+  "ambition": "Artist"
+}]

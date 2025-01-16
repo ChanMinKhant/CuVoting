@@ -1,3 +1,3 @@
 config.env
 node_modules/
-cmd/backup/*
+cmd/backup/backup/*

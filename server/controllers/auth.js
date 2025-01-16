@@ -20,7 +20,7 @@ function normalizeEmail(email) {
 
 exports.register = asyncHandler(async (req, res, next) => {
   const { email, password, confirmPassword, deviceId } = req.body;
-
+  console.log(req.body);
   // Validate request data
   const { error } = registerSchema.validate(req.body);
   if (error) {
@@ -299,7 +299,7 @@ exports.getMe = asyncHandler(async (req, res, next) => {
     const err = new CustomError('You are not login!', 400);
     return next(err);
   }
-  const user = await User.findById(req.userId);
+  const user = await User.findById(req.userId, '+isBanned');
   if (!user) {
     const err = new CustomError('User not found', 404);
     return next(err);

@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { submitOtp, resendOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
-import { getFingerprint } from '../../../utils/helpers';
 import ButtonLoader from '../../../components/ButtonLoader';
 
 const OtpPage: React.FC = () => {
@@ -27,14 +26,9 @@ const OtpPage: React.FC = () => {
   if (!email) {
     navigate('/signup');
   }
-  const deviceId = getFingerprint().then((fp) => {
-    console.log(fp);
-    return fp;
-  });
-  console.log(deviceId);
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
@@ -56,7 +50,7 @@ const OtpPage: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -77,7 +71,6 @@ const OtpPage: React.FC = () => {
     setIsSubmitting(true); // Start loading
     setErrorMessage(''); // Clear previous error messages
     const otpValue = otpArray.join('');
-    console.log('OTP Submitted:', otpValue);
     try {
       const data = await submitOtp(email!, otpValue);
       if (data.success) {
@@ -85,7 +78,7 @@ const OtpPage: React.FC = () => {
         window.location.href = '/home';
       }
     } catch (error: any) {
-      console.error(error);
+      console.error('Error verifying OTP:');
       setErrorMessage(error?.message || 'Failed to verify OTP.');
     } finally {
       setIsSubmitting(false); // End loading
@@ -105,7 +98,7 @@ const OtpPage: React.FC = () => {
         setResendTimer(30); // Start 30-second timer
       }
     } catch (error: any) {
-      console.error(error);
+      console.error('Error resending OTP:');
       setErrorMessage(error?.message || 'Failed to resend OTP.');
     } finally {
       setIsResending(false);

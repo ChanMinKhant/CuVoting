@@ -242,7 +242,9 @@ const RegisterForm: React.FC = () => {
             >
               <option value=''>Select user type</option>
               <option value='student'>Student</option>
-              <option value='other'>Other</option>
+              <option value='other' disabled>
+                Other
+              </option>
             </select>
             {errors.userType && (
               <p className='text-red-500 text-sm mt-1'>{errors.userType}</p>

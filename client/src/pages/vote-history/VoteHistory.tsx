@@ -8,6 +8,7 @@ import Loader from '../../components/Loader';
 const VoteHistory = () => {
   const [voteHistory, setVoteHistory] = useState<any>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { selections, status } = useAppSelector((state) => state.selections);
@@ -15,23 +16,25 @@ const VoteHistory = () => {
   useEffect(() => {
     setIsLoading(true);
     getVoteHistory().then((res) => {
-      console.log(res.data);
-
       setVoteHistory(res.data);
       setIsLoading(false);
     });
   }, []);
 
   const handleDelete = async (id: string, category: string) => {
+    setDeletingId(id);
     try {
       await deleteVote(id);
       dispatch(removeUserVotedTitles(category));
       const updatedVoteHistory = voteHistory.filter(
-        (vote: any) => vote._id !== id,
+        (vote: any) => vote._id !== id
       );
       setVoteHistory(updatedVoteHistory);
+      setDeletingId(null);
     } catch (error: any) {
-      console.log(error);
+      console.log('error deleting vote');
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -41,7 +44,7 @@ const VoteHistory = () => {
       return (
         selections.find(
           (selection: any) =>
-            selection.number === Number(number) && selection.gender === 'girl',
+            selection.number === Number(number) && selection.gender === 'girl'
         )?.name || 'Unknown'
       );
     }
@@ -83,8 +86,9 @@ const VoteHistory = () => {
               <button
                 className='bg-red-600 text-white px-5 py-2 rounded-lg shadow hover:bg-red-700 transition-colors duration-300'
                 onClick={() => handleDelete(vote?._id, vote?.category)}
+                disabled={deletingId === vote?._id}
               >
-                Delete
+                {deletingId === vote?._id ? 'Deleting...' : 'Delete'}
               </button>
             </div>
           ))}

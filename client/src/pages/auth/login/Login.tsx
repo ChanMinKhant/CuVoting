@@ -12,60 +12,37 @@ import { fetchCurrentUser } from '../../../store/features/userSlice';
 import { fetchAllSelections } from '../../../store/features/selectionSlice';
 import ButtonLoader from '../../../components/ButtonLoader';
 
-interface FormData {
-  email: string;
-  password: string;
-}
-
 const LoginForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    email: '',
-    password: '',
-  });
-
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [formData, setFormData] = useState({ email: '', password: '' });
+  const [errors, setErrors] = useState<Partial<typeof formData>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [deviceId, setDeviceId] = useState('');
-  const [deviceData, setDeviceData] = useState<any>({});
-  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const email = useRef<HTMLInputElement>(null);
+  const [deviceData, setDeviceData] = useState<any>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
   const { user, status } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (status === 'succeeded') {
-      navigate('/home');
-    }
-    if (deviceId === '') {
-      getFingerprint().then((fp) => {
-        console.log(fp);
-        setDeviceId(() => fp);
-      });
-    }
+    if (status === 'succeeded' && user) navigate('/home');
   }, [status, user, navigate]);
 
   useEffect(() => {
+    getFingerprint().then(setDeviceId).catch(console.error);
+  }, []);
+
+  useEffect(() => {
     if (deviceId) {
-      detectdUser(deviceId);
+      detectedDeviceAccount({ deviceId })
+        .then((data) => setDeviceData(data.user))
+        .catch(console.error);
     }
   }, [deviceId]);
 
-  const detectdUser = async (deviceId: string) => {
-    try {
-      const data = await detectedDeviceAccount({
-        deviceId: deviceId,
-      });
-      console.log(data);
-      setDeviceData(data.user);
-    } catch (error: any) {
-      console.log(error);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: '' }));
@@ -73,7 +50,7 @@ const LoginForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<any>,
+    nextRef: React.RefObject<HTMLInputElement>,
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -81,80 +58,75 @@ const LoginForm: React.FC = () => {
     }
   };
 
-  const validatePassword = (password: string) => {
-    const errors: string[] = [];
-    if (password.length < 8) {
-      errors.push('Password must be at least 8 characters long');
-    }
-    return errors;
+  const validateForm = () => {
+    const newErrors: Partial<typeof formData> = {};
+    if (!formData.email) newErrors.email = 'Email is required';
+    if (formData.password.length < 8)
+      newErrors.password = 'Password must be at least 8 characters long';
+    return newErrors;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newErrors: Partial<FormData> = {};
-
-    if (!formData.email) {
-      newErrors.email = 'Email is required';
+    const newErrors = validateForm();
+    if (Object.keys(newErrors).length) {
+      setErrors(newErrors);
+      return;
     }
 
-    const passwordErrors = validatePassword(formData.password);
-    if (passwordErrors.length > 0) {
-      newErrors.password = passwordErrors.join('. ');
-    }
-
-    setErrors(newErrors);
-
-    if (Object.keys(newErrors).length === 0) {
-      try {
-        console.log('Logging in...');
-        setIsSubmitting(true);
-
-        const data = await login(formData);
-        setIsSubmitting(false);
-
-        if (data) {
-          console.log('Logged in successfully');
-          dispatch(fetchCurrentUser());
-          dispatch(fetchAllSelections());
-          navigate('/home');
-        }
-      } catch (error: any) {
-        setIsSubmitting(false);
-
-        console.error(error);
+    setIsSubmitting(true);
+    try {
+      const data = await login(formData);
+      if (data) {
+        dispatch(fetchCurrentUser());
+        dispatch(fetchAllSelections());
+        navigate('/home');
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   const handleLoginWithDeviceID = async () => {
     try {
-      console.log('Logging in with device id...');
       const data = await loginWithDeviceId(deviceId);
       if (data) {
-        console.log('Logged in successfully');
         dispatch(fetchCurrentUser());
         dispatch(fetchAllSelections());
         navigate('/home');
       }
-    } catch (error: any) {
-      console.error(error);
+    } catch (error) {
+      console.error('Fail to login with device id');
     }
   };
-  if (deviceData) {
-    console.log(deviceData.email);
-  }
+
   return (
     <div className='min-h-screen bg-gray-100 flex items-center justify-center'>
       <div className='bg-white p-8 rounded-lg shadow-md w-full max-w-md'>
         <h2 className='text-2xl font-bold mb-6 text-center'>Log In</h2>
+        {deviceData?.email && (
+          <div
+            className='mb-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors'
+            onClick={handleLoginWithDeviceID}
+          >
+            <div className='text-sm text-center'>
+              You can log in to this account
+            </div>
+            <p className='text-center text-yellow-700 text-lg font-semibold'>
+              Detected Email: {deviceData.email}
+            </p>
+          </div>
+        )}
         <form onSubmit={handleSubmit} className='space-y-4'>
           <div>
             <input
-              ref={email}
-              type='text'
+              ref={emailRef}
+              type='email'
               name='email'
               value={formData.email}
-              onChange={handleChange}
+              onChange={handleInputChange}
               onKeyDown={(e) => handleKeyDown(e, passwordRef)}
               placeholder='Email'
               className={`w-full p-2 border rounded-full ${
@@ -171,7 +143,7 @@ const LoginForm: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               name='password'
               value={formData.password}
-              onChange={handleChange}
+              onChange={handleInputChange}
               placeholder='Password'
               className={`w-full p-2 border rounded-full ${
                 errors.password ? 'border-red-500' : 'border-gray-300'
@@ -201,22 +173,6 @@ const LoginForm: React.FC = () => {
             Sign Up
           </Link>
         </p>
-
-        {deviceData?.email ? (
-          <div>
-            <div
-              className='mt-4 p-4 bg-yellow-100 border border-yellow-300 rounded-lg cursor-pointer hover:bg-yellow-200 transition-colors'
-              onClick={handleLoginWithDeviceID}
-            >
-              <div className='text-sm text-center'>
-                You can login to this account
-              </div>
-              <p className='text-center text-yellow-700 text-lg font-semibold'>
-                Detected Email: {deviceData.email}
-              </p>
-            </div>
-          </div>
-        ) : null}
       </div>
     </div>
   );

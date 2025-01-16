@@ -5,7 +5,6 @@ const ActiveTabBar = () => {
   const dispatch = useAppDispatch();
   const { activeTab } = useAppSelector((state) => state.modal);
   const handleTabClick = (tab: 'boy' | 'girl' | 'couple') => {
-    console.log(`Currently active tab: ${tab}`);
     dispatch(changeActiveTab(tab));
   };
   return (

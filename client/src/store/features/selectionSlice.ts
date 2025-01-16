@@ -12,8 +12,8 @@ interface SelectionState {
 
 interface SelectionsState {
   selections: SelectionState[];
-  filteredSelections: SelectionState[]; 
-  userVotedTitles: string[]; 
+  filteredSelections: SelectionState[];
+  userVotedTitles: string[];
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
@@ -31,9 +31,7 @@ export const fetchAllSelections = createAsyncThunk(
   'selections/fetchAllSelections',
   async (_, { rejectWithValue }) => {
     try {
-      console.log('Fetching selections...');
       const response = await getAllSelections(); // Ensure this returns the correct structure
-      console.log('Response:', response);
       if (!response || !response.data || !response.userVotedTitles) {
         throw new Error('Invalid response structure');
       }
@@ -53,7 +51,6 @@ const selectionSlice = createSlice({
       state.userVotedTitles = state.userVotedTitles.filter(
         (title) => title !== action.payload
       );
-      console.log('Updated userVotedTitles:', state.userVotedTitles);
     },
     // Add a title to the userVotedTitles array
     addUserVotedTitles: (state, action) => {

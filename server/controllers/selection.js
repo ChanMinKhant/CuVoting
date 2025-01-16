@@ -19,7 +19,7 @@ exports.getSelections = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const Selections = await Selection.find();
+  const Selections = await Selection.find().sort({ number: 1, gender: 1 });
   res.status(200).send({
     success: true,
     data: Selections,
@@ -62,8 +62,6 @@ exports.voteSelection = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Invalid title for girls', 400);
     return next(err);
   }
-
-
 
   user.votedTitles.push(title);
   await user.save();
@@ -127,7 +125,7 @@ exports.deleteVote = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Vote not found', 404);
     return next(err);
   }
-  if (vote.user.toString() !== req.userId) {
+  if (vote?.user.toString() !== req.userId) {
     const err = new CustomError('Unauthorized', 401);
     return next(err);
   }
