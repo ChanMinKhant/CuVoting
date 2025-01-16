@@ -37,7 +37,11 @@ function App() {
     if (userStatus === 'succeeded' && user.isBanned === false) {
       if (
         window.confirm(
-          `Dear ${user?.username} We are sorry!😔 You are banned. because you are "So Handsome😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
+          `Dear ${
+            user?.username
+          } We are sorry!😔 You are banned. because you are "So ${
+            user?.gender === 'boy' ? 'Handsome' : 'Beautiful'
+          }😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
         )
       ) {
         document.cookie =
