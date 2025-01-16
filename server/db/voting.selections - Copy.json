@@ -1,13 +1,13 @@
 [{
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd73"
+    "$oid": "6788a46cca714c3989374490"
   },
   "number": 1,
   "name": "Saw Nay Wai Htoo",
-  "sign": "Sagittarius",
+  "sign": "Sagittarius ♐",
   "gender": "boy",
   "favColor": "Brown",
-  "talent": "Playing guitar",
+  "talent": "Guitar",
   "hobby": "Football",
   "personality": "INFJ-T",
   "social": [
@@ -19,15 +19,15 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd74"
+    "$oid": "6788a46cca714c3989374491"
   },
   "number": 1,
   "name": "Hnin Thu Thu Naing",
-  "sign": "Libra",
+  "sign": "Libra ♎",
   "gender": "girl",
   "favColor": "Lemon Yellow",
   "talent": "Singing",
-  "hobby": "Making crochet",
+  "hobby": "crochet",
   "personality": "ENTJ-T",
   "social": [
     "https://www.facebook.com/profile.php?id=61553857388376&mibextid=ZbWKwL",
@@ -35,16 +35,16 @@
     "https://t.me/HHninThuThuNaing1290"
   ],
   "height": 154.94,
-  "city": "Taungoke, Rakhine State",
-  "ambition": "Network Engineer at Home Office"
+  "city": "Taungoke",
+  "ambition": "Network Engineer"
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd75"
+    "$oid": "6788a46cca714c3989374492"
   },
   "number": 2,
   "name": "Htet Linn Naing",
-  "sign": "Sagittarius",
+  "sign": "Sagittarius ♐",
   "gender": "boy",
   "favColor": "White",
   "talent": "Body-Building",
@@ -60,11 +60,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd76"
+    "$oid": "6788a46cca714c3989374493"
   },
   "number": 2,
   "name": "Chan Myae Htun",
-  "sign": "Virgo",
+  "sign": "Virgo ♍",
   "gender": "girl",
   "favColor": "Sky Blue",
   "talent": "Drawing",
@@ -80,11 +80,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd77"
+    "$oid": "6788a46cca714c3989374494"
   },
   "number": 3,
   "name": "Zayar Lwin",
-  "sign": "Virgo",
+  "sign": "Virgo ♍",
   "gender": "boy",
   "favColor": "Black",
   "talent": "Leadership",
@@ -99,16 +99,13 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd78"
+    "$oid": "6788a46cca714c3989374495"
   },
   "number": 3,
+  "name": "Hnin Eain Khin",
   "sign": "Pisces ♓",
   "gender": "girl",
-  "favColor": [
-    "Black",
-    "Dark Blue",
-    "Sea Green"
-  ],
+  "favColor": "Sea Green",
   "talent": "Research",
   "hobby": "Football",
   "personality": "ENFP",
@@ -117,19 +114,19 @@
   ],
   "height": 162.56,
   "city": "Pyay",
-  "ambition": "Detective Member",
-  "name": "Hnin Eain Khin"
+  "ambition": "Detective"
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd79"
+    "$oid": "6788a46cca714c3989374496"
   },
   "number": 4,
-  "sign": "Taurus",
+  "name": "Kyaw Htay Naing",
+  "sign": "Taurus ♉",
   "gender": "boy",
   "favColor": "White",
   "talent": "Helping",
-  "hobby": "Football Player",
+  "hobby": "Football",
   "personality": null,
   "social": [
     "https://www.facebook.com/profile.php?id=100080816524575&mibextid=ZbWKwL"
@@ -140,11 +137,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7a"
+    "$oid": "6788a46cca714c3989374497"
   },
   "number": 4,
   "name": "Theint Nandar Swe",
-  "sign": "Scorpio",
+  "sign": "Scorpio ♏",
   "gender": "girl",
   "favColor": "Purple",
   "talent": "Learning fast",
@@ -160,11 +157,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7b"
+    "$oid": "6788a46cca714c3989374498"
   },
   "number": 5,
   "name": "Shin Thant Oo",
-  "sign": "Libra",
+  "sign": "Libra ♎",
   "gender": "boy",
   "favColor": "Black",
   "talent": "Adaptability",
@@ -181,14 +178,14 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7c"
+    "$oid": "6788a46cca714c3989374499"
   },
   "number": 5,
   "name": "Aye Ei Ei",
-  "sign": "Libra",
+  "sign": "Libra ♎",
   "gender": "girl",
   "favColor": "Purple",
-  "talent": "Eating and Sleeping",
+  "talent": "Eating, Sleeping",
   "hobby": "Reading",
   "personality": "ENFJ-A",
   "social": [
@@ -200,14 +197,14 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7d"
+    "$oid": "6788a46cca714c398937449a"
   },
   "number": 6,
   "name": "Pyae Phyo Kyaw",
-  "sign": "Aries",
-  "gender": "male",
+  "sign": "Aries ♈",
+  "gender": "boy",
   "favColor": "Sky blue",
-  "talent": "Continuous learning and adaptability",
+  "talent": "nonstop learning",
   "hobby": "Badminton",
   "personality": "INTP",
   "social": [
@@ -221,11 +218,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7e"
+    "$oid": "6788a46cca714c398937449b"
   },
   "number": 6,
   "name": "Yoon Shwe Yee",
-  "sign": "Virgo",
+  "sign": "Virgo ♍",
   "gender": "girl",
   "favColor": "Black",
   "talent": "Sleeping",
@@ -241,14 +238,14 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd7f"
+    "$oid": "6788a46cca714c398937449c"
   },
   "number": 7,
   "name": "Pyae Sone Kyaw",
-  "sign": "Capricorn",
+  "sign": "Capricorn ♑",
   "gender": "boy",
   "favColor": "Black",
-  "talent": "Riding a motorcycle",
+  "talent": "Motorcycle riding",
   "hobby": "Football",
   "personality": "ISFJ",
   "social": [
@@ -260,11 +257,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd80"
+    "$oid": "6788a46cca714c398937449d"
   },
   "number": 7,
   "name": "Thiri Thazin Bo",
-  "sign": "Cancer",
+  "sign": "Cancer ♋",
   "gender": "girl",
   "favColor": "Violet",
   "talent": "Eating",
@@ -279,11 +276,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd81"
+    "$oid": "6788a46cca714c398937449e"
   },
   "number": 8,
   "name": "So Pyae Aung",
-  "sign": "Gemini",
+  "sign": "Gemini ♊",
   "gender": "boy",
   "favColor": "White",
   "talent": "Playing game",
@@ -298,11 +295,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd82"
+    "$oid": "6788a46cca714c398937449f"
   },
   "number": 8,
   "name": "Shoon Myat Thu",
-  "sign": "Aries",
+  "sign": "Aries ♈",
   "gender": "girl",
   "favColor": "Lavender",
   "talent": "Dancing",
@@ -317,14 +314,14 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd83"
+    "$oid": "6788a46cca714c39893744a0"
   },
   "number": 9,
-  "sign": "Sagittarius",
+  "sign": "Sagittarius ♐",
   "gender": "boy",
   "favColor": "Blue",
   "talent": "Painting",
-  "hobby": "Traveling and Reading",
+  "hobby": "Traveling, Reading",
   "personality": "Mediator",
   "social": [
     "https://www.facebook.com/profile.php?id=61571520477464&mibextid=wwXIfr&mibextid=wwXIfr"
@@ -336,11 +333,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd84"
+    "$oid": "6788a46cca714c39893744a1"
   },
   "number": 9,
   "name": "Khaing Myat Wai",
-  "sign": "Cancer",
+  "sign": "Cancer ♋",
   "gender": "girl",
   "favColor": "Pink",
   "talent": "Swimming",
@@ -355,14 +352,14 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd85"
+    "$oid": "6788a46cca714c39893744a2"
   },
   "number": 10,
   "name": "Nay Thuta",
-  "sign": "Capricorn",
+  "sign": "Capricorn ♑",
   "gender": "boy",
   "favColor": "White",
-  "talent": "Ctritical thinking and problem solving",
+  "talent": "Deep thinking",
   "hobby": "sketch",
   "personality": "INFJ",
   "social": [
@@ -375,11 +372,11 @@
 },
 {
   "_id": {
-    "$oid": "6787a19acb8f1b76cee0fd86"
+    "$oid": "6788a46cca714c39893744a3"
   },
   "number": 10,
   "name": "Kay Zin Lin Lat",
-  "sign": "Cancer",
+  "sign": "Cancer ♋",
   "gender": "girl",
   "favColor": "Purple",
   "talent": "Dancing",
