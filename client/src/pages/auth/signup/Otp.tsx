@@ -28,7 +28,7 @@ const OtpPage: React.FC = () => {
   }
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
@@ -50,7 +50,7 @@ const OtpPage: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -142,6 +142,7 @@ const OtpPage: React.FC = () => {
                 ref={(el) => (inputRefs.current[index] = el)}
                 type='text'
                 maxLength={1}
+                inputMode='numeric'
                 value={digit}
                 onChange={(e) => handleChange(e, index)}
                 onKeyDown={(e) => handleKeyDown(e, index)}
