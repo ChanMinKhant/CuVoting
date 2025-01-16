@@ -19,7 +19,7 @@ exports.getSelections = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Something went wrong', 404);
     return next(err);
   }
-  const Selections = await Selection.find();
+  const Selections = await Selection.find().sort({ number: 1, gender: 1 });
   res.status(200).send({
     success: true,
     data: Selections,
