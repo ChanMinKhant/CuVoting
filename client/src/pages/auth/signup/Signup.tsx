@@ -340,7 +340,7 @@ const RegisterForm: React.FC = () => {
           )}
           <button
             type='submit'
-            className='w-full bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
+            className='w-full flex justify-center bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
           >
             {isSubmitting ? <ButtonLoader /> : 'Sign Up'}
           </button>
