@@ -27,9 +27,6 @@ const OtpPage: React.FC = () => {
   if (!email) {
     navigate('/signup');
   }
-  const deviceId = getFingerprint().then((fp) => {
-    return fp;
-  });
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number

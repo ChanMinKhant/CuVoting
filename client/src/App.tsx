@@ -18,7 +18,7 @@ import Nav from './components/Nav';
 function App() {
   const dispatch = useAppDispatch();
 
-  const { status: userStatus } = useAppSelector((state) => state.user);
+  const { user, status: userStatus } = useAppSelector((state) => state.user);
   const { status: selectionStatus } = useAppSelector(
     (state) => state.selections
   );
@@ -33,6 +33,18 @@ function App() {
     }
   }, [userStatus, selectionStatus, dispatch]);
 
+  if (userStatus === 'succeeded' && user.isBanned === false) {
+    if (
+      window.confirm(
+        `Dear ${user?.username} We are sorry!😔 You are banned. because you are "So Handsome😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
+      )
+    ) {
+      document.cookie = 'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      window.location.href = '/login';
+    } else {
+      // Handle cancel action if needed
+    }
+  }
   return (
     <>
       <Nav />
