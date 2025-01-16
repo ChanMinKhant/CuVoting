@@ -51,10 +51,10 @@ Tap "Okay" to logout! 👉🚪`;
 
         if (window.confirm(text)) {
           await logout();
-          window.location.href = '/login';
+          window.location.href = '/';
         } else {
           await logout();
-          window.location.href = '/login';
+          window.location.href = '/';
         }
       }
     };

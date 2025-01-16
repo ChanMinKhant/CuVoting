@@ -54,7 +54,7 @@ const RegisterForm: React.FC = () => {
 
   useEffect(() => {
     if (status === 'succeeded' && user) {
-      navigate('/home');
+      navigate('/');
     }
     // set device id
     if (formData.deviceId === '') {

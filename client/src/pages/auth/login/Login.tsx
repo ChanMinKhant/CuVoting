@@ -27,7 +27,7 @@ const LoginForm: React.FC = () => {
   const { user, status } = useAppSelector((state) => state.user);
 
   useEffect(() => {
-    if (status === 'succeeded' && user) navigate('/home');
+    if (status === 'succeeded' && user) navigate('/');
   }, [status, user, navigate]);
 
   useEffect(() => {
@@ -80,7 +80,7 @@ const LoginForm: React.FC = () => {
       if (data) {
         dispatch(fetchCurrentUser());
         dispatch(fetchAllSelections());
-        navigate('/home');
+        navigate('/');
       }
     } catch (error) {
       console.error(error);
@@ -95,7 +95,7 @@ const LoginForm: React.FC = () => {
       if (data) {
         dispatch(fetchCurrentUser());
         dispatch(fetchAllSelections());
-        navigate('/home');
+        navigate('/');
       }
     } catch (error) {
       console.error('Fail to login with device id');

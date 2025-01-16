@@ -14,7 +14,7 @@ const VotingPage = () => {
 
   useEffect(() => {
     if (userStatus === 'failed' || selectionStatus === 'failed') {
-      navigate('/signup'); // Use 'navigate' instead of 'negative'
+      navigate('/'); // Use 'navigate' instead of 'negative'
     }
   }, [selections, selectionStatus, user, userStatus, navigate]);
 
