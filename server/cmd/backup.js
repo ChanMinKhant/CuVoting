@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config.env' });
+require('dotenv').config({ path: './../config.env' });
 const connectToDatabase = require('../config/db');
 const fs = require('fs');
 const Otp = require('../models/otp');

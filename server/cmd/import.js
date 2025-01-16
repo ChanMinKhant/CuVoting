@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './config.env' });
+require('dotenv').config({ path: './../config.env' });
 const connectToDatabase = require('../config/db');
 const fs = require('fs');
 const Otp = require('../models/otp');
@@ -17,7 +17,7 @@ const importData = async () => {
     // const backupFolder = `${__dirname}/backup`;
     // console.log(process.argv[2]);
     // const folder = `${backupFolder}/${process.argv[2]}`;
-    const folder = path.join(__dirname, process.argv[2]);
+    const folder = path.join(__dirname, 'backup', process.argv[2]);
     console.log(folder);
     if (!fs.existsSync(folder)) {
       console.log('Backup folder does not exist');
@@ -25,10 +25,10 @@ const importData = async () => {
     }
     const otps = JSON.parse(fs.readFileSync(`${folder}/otps.json`, 'utf-8'));
     const results = JSON.parse(
-      fs.readFileSync(`${folder}/results.json`, 'utf-8')
+      fs.readFileSync(`${folder}/results.json`, 'utf-8'),
     );
     const selections = JSON.parse(
-      fs.readFileSync(`${folder}/selections.json`, 'utf-8')
+      fs.readFileSync(`${folder}/selections.json`, 'utf-8'),
     );
     const users = JSON.parse(fs.readFileSync(`${folder}/users.json`, 'utf-8'));
     const votes = JSON.parse(fs.readFileSync(`${folder}/votes.json`, 'utf-8'));
