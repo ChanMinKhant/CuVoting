@@ -5,6 +5,7 @@ import { register } from '../../../services/auth';
 import { useAppSelector } from '../../../store/store';
 import { toast } from 'react-toastify';
 import { getFingerprint } from '../../../utils/helpers';
+import ButtonLoader from '../../../components/ButtonLoader';
 
 interface FormData {
   username: string;
@@ -36,6 +37,7 @@ const RegisterForm: React.FC = () => {
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const usernameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -63,7 +65,7 @@ const RegisterForm: React.FC = () => {
   }, [status, user, navigate]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -71,7 +73,7 @@ const RegisterForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<any>
+    nextRef: React.RefObject<any>,
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -233,7 +235,7 @@ const RegisterForm: React.FC = () => {
               onKeyDown={(e) =>
                 handleKeyDown(
                   e,
-                  formData.userType === 'student' ? sectionRef : occupationRef
+                  formData.userType === 'student' ? sectionRef : occupationRef,
                 )
               }
               className={`w-full p-2 border rounded-full ${
@@ -336,7 +338,7 @@ const RegisterForm: React.FC = () => {
             type='submit'
             className='w-full bg-yellow-400 text-black p-2 rounded-full hover:bg-yellow-500 transition-colors'
           >
-            Sign Up
+            {isSubmitting ? <ButtonLoader /> : 'Sign Up'}
           </button>
         </form>
         <p className='mt-4 text-center'>

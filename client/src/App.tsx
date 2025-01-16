@@ -45,7 +45,7 @@ function App() {
           reasons[Math.floor(Math.random() * reasons.length)];
 
         const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
-Reason? Because you're *TOO* ${randomReason} — it’s unfair to others! Right? 😂🤣   
+Reason? Because you're TOO... Pretty — it’s unfair to others! Right? 😂🤣   
 Sorry, not sorry! 😔💔  
 Tap "Okay" to logout! 👉🚪`;
 
