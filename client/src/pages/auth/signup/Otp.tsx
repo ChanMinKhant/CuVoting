@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { submitOtp, resendOtp } from '../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../store/store';
-import { getFingerprint } from '../../../utils/helpers';
 import ButtonLoader from '../../../components/ButtonLoader';
 
 const OtpPage: React.FC = () => {
