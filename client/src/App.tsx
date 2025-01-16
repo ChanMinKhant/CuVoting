@@ -34,24 +34,25 @@ function App() {
   }, [userStatus, selectionStatus, dispatch]);
 
   useEffect(() => {
-    if (userStatus === 'succeeded' && user.isBanned === false) {
-      if (
-        window.confirm(
-          `Dear ${
-            user?.username
-          } We are sorry!😔 You are banned. because you are "So ${
-            user?.gender === 'boy' ? 'Handsome' : 'Beautiful'
-          }😄😂". We've cleared all of your votes. No worries you can create another account. Click to logout?`
-        )
-      ) {
+    console.log(user?.user?.isBanned);
+    console.log(userStatus);
+    if (userStatus === 'succeeded' && user?.user?.isBanned === false) {
+      console.log('hi');
+      const reasons = ['handsome 😎🔥', 'beautiful 💃✨'];
+      const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
+
+      const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
+Reason? Because you're *TOO* ${randomReason} — it’s unfair to others! Right? 😂🤣   
+Sorry, not sorry! 😔💔  
+Tap "Okay" to logout! 👉🚪`;
+
+      if (window.confirm(text)) {
         document.cookie =
           'jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         window.location.href = '/login';
-      } else {
-        // Handle cancel action if needed
       }
     }
-  }, [userStatus, user?.isBanned, user?.username]);
+  }, [userStatus, user?.user?.isBanned, user?.user?.username]);
 
   return (
     <>
