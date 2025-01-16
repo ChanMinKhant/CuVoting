@@ -20,7 +20,7 @@ function App() {
 
   const { user, status: userStatus } = useAppSelector((state) => state.user);
   const { status: selectionStatus } = useAppSelector(
-    (state) => state.selections
+    (state) => state.selections,
   );
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function App() {
   useEffect(() => {
     console.log(user?.user?.isBanned);
     console.log(userStatus);
-    if (userStatus === 'succeeded' && user?.user?.isBanned === false) {
+    if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
       console.log('hi');
       const reasons = ['handsome 😎🔥', 'beautiful 💃✨'];
       const randomReason = reasons[Math.floor(Math.random() * reasons.length)];
