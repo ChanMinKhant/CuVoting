@@ -9,12 +9,12 @@ const VotingPage = () => {
 
   const { user, status: userStatus } = useAppSelector((state) => state.user);
   const { selections, status: selectionStatus } = useAppSelector(
-    (state) => state.selections,
+    (state) => state.selections
   );
 
   useEffect(() => {
     if (userStatus === 'failed' || selectionStatus === 'failed') {
-      navigate('/'); // Use 'navigate' instead of 'negative'
+      navigate('/signup'); // Use 'navigate' instead of 'negative'
     }
   }, [selections, selectionStatus, user, userStatus, navigate]);
 
