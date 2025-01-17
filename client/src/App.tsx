@@ -60,7 +60,7 @@ Tap "Okay" to logout! 👉🚪`;
     checkBanStatus();
   }, [userStatus, user?.user?.isBanned, user?.user?.username]);
 
-  const isMaintaining: boolean = false;
+  const isMaintaining: boolean = true;
   if (isMaintaining) {
     return <MaintenancePage />;
   }
