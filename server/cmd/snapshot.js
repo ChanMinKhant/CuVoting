@@ -1,10 +1,8 @@
 require('dotenv').config({ path: './../config.env' });
 const connectToDatabase = require('../config/db');
 const fs = require('fs');
-const Otp = require('../models/otp');
 const User = require('../models/user');
 const Result = require('../models/result');
-const Selection = require('../models/selection');
 const Vote = require('../models/vote');
 const moment = require('moment-timezone');
 
@@ -12,14 +10,32 @@ connectToDatabase();
 
 const backupData = async () => {
   try {
-    const otps = await Otp.find();
     const users = await User.find();
-    console.log(users.length);
     const results = await Result.find();
-    const selections = await Selection.find();
     const votes = await Vote.find();
 
-    // Get current date-time in Asia/Yangon timezone with seconds included
+    let userJson = JSON.stringify(users);
+    userJson = JSON.parse(userJson);
+    userJson.forEach((user) => {
+      user._id = { $oid: user._id };
+    });
+
+    let resultJson = JSON.stringify(results);
+    resultJson = JSON.parse(resultJson);
+    console.log(resultJson);
+    resultJson.forEach((result) => {
+      result._id = { $oid: result._id };
+      result.selectionId = { $oid: result.selectionId };
+    });
+
+    let voteJson = JSON.stringify(votes);
+    voteJson = JSON.parse(voteJson);
+    voteJson.forEach((vote) => {
+      vote._id = { $oid: vote._id };
+      vote.user = { $oid: vote.user };
+      vote.selectionId = { $oid: vote.selectionId };
+    });
+
     const formattedDate = moment()
       .tz('Asia/Yangon')
       .format('YYYY-MM-DD-HH-mm-ss'); // Including seconds for uniqueness
@@ -34,27 +50,32 @@ const backupData = async () => {
     if (!fs.existsSync(folder)) {
       fs.mkdirSync(folder, { recursive: true });
     }
-    if (otps) {
-      fs.writeFileSync(`${folder}/otps.json`, JSON.stringify(otps));
-    }
+
     if (users) {
-      fs.writeFileSync(`${folder}/users.json`, JSON.stringify(users));
-    }
-    if (results) {
-      fs.writeFileSync(`${folder}/results.json`, JSON.stringify(results));
-    }
-    if (selections) {
-      fs.writeFileSync(`${folder}/selections.json`, JSON.stringify(selections));
-    }
-    if (votes) {
-      fs.writeFileSync(`${folder}/votes.json`, JSON.stringify(votes));
+      fs.writeFileSync(
+        `${folder}/users.json`,
+        JSON.stringify(userJson, null, 2)
+      );
     }
 
-    console.log('Data successfully backed up for ' + formattedDate);
+    if (results) {
+      fs.writeFileSync(
+        `${folder}/results.json`,
+        JSON.stringify(resultJson, null, 2)
+      );
+    }
+
+    if (votes) {
+      fs.writeFileSync(
+        `${folder}/votes.json`,
+        JSON.stringify(voteJson, null, 2)
+      );
+    }
   } catch (err) {
     console.log(err);
   }
 };
 
-// backup every 15 seconds (or adjust as needed)
-setInterval(backupData, 1000 * 5);
+if (process.argv[2] === '-b') {
+  backupData();
+}
