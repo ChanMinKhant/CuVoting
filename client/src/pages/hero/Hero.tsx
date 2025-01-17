@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../store/store';
 
 function Front() {
+  const { status: userStatus } = useAppSelector((state) => state.user);
   return (
     <div className='w-full h-[100vh] bg-gradient-to-r from-purple-800 to-blue-600 flex flex-col justify-center items-center text-white relative overflow-hidden'>
       {/* Overlay */}
@@ -26,7 +28,12 @@ function Front() {
           </Link>
           <Link
             to='/signup'
-            className='px-8 py-3 text-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition transform duration-300'
+            className={`px-8 py-3 text-lg bg-gradient-to-r from-green-400 to-blue-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition transform duration-300 ${
+              userStatus === 'succeeded'
+                ? 'cursor-not-allowed opacity-50'
+                : 'hover:scale-110'
+            }`}
+            onClick={(e) => userStatus === 'succeeded' && e.preventDefault()}
           >
             Sign Up
           </Link>

@@ -35,6 +35,6 @@ const calculateResult = async () => {
   }
 };
 
-calculateResult();
+// calculateResult();
 
 module.exports = calculateResult;

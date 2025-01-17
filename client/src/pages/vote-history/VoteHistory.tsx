@@ -14,6 +14,12 @@ const VoteHistory = () => {
   const { selections, status } = useAppSelector((state) => state.selections);
 
   useEffect(() => {
+    if (status === 'failed') {
+      navigate('/signup');
+    }
+  }, [status, navigate]);
+
+  useEffect(() => {
     setIsLoading(true);
     getVoteHistory().then((res) => {
       setVoteHistory(res.data);
