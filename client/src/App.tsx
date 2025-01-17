@@ -15,13 +15,14 @@ import VoteHistory from './pages/vote-history/VoteHistory';
 import CoupleCard from './pages/vote/components/CoupleCard';
 import Nav from './components/Nav';
 import { logout } from './services/auth';
+import MaintenancePage from './pages/hero/MaintenancePage';
 
 function App() {
   const dispatch = useAppDispatch();
 
   const { user, status: userStatus } = useAppSelector((state) => state.user);
   const { status: selectionStatus } = useAppSelector(
-    (state) => state.selections,
+    (state) => state.selections
   );
 
   useEffect(() => {
@@ -58,6 +59,11 @@ Tap "Okay" to logout! 👉🚪`;
 
     checkBanStatus();
   }, [userStatus, user?.user?.isBanned, user?.user?.username]);
+
+  const isMaintaining: boolean = true;
+  if (isMaintaining) {
+    return <MaintenancePage />;
+  }
 
   return (
     <>
