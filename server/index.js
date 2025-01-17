@@ -14,7 +14,13 @@ process.on('uncaughtException', (err) => {
 
 app.use(
   express.static(path.join(__dirname, 'public'), {
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    setHeaders: (res, path) => {
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=604800'); // 1 week
+      }
+    },
   })
 );
 
