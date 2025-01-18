@@ -14,6 +14,7 @@ const voteSchema = new mongoose.Schema(
       enum: [...BoyTitles, ...GirlTitles, ...CoupleTitles],
       required: true,
     },
+    isArchive: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
