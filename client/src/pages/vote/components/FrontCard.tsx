@@ -20,13 +20,7 @@ function FrontCard({ selection, activeTab }: any) {
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
         <LazyLoadImage
           src={`${backendUrl}/webp/${selection?.number}${
-            selection?.gender === 'boy'
-              ? 'b'
-              : selection?.number === 9
-              ? Math.random() < 0.5
-                ? 'g2'
-                : 'g'
-              : 'g'
+            selection?.gender === 'boy' ? 'b' : 'g'
           }.webp`}
           alt={`Contestant ${selection?.name}`}
           effect='blur'

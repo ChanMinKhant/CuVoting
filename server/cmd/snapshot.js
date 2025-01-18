@@ -22,7 +22,6 @@ const backupData = async () => {
 
     let resultJson = JSON.stringify(results);
     resultJson = JSON.parse(resultJson);
-    console.log(resultJson);
     resultJson.forEach((result) => {
       result._id = { $oid: result._id };
       result.selectionId = { $oid: result.selectionId };

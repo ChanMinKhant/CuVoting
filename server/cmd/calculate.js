@@ -10,16 +10,19 @@ connectToDatabase();
 const calculateResult = async () => {
   try {
     const results = await Result.find().populate('selectionId');
-    console.log(results);
 
     const logResults = (titleType, titles) => {
       titles.forEach((title) => {
+        console.log('............................................');
         console.log(`${titleType} titles "${title}"`);
         results
           .filter((result) => result.category === title)
           .forEach((result) => {
-            console.log(`${result?.selectionId?.name} = ${result.count}`);
+            console.log(
+              `${result?.selectionId?.number} - ${result?.selectionId?.name} = ${result.count}`
+            );
           });
+        console.log('............................................');
       });
     };
 
