@@ -5,10 +5,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from './components/Modal';
 
 const VotingPage = () => {
+  console.log('VotingPage');
   const navigate = useNavigate();
 
-  const { user, status: userStatus } = useAppSelector((state) => state.user);
-  const { selections, status: selectionStatus } = useAppSelector(
+  const { status: userStatus } = useAppSelector((state) => state.user);
+  const { status: selectionStatus } = useAppSelector(
     (state) => state.selections
   );
 
@@ -16,7 +17,7 @@ const VotingPage = () => {
     if (userStatus === 'failed' || selectionStatus === 'failed') {
       navigate('/signup'); // Use 'navigate' instead of 'negative'
     }
-  }, [selections, selectionStatus, user, userStatus, navigate]);
+  }, [selectionStatus, userStatus, navigate]);
 
   return (
     <div className='w-full h-full p-4 flex flex-col select-none'>

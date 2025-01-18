@@ -17,7 +17,7 @@ import { logout } from './services/auth';
 import MaintenancePage from './pages/hero/MaintenancePage';
 
 function App() {
-  const isMaintaining: boolean = true;
+  const isMaintaining: boolean = false;
   if (isMaintaining) {
     return <MaintenancePage />;
   }
@@ -40,11 +40,7 @@ function App() {
 
   useEffect(() => {
     const checkBanStatus = async () => {
-      console.log(user?.user?.isBanned);
-      console.log(userStatus);
       if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
-        console.log('hi');
-
         const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
 Reason? Because you're TOO... Pretty — it’s unfair to others! Right? 😂🤣   
 Sorry, not sorry! 😔💔  

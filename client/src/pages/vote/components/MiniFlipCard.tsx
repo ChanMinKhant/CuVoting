@@ -1,6 +1,7 @@
 import './mini.css';
 
 const MiniFlipCard = () => {
+  console.log('MiniFlipCard');
   return (
     <div className='relative w-[20px] h-[30px] perspective flex'>
       <div className='mini-flip-card '>
