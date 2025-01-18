@@ -17,7 +17,7 @@ import { logout } from './services/auth';
 import MaintenancePage from './pages/hero/MaintenancePage';
 
 function App() {
-  const isMaintaining: boolean = false;
+  const isMaintaining: boolean = true;
   if (isMaintaining) {
     return <MaintenancePage />;
   }
