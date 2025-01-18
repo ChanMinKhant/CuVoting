@@ -18,10 +18,15 @@ function FrontCard({ selection, activeTab }: any) {
   return (
     <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
-        {/* Lazy Loaded Image with Blur Effect */}
         <LazyLoadImage
           src={`${backendUrl}/webp/${selection?.number}${
-            selection?.gender === 'boy' ? 'b' : 'g'
+            selection?.gender === 'boy'
+              ? 'b'
+              : selection.number === 9
+              ? Math.random() < 0.5
+                ? 'g2'
+                : 'g'
+              : 'g'
           }.webp`}
           alt={`Contestant ${selection?.name}`}
           effect='blur'
