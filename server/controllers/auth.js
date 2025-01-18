@@ -20,7 +20,6 @@ function normalizeEmail(email) {
 
 exports.register = asyncHandler(async (req, res, next) => {
   const { email, password, confirmPassword, deviceId } = req.body;
-  console.log(req.body);
   // Validate request data
   const { error } = registerSchema.validate(req.body);
   if (error) {
@@ -126,7 +125,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    sameSite: 'none',
     path: '/',
   });
 
@@ -182,7 +181,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   res.cookie('jwt', token, {
     httpOnly: true,
     maxAge: 365 * 24 * 60 * 60 * 1000, // 30 days
-    sameSite: 'strict',
+    sameSite: 'none',
     secure: true,
   });
 
@@ -284,7 +283,7 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
     maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
     httpOnly: true,
     secure: true,
-    sameSite: 'strict',
+    sameSite: 'none',
     path: '/',
   });
 
