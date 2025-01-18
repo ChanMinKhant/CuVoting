@@ -126,7 +126,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
     httpOnly: true,
     secure: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     path: '/',
   });
 
@@ -182,7 +182,7 @@ exports.submitOtp = asyncHandler(async (req, res, next) => {
   res.cookie('jwt', token, {
     httpOnly: true,
     maxAge: 365 * 24 * 60 * 60 * 1000, // 30 days
-    sameSite: 'None',
+    sameSite: 'strict',
     secure: true,
   });
 
@@ -284,7 +284,7 @@ exports.loginWithDeviceId = asyncHandler(async (req, res, next) => {
     maxAge: 365 * 24 * 60 * 60 * 1000, // 1 year
     httpOnly: true,
     secure: true,
-    sameSite: 'none',
+    sameSite: 'strict',
     path: '/',
   });
 

@@ -7,19 +7,25 @@ const router = require('./routes/index');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
+const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require('express-rate-limit');
+const helmet = require('helmet');
+
 process.on('uncaughtException', (err) => {
   console.error('There was an uncaught error', err);
   process.exit(1); // Mandatory (as per the Node.js docs)
 });
 
-app.use(
-  express.static(path.join(__dirname, 'public'), {
-    etag: true,
-  })
-);
-
+app.use(helmet());
 app.use(express.json());
 app.use(cookieParser());
+app.use(mongoSanitize());
+
+const limiter = rateLimit({
+  windowMs: 5 * 60 * 1000, // 5 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: 'Too many requests from this IP, please try again after 15 minutes',
+});
 
 const corsOptions = {
   origin: [
@@ -32,6 +38,13 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.use(limiter);
+
+app.use(
+  express.static(path.join(__dirname, 'public'), {
+    etag: true,
+  })
+);
 
 app.use('/api', router);
 
