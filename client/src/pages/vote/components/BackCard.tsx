@@ -9,9 +9,9 @@ const ProfileCard = memo(({ selection }: any) => {
       {/* Header Section */}
       <div className='text-center'>
         <h1
-          className={`font-bold text-gray-900 ${
-            selection?.name?.length > 13 ? 'text-xl' : 'text-2xl'
-          }`}
+          className={`font-bold ${
+            selection?.gender === 'boy' ? 'text-blue-500' : 'text-pink-500'
+          } ${selection?.name?.length > 13 ? 'text-xl' : 'text-2xl'}`}
         >
           {selection?.name}
         </h1>

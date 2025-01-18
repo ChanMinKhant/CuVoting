@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import './mini.css';
 
 const MiniFlipCard = () => {
-  console.log('MiniFlipCard');
+  console.log('mini');
   return (
     <div className='relative w-[20px] h-[30px] perspective flex'>
       <div className='mini-flip-card '>
@@ -18,4 +19,4 @@ const MiniFlipCard = () => {
   );
 };
 
-export default MiniFlipCard;
+export default memo(MiniFlipCard);

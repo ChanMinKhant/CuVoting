@@ -49,11 +49,6 @@ function CardSwiper() {
           if (boySelection && girlSelection) {
             filteredSelection.push([boySelection, girlSelection]);
           }
-          // const boySelection = boy[number - 1];
-          // const girlSelection = girl[number - 1];
-          // if (boySelection && girlSelection) {
-          //   filteredSelection.push([boySelection, girlSelection]);
-          // }
         }
         setFilteredSelections(filteredSelection);
       }
