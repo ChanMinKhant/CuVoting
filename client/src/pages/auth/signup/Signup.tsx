@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import { register } from '../../../services/auth';
 import { useAppSelector } from '../../../store/store';
 import { toast } from 'react-toastify';
@@ -56,7 +56,6 @@ const RegisterForm: React.FC = () => {
     if (status === 'succeeded' && user) {
       navigate('/');
     }
-    // set device id
     if (formData.deviceId === '') {
       getFingerprint().then((fp) => {
         setFormData((prev) => ({ ...prev, deviceId: fp }));
@@ -65,7 +64,7 @@ const RegisterForm: React.FC = () => {
   }, [status, user, navigate]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -73,7 +72,7 @@ const RegisterForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<any>,
+    nextRef: React.RefObject<any>
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -86,19 +85,11 @@ const RegisterForm: React.FC = () => {
     if (password.length < 8) {
       errors.push('Password must be at least 8 characters long');
     }
-    // if (!/[A-Z]/.test(password)) {
-    //   errors.push('Password must contain at least one uppercase letter');
-    // }
-    // if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-    //   errors.push('Password must contain at least one special character');
-    // }
     return errors;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const validateForm = () => {
     const newErrors: Partial<FormData> = {};
-
     if (!formData.username) newErrors.username = 'Username is required';
     if (!formData.email) newErrors.email = 'Email is required';
 
@@ -121,6 +112,12 @@ const RegisterForm: React.FC = () => {
       if (!formData.occupation) newErrors.occupation = 'Occupation is required';
     }
 
+    return newErrors;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const newErrors = validateForm();
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
@@ -133,8 +130,8 @@ const RegisterForm: React.FC = () => {
         navigate('/otp');
         toast.success('User registered successfully');
       } catch (error: any) {
-        console.log(error?.data?.message);
-        toast.error(error?.data?.message) || 'something went wrong';
+        console.error(error?.data?.message);
+        toast.error(error?.data?.message || 'Something went wrong');
       } finally {
         setIsSubmitting(false);
       }
@@ -198,7 +195,11 @@ const RegisterForm: React.FC = () => {
               onClick={() => setShowPassword(!showPassword)}
               className='absolute right-3 top-1/2 transform -translate-y-1/2'
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
             </button>
             {errors.password && (
               <p className='text-red-500 text-sm mt-1'>{errors.password}</p>
@@ -222,7 +223,11 @@ const RegisterForm: React.FC = () => {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               className='absolute right-3 top-1/2 transform -translate-y-1/2'
             >
-              {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showConfirmPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
             </button>
             {errors.confirmPassword && (
               <p className='text-red-500 text-sm mt-1'>
@@ -239,7 +244,7 @@ const RegisterForm: React.FC = () => {
               onKeyDown={(e) =>
                 handleKeyDown(
                   e,
-                  formData.userType === 'student' ? sectionRef : occupationRef,
+                  formData.userType === 'student' ? sectionRef : occupationRef
                 )
               }
               className={`w-full p-2 border rounded-full ${

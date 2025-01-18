@@ -12,12 +12,15 @@ import { fetchCurrentUser } from './store/features/userSlice';
 import { fetchAllSelections } from './store/features/selectionSlice';
 import { ToastContainer } from 'react-toastify';
 import VoteHistory from './pages/vote-history/VoteHistory';
-import CoupleCard from './pages/vote/components/CoupleCard';
 import Nav from './components/Nav';
 import { logout } from './services/auth';
 import MaintenancePage from './pages/hero/MaintenancePage';
 
 function App() {
+  const isMaintaining: boolean = false;
+  if (isMaintaining) {
+    return <MaintenancePage />;
+  }
   const dispatch = useAppDispatch();
 
   const { user, status: userStatus } = useAppSelector((state) => state.user);
@@ -60,11 +63,6 @@ Tap "Okay" to logout! 👉🚪`;
     checkBanStatus();
   }, [userStatus, user?.user?.isBanned, user?.user?.username]);
 
-  const isMaintaining: boolean = true;
-  if (isMaintaining) {
-    return <MaintenancePage />;
-  }
-
   return (
     <>
       <Nav />
@@ -76,7 +74,6 @@ Tap "Okay" to logout! 👉🚪`;
             <Route path='/login' element={<Login />} />
             <Route path='/otp' element={<Otp />} />
             <Route path='/home' element={<VotingPage />} />
-            <Route path='/test' element={<CoupleCard />} />
             <Route path='/vote-history' element={<VoteHistory />} />
             <Route path='/helloworld' element={<h1>Hello World!</h1>} />
             <Route path='*' element={<h1>Not Found</h1>} />

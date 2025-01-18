@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Eye, EyeOff } from 'lucide-react';
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import {
   detectedDeviceAccount,
   login,
@@ -50,7 +50,7 @@ const LoginForm: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent,
-    nextRef: React.RefObject<HTMLInputElement>,
+    nextRef: React.RefObject<HTMLInputElement>
   ) => {
     if (e.key === 'Enter') {
       e.preventDefault();
@@ -98,7 +98,7 @@ const LoginForm: React.FC = () => {
         navigate('/');
       }
     } catch (error) {
-      console.error('Fail to login with device id');
+      console.error('Failed to log in with device ID');
     }
   };
 
@@ -154,7 +154,11 @@ const LoginForm: React.FC = () => {
               onClick={() => setShowPassword(!showPassword)}
               className='absolute right-3 top-1/2 transform -translate-y-1/2'
             >
-              {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
             </button>
             {errors.password && (
               <p className='text-red-500 text-sm mt-1'>{errors.password}</p>
