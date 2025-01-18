@@ -15,6 +15,7 @@ import VoteHistory from './pages/vote-history/VoteHistory';
 import Nav from './components/Nav';
 import { logout } from './services/auth';
 import MaintenancePage from './pages/hero/MaintenancePage';
+import Loader from './components/Loader';
 
 function App() {
   const isMaintaining: boolean = false;
@@ -58,6 +59,17 @@ Tap "Okay" to logout! 👉🚪`;
 
     checkBanStatus();
   }, [userStatus, user?.user?.isBanned, user?.user?.username]);
+
+  if (userStatus === 'loading') {
+    // const dynamicText = ['king', 'queen', 'favourite couple'];
+    // const rand = dynamicText[Math.floor(Math.random() * dynamicText.length)];
+    return (
+      <div className='flex flex-col justify-center items-center h-screen'>
+        <Loader />
+        {`Are you ready to vote?...`}
+      </div>
+    );
+  }
 
   return (
     <>
