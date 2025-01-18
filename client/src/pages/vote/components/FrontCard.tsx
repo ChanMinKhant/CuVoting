@@ -22,7 +22,7 @@ function FrontCard({ selection, activeTab }: any) {
           src={`${backendUrl}/webp/${selection?.number}${
             selection?.gender === 'boy'
               ? 'b'
-              : selection.number === 9
+              : selection?.number === 9
               ? Math.random() < 0.5
                 ? 'g2'
                 : 'g'
