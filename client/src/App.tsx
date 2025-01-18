@@ -18,7 +18,7 @@ import MaintenancePage from './pages/hero/MaintenancePage';
 import Loader from './components/Loader';
 
 function App() {
-  const isMaintaining: boolean = false;
+  const isMaintaining: boolean = true;
   if (isMaintaining) {
     return <MaintenancePage />;
   }
