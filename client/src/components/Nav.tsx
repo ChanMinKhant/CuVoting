@@ -1,45 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../services/auth';
 
 const Nav: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isShowNav, setIsShowNav] = useState(false);
-  const location = useLocation(); // useLocation hook to get the current path
+  const [isShowNav, setIsShowNav] = useState(true);
+  const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // Toggle dropdown visibility
+  const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
+  // Handle logout
   const handleLogout = async () => {
-    try {
-      const userConfirmed = window.confirm('Are you sure you want to log out?');
-      if (!userConfirmed) {
-        return;
-      }
+    if (!window.confirm('Are you sure you want to log out?')) return;
 
+    try {
       setIsDropdownOpen(false);
       await logout();
       window.location.href = '/';
     } catch (error) {
-      console.log('fail to login');
+      console.error('Failed to log out', error);
     }
   };
 
+  // Control nav visibility based on the current route
   useEffect(() => {
-    // Only show the nav bar on the /home route
-    if (location.pathname !== '/home') {
-      setIsShowNav(false);
-    } else {
-      setIsShowNav(true);
-    }
-  }, [location.pathname]); // Re-run the effect when location changes
+    setIsShowNav(location.pathname === '/home');
+  }, [location.pathname]);
 
   if (!isShowNav) return null;
 
@@ -52,45 +40,25 @@ const Nav: React.FC = () => {
 
         <div className='relative'>
           <button
-            onClick={toggleMenu}
-            className='focus:outline-none text-white'
-          ></button>
-          <button
             onClick={toggleDropdown}
             className='ml-4 text-white focus:outline-none'
           >
-            {isDropdownOpen ? (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                strokeWidth='2'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M5 15l7-7 7 7'
-                />
-              </svg>
-            ) : (
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                className='w-6 h-6'
-                fill='none'
-                stroke='currentColor'
-                viewBox='0 0 24 24'
-                strokeWidth='2'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M19 9l-7 7-7-7'
-                />
-              </svg>
-            )}
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              className='w-6 h-6'
+              fill='none'
+              stroke='currentColor'
+              viewBox='0 0 24 24'
+              strokeWidth='2'
+            >
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                d={isDropdownOpen ? 'M5 15l7-7 7 7' : 'M19 9l-7 7-7-7'}
+              />
+            </svg>
           </button>
+
           {isDropdownOpen && (
             <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20'>
               <Link
@@ -116,4 +84,4 @@ const Nav: React.FC = () => {
   );
 };
 
-export default Nav;
+export default memo(Nav);
