@@ -43,7 +43,7 @@ function App() {
     const checkBanStatus = async () => {
       if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
         const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
-Reason? Because you're TOO... Pretty — it’s unfair to others! Right? 😂🤣   
+Reason? Because we couldn't verify who u are.   
 Sorry, not sorry! 😔💔  
 Tap "Okay" to logout! 👉🚪`;
 
