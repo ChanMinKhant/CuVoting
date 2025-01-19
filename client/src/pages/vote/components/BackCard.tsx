@@ -18,7 +18,7 @@ const ProfileCard = memo(({ selection }: any) => {
       </div>
 
       {/* Info Section */}
-      <div className='space-y-3'>
+      <div className='space-y-2'>
         <InfoItem label='FavColor' value={selection?.favColor} />
         <InfoItem label='Talent' value={selection?.talent} />
         <InfoItem label='Hobby' value={selection?.hobby} />
@@ -28,25 +28,32 @@ const ProfileCard = memo(({ selection }: any) => {
       </div>
 
       {/* Social Media Links */}
-      {selection.social?.length > 0 && (
-        <div className='flex justify-center gap-4 pt-4'>
-          {selection?.social?.map((url: string, index: number) => (
-            <a
-              key={index}
-              href={url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='bg-blue-500 text-white rounded-full p-3 hover:bg-blue-600 transition duration-300'
-              aria-label='Social Profile'
-            >
-              {url?.includes('facebook') && <FaFacebookF />}
-              {url?.includes('instagram') && <FaInstagram />}
-              {url?.includes('tiktok') && <FaTiktok />}
-              {url?.includes('t.me') && <FaTelegram />}
-            </a>
-          ))}
-        </div>
-      )}
+      <div>
+        <h2 className='text-xs font-semibold text-gray-700'>Social Media</h2>
+        {selection.social?.length > 0 && (
+          <div className='flex justify-center gap-4 pt-4'>
+            {selection?.social?.map((url: string, index: number) => (
+              <a
+                key={index}
+                href={url}
+                target='_blank'
+                rel='noopener noreferrer'
+                className={`${
+                  selection?.gender === 'boy'
+                    ? 'bg-blue-500 hover:bg-blue-600'
+                    : 'bg-pink-500 hover:bg-pink-600'
+                } text-white rounded-full p-2 transition duration-300`}
+                aria-label='Social Profile'
+              >
+                {url?.includes('facebook') && <FaFacebookF />}
+                {url?.includes('instagram') && <FaInstagram />}
+                {url?.includes('tiktok') && <FaTiktok />}
+                {url?.includes('t.me') && <FaTelegram />}
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 });

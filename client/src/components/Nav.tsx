@@ -1,12 +1,13 @@
-import { useState, useEffect, memo } from 'react';
+import { useState, useEffect, useRef, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHistory, FaSignOutAlt } from 'react-icons/fa';
+import { FaHistory, FaSignOutAlt, FaChartBar } from 'react-icons/fa';
 import { logout } from '../services/auth';
 
 const Nav: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isShowNav, setIsShowNav] = useState(true);
   const location = useLocation();
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Toggle dropdown visibility
   const toggleDropdown = () => setIsDropdownOpen((prev) => !prev);
@@ -29,6 +30,23 @@ const Nav: React.FC = () => {
     setIsShowNav(location.pathname === '/home');
   }, [location.pathname]);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   if (!isShowNav) return null;
 
   return (
@@ -38,7 +56,7 @@ const Nav: React.FC = () => {
           <span className='italic'>Voting</span>
         </Link>
 
-        <div className='relative'>
+        <div className='relative' ref={dropdownRef}>
           <button
             onClick={toggleDropdown}
             className='ml-4 text-white focus:outline-none'
@@ -63,14 +81,24 @@ const Nav: React.FC = () => {
             <div className='absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-20'>
               <Link
                 to='/vote-history'
-                className='flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100'
+                className='flex items-center w-full px-4 py-2 text-gray-800 hover:bg-gray-100'
                 onClick={() => setIsDropdownOpen(false)}
               >
                 <FaHistory className='mr-2' />
                 Vote History
               </Link>
+              <hr />
+              <Link
+                to='/results'
+                className='flex items-center w-full px-4 py-2 text-gray-800 hover:bg-gray-100'
+                onClick={() => setIsDropdownOpen(false)}
+              >
+                <FaChartBar className='mr-2' />
+                Results
+              </Link>
+              <hr />
               <button
-                className='flex items-center px-4 py-2 text-gray-800 hover:bg-gray-100'
+                className='flex items-center w-full px-4 py-2 text-gray-800 hover:bg-gray-100'
                 onClick={handleLogout}
               >
                 <FaSignOutAlt className='mr-2' />
