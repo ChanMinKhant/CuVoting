@@ -38,7 +38,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   if (existingDeviceUser) {
     return next(
       new CustomError(
-        `This device is already registered with ${existingDeviceUser.email}. You can log in with this email.`,
+        `We do not allow multiple accounts. Please log in with your existing account.`,
         400
       )
     );

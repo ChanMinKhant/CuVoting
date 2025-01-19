@@ -353,9 +353,9 @@ const RegisterForm: React.FC = () => {
             {isSubmitting ? <ButtonLoader /> : 'Sign Up'}
           </button>
         </form>
-        <p className='mt-4 text-center'>
+        <p className='mt-4 text-center text-gray-600'>
           Already have an account?{' '}
-          <Link to='/login' className='text-blue-500 hover:underline'>
+          <Link to='/login' className='text-blue-600 hover:underline'>
             Log In
           </Link>
         </p>

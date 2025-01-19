@@ -74,8 +74,8 @@ Tap "Okay" to logout! 👉🚪`;
   return (
     <>
       <Nav />
-      <div className='flex bg-soft-milk min-h-screen'>
-        <div className='w-full max-w-screen-sm sm:max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl mx-auto p-4'>
+      <div className='flex w-full bg-soft-milk min-h-screen'>
+        <div className='w-full max-w-screen-sm sm:max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl mx-auto p-0'>
           <Routes>
             <Route path='/' element={<Hero />} />
             <Route path='/signup' element={<Signup />} />
