@@ -44,7 +44,7 @@ function App() {
       if (userStatus === 'succeeded' && user?.user?.isBanned === true) {
         const text = `Hey ${user?.user?.username}! 🚨 You're banned! 🚫  
 Reason? Because we couldn't verify who u are.   
-Sorry, not sorry! 😔💔  
+Sorry,  😔💔  
 Tap "Okay" to logout! 👉🚪`;
 
         if (window.confirm(text)) {

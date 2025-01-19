@@ -3,7 +3,7 @@ import Card from './Card';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './cardSwiper.css';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules'; // Update the import path
-import MiniFlipCard from './MiniFlipCard';
+// import MiniFlipCard from './MiniFlipCard';
 import { useState, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../store/store';
 import { openModal, setName } from '../../../store/features/modalSlice';
