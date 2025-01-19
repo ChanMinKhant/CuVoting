@@ -7,7 +7,7 @@ import Modal from './components/Modal';
 const VotingPage = () => {
   console.log('VotingPage');
   const navigate = useNavigate();
-
+  const { activeTab } = useAppSelector((state) => state.modal);
   const { status: userStatus } = useAppSelector((state) => state.user);
   const { status: selectionStatus } = useAppSelector(
     (state) => state.selections
@@ -20,15 +20,23 @@ const VotingPage = () => {
   }, [selectionStatus, userStatus, navigate]);
 
   return (
-    <div className='w-full h-full p-4 flex flex-col select-none'>
+    <div className='w-full h-full p-4 flex flex-col select-none bg-pale-100'>
       {/* Header */}
       <div className='text-center my-0'>
         <Link to='/'>
-          <h1 className='text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-pink-500 to-red-500'>
-            UCS(Pyay) Voting
+          <h1
+            className={`text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
+              activeTab === 'boy'
+                ? 'from-green-300 to-green-500'
+                : activeTab === 'girl'
+                ? 'from-pink-300 to-pink-600'
+                : 'from-green-400 via-purple-300 to-pink-800'
+            }`}
+          >
+            Vote Your Favorite Selections
           </h1>
         </Link>
-        <p className='text-sm font-semibold text-gray-600 mt-1'>
+        <p className='text-sm font-semibold text-gray-600 mt-1 mb-2'>
           Every Vote Matters
         </p>
       </div>

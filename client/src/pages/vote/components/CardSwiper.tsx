@@ -68,10 +68,10 @@ function CardSwiper() {
       <ActiveTabBar />
       <br />
       <div className='w-full flex justify-end text-xs items-center mt-2 mr-4 mb-[-5px] px-2'>
-        <div className='border-b px-2 py-[2px] mr-2 rounded-md shadow-[10px_10px_20px_#bebebe,-10px_-10px_20px_#ffffff,inset_10px_10px_20px_#bebebe,inset_-10px_-10px_10px_#ffffff]'>
+        {/* <div className='border-b px-2 py-[2px] mr-2 rounded-md shadow-[10px_10px_20px_#bebebe,-10px_-10px_20px_#ffffff,inset_10px_10px_20px_#bebebe,inset_-10px_-10px_10px_#ffffff]'>
           Click the cards to flip
         </div>
-        <MiniFlipCard />
+        <MiniFlipCard /> */}
       </div>
       {filteredSelections.length > 0 ? (
         <Swiper
