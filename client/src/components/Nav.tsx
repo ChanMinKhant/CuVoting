@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, memo } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaHistory, FaSignOutAlt, FaChartBar, FaVoteYea } from 'react-icons/fa';
+import { FaHistory, FaSignOutAlt, FaChartBar } from 'react-icons/fa';
 import { logout } from '../services/auth';
 import { useAppSelector } from '../store/store';
 
@@ -58,9 +58,9 @@ const Nav: React.FC = () => {
         activeTab === 'girl'
           ? 'bg-pink-100'
           : activeTab === 'boy'
-          ? 'bg-green-100'
+          ? 'bg-blue-100'
           : activeTab === 'couple'
-          ? 'bg-gradient-to-r from-green-100 to-pink-100'
+          ? 'bg-gradient-to-r from-blue-100 to-pink-100'
           : 'bg-gray-100'
       } bg-opacity-50 backdrop-blur-md w-full max-w-[640px] mx-auto p-4 top-0 left-0 right-0 z-10`}
     >

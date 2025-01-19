@@ -14,8 +14,8 @@ const ActiveTabBar = () => {
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
               activeTab === 'boy'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
+                ? 'text-blue-600 border-b-2 border-blue-600'
+                : 'hover:text-blue-600 hover:border-b-2 hover:border-blue-600'
             }`}
             onClick={() => handleTabClick('boy')}
           >
@@ -24,8 +24,8 @@ const ActiveTabBar = () => {
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
               activeTab === 'girl'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
+                ? 'text-pink-800 border-b-2 border-pink-600'
+                : 'hover:text-pink-600 hover:border-b-2 hover:border-pink-600'
             }`}
             onClick={() => handleTabClick('girl')}
           >
@@ -34,8 +34,8 @@ const ActiveTabBar = () => {
           <div
             className={`w-1/3 text-center py-2 mx-[3px] cursor-pointer ${
               activeTab === 'couple'
-                ? 'text-purple-600 border-b-2 border-purple-600'
-                : 'hover:text-purple-600 hover:border-b-2 hover:border-purple-600'
+                ? 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-pink-600 border-b-2 border-gradient-to-r from-blue-600 to-pink-600'
+                : 'hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-blue-600 hover:to-pink-600 hover:border-b-2 hover:border-gradient-to-r hover:from-blue-600 hover:to-pink-600'
             }`}
             onClick={() => handleTabClick('couple')}
           >

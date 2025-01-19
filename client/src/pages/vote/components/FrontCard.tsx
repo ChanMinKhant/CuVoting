@@ -47,7 +47,7 @@ function FrontCard({ selection, activeTab }: any) {
         <div
           className={`absolute top-3 left-3 rounded-full px-4 py-1 shadow-md ${
             selection?.gender === 'boy'
-              ? 'bg-gradient-to-r from-green-300 to-green-400'
+              ? 'bg-gradient-to-r from-blue-300 to-blue-400'
               : 'bg-gradient-to-r from-pink-500 to-purple-500'
           }`}
         >

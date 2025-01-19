@@ -27,10 +27,10 @@ const VotingPage = () => {
           <h1
             className={`text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${
               activeTab === 'boy'
-                ? 'from-green-300 to-green-500'
+                ? 'from-blue-300 to-blue-500'
                 : activeTab === 'girl'
                 ? 'from-pink-300 to-pink-600'
-                : 'from-green-400 via-purple-300 to-pink-800'
+                : 'from-blue-400 to-pink-500'
             }`}
           >
             Vote Your Favorite Selections
