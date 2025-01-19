@@ -9,7 +9,9 @@ connectToDatabase();
 
 const calculateResult = async () => {
   try {
-    const results = await Result.find().populate('selectionId');
+    const results = await Result.find()
+      .populate('selectionId')
+      .sort({ count: -1 });
 
     const logResults = (titleType, titles) => {
       titles.forEach((title) => {

@@ -2,6 +2,7 @@ require('dotenv').config({ path: './../config.env' });
 const connectToDatabase = require('../config/db');
 const fs = require('fs');
 const User = require('../models/user');
+const Selection = require('../models/selection');
 const Result = require('../models/result');
 const Vote = require('../models/vote');
 const moment = require('moment-timezone');
@@ -13,6 +14,7 @@ const backupData = async () => {
     const users = await User.find();
     const results = await Result.find();
     const votes = await Vote.find();
+    const selections = await Selection.find();
 
     let userJson = JSON.stringify(users);
     userJson = JSON.parse(userJson);
@@ -33,6 +35,12 @@ const backupData = async () => {
       vote._id = { $oid: vote._id };
       vote.user = { $oid: vote.user };
       vote.selectionId = { $oid: vote.selectionId };
+    });
+
+    let selectionJson = JSON.stringify(selections);
+    selectionJson = JSON.parse(selectionJson);
+    selectionJson.forEach((selection) => {
+      selection._id = { $oid: selection._id };
     });
 
     const formattedDate = moment()
@@ -68,6 +76,13 @@ const backupData = async () => {
       fs.writeFileSync(
         `${folder}/votes.json`,
         JSON.stringify(voteJson, null, 2)
+      );
+    }
+
+    if (selections) {
+      fs.writeFileSync(
+        `${folder}/selections.json`,
+        JSON.stringify(selectionJson, null, 2)
       );
     }
   } catch (err) {

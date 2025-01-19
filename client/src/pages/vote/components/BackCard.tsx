@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import { FaFacebookF } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTelegram, FaTiktok } from 'react-icons/fa';
 
 const ProfileCard = memo(({ selection }: any) => {
   if (!selection) return null;
@@ -39,7 +39,10 @@ const ProfileCard = memo(({ selection }: any) => {
               className='bg-blue-500 text-white rounded-full p-3 hover:bg-blue-600 transition duration-300'
               aria-label='Social Profile'
             >
-              <FaFacebookF size={20} />
+              {url?.includes('facebook') && <FaFacebookF />}
+              {url?.includes('instagram') && <FaInstagram />}
+              {url?.includes('tiktok') && <FaTiktok />}
+              {url?.includes('t.me') && <FaTelegram />}
             </a>
           ))}
         </div>
