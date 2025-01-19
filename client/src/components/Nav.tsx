@@ -62,7 +62,7 @@ const Nav: React.FC = () => {
           : activeTab === 'couple'
           ? 'bg-gradient-to-r from-blue-100 to-pink-100'
           : 'bg-gray-100'
-      } bg-opacity-50 backdrop-blur-md w-full max-w-[640px] mx-auto p-4 top-0 left-0 right-0 z-10`}
+      } bg-opacity-50 backdrop-blur-md w-full mx-auto p-4 top-0 left-0 right-0 z-10`}
     >
       <div className='container mx-auto flex justify-between items-center'>
         <Link
