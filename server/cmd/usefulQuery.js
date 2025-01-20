@@ -68,8 +68,8 @@ const userVotedSelection = async (id) => {
       console.log(
         `No.${vote.selectionId.number} - ${vote.selectionId.name}, ${vote.category}`
       );
-      console.log('.....................................');
     });
+    console.log('.....................................');
   } catch (error) {
     console.log(error);
   }
@@ -79,13 +79,17 @@ const selectionVotedUser = async (id) => {
   try {
     console.log('selectionVotedUser');
     const selection = await Selection.findById(id);
-    const votes = await Vote.find({ selectionId: id }).populate('user');
+    const votes = await Vote.find({ selectionId: id })
+      .populate('user')
+      .sort({ category: 1 });
     console.log('.....................................');
-    console.log(`selection no.${selection.number} ${selection.name} voted by`);
+    console.log(
+      `selection no.${selection.number} ${selection.name} is voted by `
+    );
     votes.forEach((vote) => {
-      console.log(`user ${vote.user.username}`);
-      console.log('.....................................');
+      console.log(`user ${vote.user.username} - ${vote.category}`);
     });
+    console.log('.....................................');
   } catch (error) {
     console.log(error);
   }
