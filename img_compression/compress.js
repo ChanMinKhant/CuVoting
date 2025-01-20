@@ -42,7 +42,7 @@ const compressImages = async () => {
         await sharp(inputFilePath)
           .rotate() // Automatically correct orientation
           .withMetadata() // Preserve metadata
-          .webp({ quality: 70 }) // WebP compression quality
+          .webp({ quality: 20 }) // WebP compression quality
           .toFile(outputWebpFilePath);
 
         console.log(`Processed: ${file}`);
