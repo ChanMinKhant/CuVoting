@@ -119,7 +119,7 @@ const Modal = () => {
           </div>
         ) : (
           <div className='text-center border-b-2 text-gray-600 text-lg font-medium'>
-            The voting period hasn't begun yet.
+            The voting period hasn't begun yet for you.
           </div>
         )}
         <div className='flex justify-end mt-6'>
