@@ -205,7 +205,7 @@ exports.resendOtp = asyncHandler(async (req, res, next) => {
     const err = new CustomError('Email is required', 400);
     return next(err);
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email, isVerify : false });
   if (!user) {
     const err = new CustomError('Invalid credentials', 400);
     return next(err);
