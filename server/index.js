@@ -28,11 +28,7 @@ const limiter = rateLimit({
 });
 
 const corsOptions = {
-  origin: [
-    'https://www.ucspyay.site',
-    'https://ucspyay.site',
-    'http://localhost:5173',
-  ],
+  origin: ['https://www.ucspyay.site', 'https://ucspyay.site'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
@@ -43,6 +39,13 @@ app.use(limiter);
 app.use(
   express.static(path.join(__dirname, 'public'), {
     etag: true,
+    setHeaders: (res, path) => {
+      if (path.endsWith('.html')) {
+        res.setHeader('Cache-Control', 'no-cache');
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=4600'); // 1 hour
+      }
+    },
   })
 );
 
