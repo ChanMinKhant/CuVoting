@@ -18,7 +18,7 @@ const OtpPage: React.FC = () => {
 
   useEffect(() => {
     if (status === 'succeeded' && user) {
-      navigate('/home');
+      navigate('/vote');
     }
   }, [status, user, navigate]);
 
@@ -28,7 +28,7 @@ const OtpPage: React.FC = () => {
   }
   const handleChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     const { value } = e.target;
     if (/^[0-9]$/.test(value)) {
@@ -50,7 +50,7 @@ const OtpPage: React.FC = () => {
 
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number,
+    index: number
   ) => {
     if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
       inputRefs.current[index - 1]?.focus();
@@ -75,7 +75,7 @@ const OtpPage: React.FC = () => {
       const data = await submitOtp(email!, otpValue);
       if (data.success) {
         alert('Account is verified successfully');
-        window.location.href = '/home';
+        window.location.href = '/vote';
       }
     } catch (error: any) {
       console.error('Error verifying OTP:');

@@ -20,7 +20,7 @@ function Front() {
         </p>
         <div className='flex flex-col sm:flex-row justify-center gap-3 w-full'>
           <Link
-            to='/home'
+            to='/vote'
             className='w-full sm:w-auto px-5 py-3 text-md bg-teal-200 hover:bg-teal-300 text-gray-800 font-medium rounded-md shadow transition-all duration-300'
           >
             Vote Now

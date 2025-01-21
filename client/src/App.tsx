@@ -16,6 +16,7 @@ import Nav from './components/Nav';
 import { logout } from './services/auth';
 import MaintenancePage from './pages/hero/MaintenancePage';
 import Loader from './components/Loader';
+import FullScreen from './pages/FullScreen/FullScreen';
 
 function App() {
   const isMaintaining: boolean = false;
@@ -81,8 +82,9 @@ Tap "Okay" to logout! 👉🚪`;
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/otp' element={<Otp />} />
-            <Route path='/home' element={<VotingPage />} />
+            <Route path='/vote' element={<VotingPage />} />
             <Route path='/vote-history' element={<VoteHistory />} />
+            <Route path='/:gender/:number' element={<FullScreen />} />
             <Route path='/helloworld' element={<h1>Hello World!</h1>} />
             <Route path='*' element={<h1>Not Found</h1>} />
           </Routes>

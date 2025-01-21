@@ -30,7 +30,7 @@ const Nav: React.FC = () => {
 
   // Control nav visibility based on the current route
   useEffect(() => {
-    setIsShowNav(location.pathname === '/home');
+    setIsShowNav(location.pathname === '/vote');
   }, [location.pathname]);
 
   // Close dropdown when clicking outside
