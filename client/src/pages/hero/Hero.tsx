@@ -26,7 +26,7 @@ function Front() {
             Vote Now
           </Link>
           <Link
-            to='/signup'
+            to='/login'
             className={`w-full sm:w-auto px-5 py-3 text-md bg-blue-200 hover:bg-blue-300 text-gray-800 font-medium rounded-md shadow transition-all duration-300 ${
               userStatus === 'succeeded'
                 ? 'cursor-not-allowed opacity-50'
@@ -34,7 +34,7 @@ function Front() {
             }`}
             onClick={(e) => userStatus === 'succeeded' && e.preventDefault()}
           >
-            Sign Up
+            Login
           </Link>
         </div>
       </div>
