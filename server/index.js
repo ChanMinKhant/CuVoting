@@ -28,11 +28,7 @@ const limiter = rateLimit({
 });
 
 const corsOptions = {
-  origin: [
-    'https://www.ucspyay.site',
-    'https://ucspyay.site',
-    'http://localhost:5173',
-  ],
+  origin: ['https://www.ucspyay.site', 'https://ucspyay.site'],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
