@@ -31,18 +31,13 @@ const corsOptions = {
   origin: [
     'https://www.ucspyay.site',
     'https://ucspyay.site',
-    'https://ucspyay-vote.onrender.com',
+    'http://localhost:5173',
   ],
-  credentials: true, // Allow sending cookies and credentials
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
-  exposedHeaders: ['Content-Type', 'Authorization'], // Expose headers for the client to access
+  credentials: true,
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
 
 app.use(cors(corsOptions));
-
-// Optional: Handle preflight requests explicitly (for better control)
-app.options('*', cors(corsOptions));
 app.use(limiter);
 
 app.use(
