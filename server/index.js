@@ -30,7 +30,8 @@ const limiter = rateLimit({
 const corsOptions = {
   origin: [
     'https://www.ucspyay.site',
-    'https://ucspyay.site, https://ucspyay-vote.onrender.com',
+    'https://ucspyay.site',
+    'https://ucspyay-vote.onrender.com',
   ],
   credentials: true, // Allow sending cookies and credentials
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
