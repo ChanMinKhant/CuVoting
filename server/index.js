@@ -29,11 +29,16 @@ const limiter = rateLimit({
 
 const corsOptions = {
   origin: ['https://www.ucspyay.site', 'https://ucspyay.site'],
-  credentials: true,
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true, // Allow sending cookies and credentials
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allowed request headers
+  exposedHeaders: ['Content-Type', 'Authorization'], // Expose headers for the client to access
 };
 
 app.use(cors(corsOptions));
+
+// Optional: Handle preflight requests explicitly (for better control)
+app.options('*', cors(corsOptions));
 app.use(limiter);
 
 app.use(
