@@ -1,20 +1,45 @@
 // memo
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useAppDispatch } from '../../../store/store';
 import { openModal, setName } from '../../../store/features/modalSlice';
 import { LazyLoadImage } from 'react-lazy-load-image-component'; // Import LazyLoadImage
 import 'react-lazy-load-image-component/src/effects/blur.css'; // Import blur effect
 import { backendUrl } from '../../../services/api';
+import { SlSizeFullscreen } from 'react-icons/sl';
+import { IoIosBackspace } from 'react-icons/io';
 
 function FrontCard({ selection, activeTab }: any) {
   const dispatch = useAppDispatch();
-
+  const [scaleBig, setScaleBig] = useState<boolean>(false);
   const handleVoteClick = (event: any) => {
     event.stopPropagation(); // Prevent card flip
     dispatch(openModal({ activeTab, selectionId: selection._id }));
     dispatch(setName(selection?.name));
   };
+  const handleImgSize = (event: any) => {
+    event.stopPropagation();
+    setScaleBig(true);
+  };
+  if (scaleBig) {
+    return (
+      <div>
+        <IoIosBackspace
+          onClick={() => {
+            setScaleBig(false);
+          }}
+          className='[40px] fixed top-[70px] left-[30px]'
+        />
 
+        <img
+          src={`${backendUrl}/webp/${selection?.number}${
+            selection?.gender === 'boy' ? 'b' : 'g'
+          }.webp`}
+          alt=''
+          className='w-full'
+        />
+      </div>
+    );
+  }
   return (
     <div className='relative w-full aspect-[2/3] overflow-hidden rounded-2xl shadow-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
       <div className='relative w-full h-full bg-white rounded-xl overflow-hidden'>
@@ -31,6 +56,11 @@ function FrontCard({ selection, activeTab }: any) {
         {/* <div className='absolute inset-0 bg-gradient-to-b from-black/0 via-black/5 to-transparent'></div> */}
         {/* Card Details */}
         <div className='absolute bottom-0 left-0 p-4 text-white text-left'>
+          <SlSizeFullscreen
+            onClick={handleImgSize}
+            className='w-[40px] absolute top-[20px] right-[20px]'
+          />
+
           <h2
             className={`text-2xl font-extrabold mb-3 ${
               selection?.name?.length > 15 ? 'text-xl' : ''
