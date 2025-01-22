@@ -68,7 +68,7 @@ Tap "Okay" to logout! 👉🚪`;
     );
   }
 
-  const isMaintaining: boolean = false;
+  const isMaintaining: boolean = true;
   if (isMaintaining) {
     return <MaintenancePage />;
   }
