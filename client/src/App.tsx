@@ -19,10 +19,6 @@ import Loader from './components/Loader';
 import FullScreen from './pages/FullScreen/FullScreen';
 
 function App() {
-  const isMaintaining: boolean = false;
-  if (isMaintaining) {
-    return <MaintenancePage />;
-  }
   const dispatch = useAppDispatch();
 
   const { user, status: userStatus } = useAppSelector((state) => state.user);
@@ -70,6 +66,11 @@ Tap "Okay" to logout! 👉🚪`;
         {`Are you ready to vote?...`}
       </div>
     );
+  }
+
+  const isMaintaining: boolean = true;
+  if (isMaintaining) {
+    return <MaintenancePage />;
   }
 
   return (

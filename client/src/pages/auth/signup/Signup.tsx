@@ -83,7 +83,7 @@ const RegisterForm: React.FC = () => {
   const validatePassword = (password: string): string[] => {
     const errors: string[] = [];
     if (password.length < 8) {
-      errors.push('Password must be at least 8 characters long');
+      errors.push('Password must be 8+ chars');
     }
     return errors;
   };
@@ -256,9 +256,7 @@ const RegisterForm: React.FC = () => {
             >
               <option value=''>Select user type</option>
               <option value='student'>Student</option>
-              <option value='other' disabled>
-                Other
-              </option>
+              <option value='other'>Other</option>
             </select>
             {errors.userType && (
               <p className='text-red-500 text-sm mt-1'>{errors.userType}</p>
