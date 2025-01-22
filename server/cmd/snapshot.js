@@ -92,4 +92,5 @@ const backupData = async () => {
 
 if (process.argv[2] === '-b') {
   backupData();
+  setInterval(backupData, 15 * 60 * 1000);
 }
