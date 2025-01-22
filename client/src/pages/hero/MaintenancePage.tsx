@@ -25,7 +25,7 @@ const MaintenancePage = () => {
     <div className='h-screen bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-600 flex justify-center items-center'>
       <div className='text-center max-w-2xl px-6'>
         <h1 className='text-5xl font-bold text-white mb-4 animate__animated animate__fadeIn'>
-          Will you vote for
+          Who will be the next hero?
         </h1>
         <p className='text-3xl font-semibold bg-gradient-to-r from-yellow-300 via-yellow-400 to-yellow-500 text-transparent bg-clip-text mb-6 animate__animated animate__fadeIn animate__delay-1s'>
           {randomSelection}
