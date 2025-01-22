@@ -37,6 +37,17 @@ function Front() {
             Login
           </Link>
         </div>
+        <div className='mt-4'>
+          <button
+            onClick={() => window.location.reload()}
+            className='px-5 py-3 text-md bg-red-200 hover:bg-red-300 text-gray-800 font-medium rounded-md shadow transition-all duration-300'
+          >
+            Refresh the Page
+          </button>
+          <p className='text-sm text-gray-600 mt-2'>
+            If you have trouble, click here.
+          </p>
+        </div>
       </div>
 
       {/* Floating Decorative Elements */}
