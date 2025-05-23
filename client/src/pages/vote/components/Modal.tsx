@@ -14,7 +14,7 @@ const BoyTitles = ['king', 'smart', 'handsome'];
 const CoupleTitles = ['bestCouple'];
 
 const Modal = () => {
-  const votingStarted = false;
+  const votingStarted = true;
   const [votes, setVotes] = useState<string[]>([]);
   const [isVoting, setIsVoting] = useState<{ [key: string]: boolean }>({}); // Add state for voting loading
 
