@@ -32,6 +32,7 @@ const corsOptions = {
     'https://www.ucspyay.site',
     'https://ucspyay.site',
     'http://localhost:5173',
+    'https://ucspyay.vercel.app',
   ],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
