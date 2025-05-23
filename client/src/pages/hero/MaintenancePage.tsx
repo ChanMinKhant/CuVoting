@@ -3,6 +3,7 @@ import { useAppSelector } from '../../store/store';
 import { useEffect, useState } from 'react';
 
 const MaintenancePage = () => {
+/*
   const { selections, status } = useAppSelector((state) => state.selections);
   const [randomSelection, setRandomSelection] = useState<string>('');
 
@@ -20,6 +21,7 @@ const MaintenancePage = () => {
   if (status !== 'succeeded') {
     return <Loader />;
   }
+*/
 
   return (
     <div className='h-screen bg-gradient-to-r from-pink-400 via-purple-500 to-indigo-600 flex justify-center items-center'>
