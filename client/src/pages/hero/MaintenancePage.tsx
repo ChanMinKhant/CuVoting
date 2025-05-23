@@ -1,6 +1,6 @@
-import Loader from '../../components/Loader';
-import { useAppSelector } from '../../store/store';
-import { useEffect, useState } from 'react';
+// import Loader from '../../components/Loader';
+// import { useAppSelector } from '../../store/store';
+// import { useEffect, useState } from 'react';
 
 const MaintenancePage = () => {
 /*
