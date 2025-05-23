@@ -29,10 +29,7 @@ const limiter = rateLimit({
 
 const corsOptions = {
   origin: [
-    'https://www.ucspyay.site',
-    'https://ucspyay.site',
-    'http://localhost:5173',
-    'https://ucspyay.vercel.app',
+    `https://ucspyay.vercel.app`
   ],
   credentials: true,
   allowedHeaders: ['Content-Type', 'Authorization'],
